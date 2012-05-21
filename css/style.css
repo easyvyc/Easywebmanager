@@ -1,0 +1,277 @@
+html {
+	
+}
+body {
+	font-family:Arial, Tahoma, Verdana;
+	font-size:11px;
+}
+a {
+	color:#341f81;
+}
+a img {
+	border:none;
+}
+
+#main {
+	width:970px;
+	margin:0 auto;
+}
+#top {
+	border-bottom:8px solid #1f0c65;
+	height:110px;
+	overflow:hidden;
+	position:relative;
+}
+#logo {
+	float:left;
+	margin:25px 15px;
+}
+#home {
+	background:url('images/home.png') center center no-repeat;
+	width:35px;
+	height:38px;
+	padding:0px !important;
+}
+#home:hover, #home.a {
+	background:url('images/home_w.png') center center no-repeat #1f0c65 !important;
+}
+#top nav {
+	margin-top:35px;
+	margin-left:20px;
+}
+#top nav ul {
+	list-style:none;
+	padding:0px;
+	margin:0px;
+}
+#top nav ul li {
+	float:left;
+	border-right:1px solid #e6e6e6;
+}
+#top nav ul li:last-child, #top nav ul li:first-child {
+	border:none;
+}
+#top nav ul li a {
+	padding:12px;
+	display:block;
+	color:#2e2e2e;
+	font-size:11px;
+	text-decoration:none;
+	text-transform:uppercase;
+}
+#top nav ul li a:hover, #top nav ul li.a a {
+	background:#1f0c65;
+	color:#ffffff;
+}
+#lang {
+	position:absolute;
+	right:15px;
+	bottom:0px;
+}
+#lang a {
+	color:#606568;
+	text-decoration:none;
+	display:block;
+	float:left;
+	font-size:11px;
+	text-align:center;
+	width:30px;
+	height:21px;
+	line-height:23px;
+}
+#lang a.a {
+	background:url('images/lang.png') no-repeat;
+	color:#FFF;
+}
+
+
+footer {
+	border-top:3px solid #f1f1f1;
+	padding:15px;
+	color:#a4a4a4;
+	font-size:11px;
+	font-family:Tahoma;
+}
+footer p {
+	margin:0px;
+}
+footer a {
+	color:#a4a4a4;
+	text-decoration:none;
+}
+footer a:hover {
+	text-decoration:underline;
+}
+
+#main_tpl {
+	background:url('images/flash/gradient.jpg') top center no-repeat;
+	height:330px;
+	position:relative;
+	overflow:hidden;
+}
+#main_tpl div {
+	position:absolute;
+	width:100%;
+	height:100%;
+	left:0px;
+	top:0px;
+}
+#europe {
+	background:url('images/flash/map.png') top center no-repeat;
+	z-index:1;
+}
+#tinklas {
+	background:url('images/flash/tinklas.png') top center no-repeat;
+	z-index:2;
+}
+#img1 {
+	background:url('images/flash/1.png') top center no-repeat;
+	z-index:3;	
+}
+#img2 {
+	background:url('images/flash/2.png') top center no-repeat;
+	z-index:3;	
+}
+#img3 {
+	background:url('images/flash/3.png') top center no-repeat;
+	z-index:3;	
+}
+#img4 {
+	background:url('images/flash/4.png') top center no-repeat;
+	z-index:3;	
+}
+#img5 {
+	background:url('images/flash/5.png') top center no-repeat;
+	z-index:3;	
+}
+#img6 {
+	background:url('images/flash/6.png') top center no-repeat;
+	z-index:3;	
+}
+.flash {
+	display:none;
+}
+
+.main_sect {
+	float:left;
+}
+.main_sect h2, .inner_contacts h2 {
+	color:#2f3131;
+	font-size:18px;
+	font-family:Trajan Pro;
+}
+.mns1 {
+	width:270px;
+	margin-left:30px;
+}
+.mns2 {
+	width:270px;
+	margin-left:30px;
+}
+.mns3 {
+	width:315px;
+	margin-left:30px;
+}
+
+.inner_contacts {
+	padding:10px 20px;
+}
+
+#inner_tpl {
+	background:url('images/header_inner.jpg') top center no-repeat;
+	height:120px;
+}
+#data_text {
+	float:left;
+	width:690px;
+	padding:10px;
+}
+#data_text h1 {
+	margin:0px;
+	color:#2dc52d;
+	font-size:25px;
+	font-family:Trajan Pro;
+	margin:10px 5px;
+}
+#left_text {
+	float:left;
+	width:250px;
+	background:url('images/map_shadow.jpg') top left no-repeat;
+	min-height:150px;
+	margin-top:20px;
+}
+#left_text ul {
+	list-style:none;
+	padding:0px;
+	margin:0px;
+}
+#left_text ul li {
+	padding:10px 15px;
+	border-bottom:1px dotted #d1d1d1;
+}
+#left_text ul li:last-child {
+	border:none;
+}
+#left_text ul li a {
+	color:#4d4d4d;
+	text-decoration:none;
+}
+#left_text ul li a:hover {
+	text-decoration:underline;
+}
+#left_text ul li.a a {
+	font-weight:bold;
+}
+#path {
+	background:#f1f1f1;
+	padding:5px;
+}
+#path a {
+	text-decoration:none;
+}
+
+
+
+.abs {
+	position:absolute;
+}
+.rel {
+	position:relative;
+}
+.center {
+	text-align:center;
+}
+.fleft {
+	float:left;
+}
+.fright {
+	float:right;
+}
+.clear {
+	clear:both;
+}
+.vam {
+	vertical-align:middle;
+}
+.inline {
+	display:inline;
+}
+
+.radius3 {
+	border-radius: 3px;
+	-moz-border-radius:3px;
+	-o-border-radius:3px;
+	-webkit-border-radius:3px;
+}
+.radius5 {
+	border-radius: 5px;
+	-moz-border-radius:5px;
+	-o-border-radius:5px;
+	-webkit-border-radius:5px;
+}
+.radius10 {
+	border-radius: 10px;
+	-moz-border-radius:10px;
+	-o-border-radius:10px;
+	-webkit-border-radius:10px;
+}

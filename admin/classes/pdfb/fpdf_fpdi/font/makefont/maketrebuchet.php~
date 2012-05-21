@@ -1,0 +1,4 @@
+<?php
+require('makefont.php');
+MakeFont('georgia.ttf','georgia.afm','cp1257');
+?>

@@ -1,0 +1,117 @@
+#_OVERLAY {
+	 position: fixed;
+	 z-index:1300;
+	 top: 0px;
+	 left: 0px;
+	 background: #FFFFFF;
+	 filter:alpha(opacity=55);
+	 -moz-opacity: 0.55;
+	 opacity: 0.55;
+	 height:100%;
+	 width:100%;
+     border:none;
+}
+* html #_OVERLAY { /* ie6 hack */
+     position: absolute;
+     height: expression(document.body.scrollHeight > document.body.offsetHeight ? (document.body.scrollHeight ) : (document.body.offsetHeight ) + 'px');
+     top:-13px;
+     width: expression(document.body.scrollWidth > document.body.offsetWidth ? (document.body.scrollWidth) : (document.body.offsetWidth) + 'px');
+     border:none;
+}
+#_WINDOW {
+	 position: fixed;
+	 z-index: 1302;
+	 color:#000000;
+	 display:none;
+	 /*border-top: 7px solid #9BC14A;*/
+	 text-align:left;
+	 top:150px;
+	 margin:10px;
+	width:670px;
+	min-height:200px;
+	max-height:800px;
+	height:auto;
+	
+	border:7px solid #9d9d9d;
+
+	background: #FFFFFF;
+	background: rgba(255, 255, 255, 0.899219);
+	border-radius: 8px;
+	-moz-border-radius:8px;
+	-o-border-radius:8px;
+	-webkit-border-radius:8px;
+	-webkit-box-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+	-moz-box-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+	behavior: url(border-radius.htc);
+	
+} 
+* html #_WINDOW { /* ie6 hack */
+	position: absolute;
+}
+#_WINDOW_content {
+	padding: 10px;
+	max-height:760px;
+	height:auto;
+	overflow:auto;
+}
+#_WINDOW_toolbar {
+	padding:0px;
+	background:#9d9d9d;
+	text-align:right;
+	overflow:hidden;
+	position:relative;
+	height:22px;
+}
+#_WINDOW_ico {
+	position:absolute;
+	right:3px;
+	top:2px;
+}
+#_WINDOW_tabs {
+	width:90%;
+	text-align:left;
+	overflow:hidden;
+}
+#_WINDOW_tabs_inner {
+	width:5000px;
+}
+#_WINDOW_tabs_inner a {
+	text-decoration:none;
+}
+#_WINDOW_tabs .tab_t {
+	float:left;
+	padding:2px 5px;
+	background:#9FC9EA;
+	cursor:pointer;
+	margin-right:1px;
+	margin-top:3px;
+
+	border-top-left-radius: 5px;
+	-moz-border-top-left-radius:5px;
+	-o-border-top-left-radius:5px;
+	-webkit-border-top-left-radius:5px;
+
+	border-top-right-radius: 5px;
+	-moz-border-top-right-radius:5px;
+	-o-border-top-right-radius:5px;
+	-webkit-border-top-right-radius:5px;
+	
+}
+#_WINDOW_tabs .a {
+	background:#FFF;
+	font-weight:bold;
+	padding-top:5px;
+	margin-top:0px;
+	
+}
+#_WINDOW_loading {
+	width:100%;
+	height:100px;
+	background:url('admin/images/loading.gif') bottom center no-repeat;
+	position:absolute;
+	display:none;
+	z-index:20;
+}
+.loading {
+	background:url('admin/images/loading.gif') no-repeat;
+}

@@ -1,0 +1,1 @@
+[{"url":"http://www.delfi.lt/rss/feeds/economy.xml","title":"Verslas"},{"url":"http://www.delfi.lt/rss/feeds/sport.xml","title":"Sportas"},{"url":"http://www.delfi.lt/rss/feeds/channels/mokslas.xml","title":"Mokslas"}]

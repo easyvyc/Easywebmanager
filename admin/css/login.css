@@ -1,0 +1,144 @@
+html {
+	height:100%;
+}
+body {
+	margin:0px;
+	
+	font-family:Arial, Tahoma, Verdana;
+	font-size:12px;
+	
+	background-color:#E2E2E2;
+	height:100%;
+	position:relative;
+}
+#gradient {
+	/* Safari 4-5, Chrome 1-9 */
+	
+	/* Safari 5.1+, Chrome 10+ */
+	background: -webkit-radial-gradient(50% 30%, #FFFFFF, #E2E2E2) no-repeat;
+	
+	/* Firefox 3.6+ */ 
+	background: -moz-radial-gradient(circle, #FFFFFF, #E2E2E2);
+	
+	/* IE 10 */ 
+	background: -ms-radial-gradient(circle, #FFFFFF, #E2E2E2);
+
+	position:relative;
+	height:100%;
+	width:100%;
+	min-width:750px;
+	left:0px;
+	top:0px;
+	z-index:1;
+}
+#container {
+	width:450px;
+	margin:0 auto;
+	padding:150px;
+	position:relative;
+	z-index:2;
+}
+#logo {
+	margin-bottom:30px;
+	text-align:center;
+}
+fieldset {
+	border:0px solid #000;
+	background:#FFF;
+	padding:30px;
+}
+.lang, .login {
+	overflow:hidden;
+	margin-left:30px;
+}
+.lang a, .login a {
+	display:block;
+	background:#F5F5F5;
+	margin:0px 2px;
+	padding:10px 20px;
+	float:left;
+	cursor:pointer
+}
+.login a img {
+	vertical-align:middle;
+}
+.lang a {
+	border-radius:0px 0px 10px 10px;
+	-moz-border-radius:0px 0px 10px 10px;
+	-o-border-radius:0px 0px 10px 10px;
+	-webkit-border-radius:0px 0px 10px 10px;
+}
+.login a {
+	border-radius:10px 10px 0px 0px;
+	-moz-border-radius:10px 10px 0px 0px;
+	-o-border-radius:10px 10px 0px 0px;
+	-webkit-border-radius:10px 10px 0px 0px;
+}
+.lang a.a, .lang a:hover, .login a.a, .login a:hover {
+	background:#FFF;
+	margin-top:0px;
+}
+form {
+	margin:0px;
+	padding:0px;
+}
+a {
+	color:#F29733;
+	text-decoration:none;
+}
+.fo_text {
+	padding:5px;
+}
+.fo_submit {
+	padding:5px 10px !important;
+	border-radius:5px !important;
+	
+}
+.login_field {
+	margin:5px;
+}
+
+.block {
+	display:none;
+}
+
+
+.center {
+	
+} 
+.error {
+	color:#B55;
+}
+.message {
+	margin:0px;
+	padding-left:10px;
+}
+.message img {
+	vertical-align:middle;
+}
+
+
+.show {
+	display:block !important;
+}
+.hide {
+	display:none;
+}
+.radius3 {
+	border-radius: 3px;
+	-moz-border-radius:3px;
+	-o-border-radius:3px;
+	-webkit-border-radius:3px;
+}
+.radius5 {
+	border-radius: 5px;
+	-moz-border-radius:5px;
+	-o-border-radius:5px;
+	-webkit-border-radius:5px;
+}
+.radius10 {
+	border-radius: 10px;
+	-moz-border-radius:10px;
+	-o-border-radius:10px;
+	-webkit-border-radius:10px;
+}

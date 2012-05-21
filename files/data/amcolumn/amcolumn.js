@@ -1,0 +1,11 @@
+var amcolumn_src = amcolumn_path+'amcolumn.swf?amcolumn_settingsFile='+amcolumn_settingsFile+'&amcolumn_dataFile='+amcolumn_dataFile+'&amcolumn_path='+amcolumn_path+'&amcolumn_flashWidth='+escape(amcolumn_flashWidth)+'&amcolumn_flashHeight='+escape(amcolumn_flashHeight)+'&amcolumn_preloaderColor='+amcolumn_preloaderColor;
+document.write ('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="'+amcolumn_flashWidth+'" height="'+amcolumn_flashHeight+'" id="amcolumn" align="middle">');
+document.write ('<param name="allowScriptAccess" value="sameDomain" />');
+document.write ('<param name="movie" value="'+amcolumn_src+'" />');
+document.write ('<param name="quality" value="high" />');
+document.write ('<param name="scale" value="noscale" />');
+document.write ('<param name="salign" value="lt" />');
+document.write ('<param name="wmode" value="transparent" />');
+document.write ('<param name="bgcolor" value="'+amcolumn_backgroundColor+'" />');
+document.write ('<embed src="'+amcolumn_src+'" quality="high" scale="noscale" salign="lt" bgcolor="'+amcolumn_backgroundColor+'" width="'+amcolumn_flashWidth+'" height="'+amcolumn_flashHeight+'" name="amcolumn" align="middle" wmode="transparent" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />');
+document.write ('</object>');

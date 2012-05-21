@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--
+ * FCKeditor - The text editor for Internet - http://www.fckeditor.net
+ * Copyright (C) 2003-2008 Frederico Caldeira Knabben
+ *
+ * == BEGIN LICENSE ==
+ *
+ * Licensed under the terms of any of the following licenses at your
+ * choice:
+ *
+ *  - GNU General Public License Version 2 or later (the "GPL")
+ *    http://www.gnu.org/licenses/gpl.html
+ *
+ *  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+ *    http://www.gnu.org/licenses/lgpl.html
+ *
+ *  - Mozilla Public License Version 1.1 or later (the "MPL")
+ *    http://www.mozilla.org/MPL/MPL-1.1.html
+ *
+ * == END LICENSE ==
+ *
+ * This page shows the list of folders available in the parent folder
+ * of the current folder.
+-->
+<html>
+	<head>
+		<title>Folders</title>
+		<link href="browser.css" type="text/css" rel="stylesheet">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<script type="text/javascript" src="js/common.js"></script>
+        
+    <link rel="stylesheet" type="text/css" href="../../../../../../css/tree.css" />
+
+	<script language="JavaScript" type="text/javascript" src="../../../../../../js/admin.js"></script>
+	
+	<script language="JavaScript" type="text/javascript" src="../../../../../../js/nav.js"></script>
+	
+	<script language="JavaScript" type="text/javascript" src="../../../../../../js/tree.js"></script>
+	
+	<script language="JavaScript" type="text/javascript" src="../../../../../../js/sorting/prototype.js"></script>
+	<script language="JavaScript" type="text/javascript" src="../../../../../../js/sorting/scriptaculous.js"></script>
+	<script language="JavaScript" type="text/javascript" src="../../../../../../js/sorting/dragdrop.js"></script>
+        
+        
+	</head>
+	<body class="FileArea">
+
+
+<script type="text/javascript">
+	
+	var TreeObj_files_c = new TreeClass('{config.site_url}', '{config.admin_dir}', 'catalog', 'catalog', 'c', '{lng}');
+	
+	TreeObj_files_c.param.dragndrop = 0;
+	TreeObj_files_c.param.checkbox = 0;
+	TreeObj_files_c.param.context = 0;
+    
+    TreeObj_files_c.create(0);
+	
+</script>        
+        
+	</body>
+</html>

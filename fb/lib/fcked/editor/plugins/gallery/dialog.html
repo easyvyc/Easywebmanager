@@ -1,0 +1,116 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Image Properties</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="noindex, nofollow" />
+	<script src="../../../../../js/jquery.js" type="text/javascript"></script>
+	<script src="../../../../../js/jquery/ui.core.js" type="text/javascript"></script>
+	<script src="../../../../../js/jquery/ui.widget.js" type="text/javascript"></script>
+	<script src="../../../../../js/jquery/ui.mouse.js" type="text/javascript"></script>
+	<script src="../../../../../js/jquery/ui.sortable.js" type="text/javascript"></script>
+	<script src="common/fck_dialog_common.js" type="text/javascript"></script>
+	<script src="fck_image.js" type="text/javascript"></script>
+	
+		<script type="text/javascript">
+
+//document.write( FCKTools.GetStyleHtml( GetCommonDialogCss() ) ) ;
+
+		</script>
+</head>
+<body scroll="no" style="overflow: hidden">
+
+<div id="divInfo">
+
+	<input id="btnBrowse" onclick="BrowseServer();" type="button" value="Browse Server"	fcklang="DlgBtnBrowseServer" />
+	
+	<div id="img_dir" style="height:200px;overflow:auto;">
+	
+	
+	
+	</div>
+	
+	<input type="hidden" name="url" id="url" />
+
+</div>
+
+
+<div id="divParams" style="display:none;">
+
+<input type="radio" name="g_type" value="lightbox" id="lightbox_chk" checked onclick="javascript: if(this.checked){ $('#lightbox_param').show(); $('#slideshow_param').hide(); }else{ $('#lightbox_param').hide(); $('#slideshow_param').show(); } " /><label for="lightbox_chk" fcklang="GalleryTypeLightbox">Lightbox</label>
+&nbsp;&nbsp;&nbsp;
+<input type="radio" name="g_type" value="slideshow" id="slideshow_chk"  onclick="javascript: if(this.checked){ $('#lightbox_param').hide(); $('#slideshow_param').show(); }else{ $('#lightbox_param').show(); $('#slideshow_param').hide(); } " /><label for="slideshow_chk" fcklang="GalleryTypeSlideshow">Slideshow</label><br />
+
+<table id="lightbox_param">
+	<tr>
+		<td><span fcklang="GalleryMargin">Margin</span>:</td>
+		<td><input type="text" id="margin" value="5" /></td>
+	</tr>
+	<tr>
+		<td><span fcklang="GalleryPadding">Padding</span>:</td>
+		<td><input type="text" id="padding" value="0" /></td>
+	</tr>
+	<tr>
+		<td><span fcklang="GalleryBorder">Border</span>:</td>
+		<td><input type="text" id="border" value="1" /></td>
+	</tr>
+	<tr>
+		<td><span fcklang="GalleryBorderColor">Border color</span>:</td>
+		<td><input type="text" id="bordercolor" value="#000000" /></td>
+	</tr>
+	<tr>
+		<td colspan="2"><input type="checkbox" name="resize_type_img" value="1" id="resize_type_img_chk" checked /><label for="resize_type_img_chk" fcklang="GalleryResizeMode">Resize image under the shorter border</label></td>
+	</tr>
+	<tr>
+		<td><span fcklang="GalleryThumbWidth">Thumb width</span>:</td>
+		<td><input type="text" id="width" value="100" /></td>
+	</tr>
+	<tr>
+		<td><span fcklang="GalleryThumbHeight">Thumb height</span>:</td>
+		<td><input type="text" id="height" value="100" /></td>
+	</tr>
+	<tr>
+		<td><span fcklang="GalleryImageWidth">Image width</span>:</td>
+		<td><input type="text" id="width_img" value="800" /></td>
+	</tr>
+	<tr>
+		<td><span fcklang="GalleryImageHeight">Image height</span>:</td>
+		<td><input type="text" id="height_img" value="800" /></td>
+	</tr>
+</table>
+
+<table id="slideshow_param" style="display:none;">
+	<tr>
+		<td><span fcklang="GalleryMargin">Margin</span>:</td>
+		<td><input type="text" id="margin_s" value="0" /></td>
+	</tr>
+	<tr>
+		<td><span fcklang="GallerySlideshowWidth">Width</span>:</td>
+		<td><input type="text" id="width_s" value="200" /></td>
+	</tr>
+	<tr>
+		<td><span fcklang="GallerySlideshowHeight">Height</span>:</td>
+		<td><input type="text" id="height_s" value="200" /></td>
+	</tr>
+	<tr>
+		<td><span fcklang="GallerySlideshowSpeed">Speed</span>:</td>
+		<td><input type="text" id="speed_s" value="5" /></td>
+	</tr>
+	<tr>
+		<td colspan="2"><input type="checkbox" name="big_img" value="big_img" id="big_img_chk"  onclick="javascript: if(this.checked){ $('#bi_1').show(); $('#bi_2').show(); }else{ $('#bi_1').hide(); $('#bi_2').hide(); } " /><label for="big_img_chk" fcklang="GalleryUseLightbox">Use lightbox to show big image</label></td>
+	</tr>
+	<tr id="bi_1" style="display:none;">
+		<td><span fcklang="GalleryImageWidth">Image width</span>:</td>
+		<td><input type="text" id="width_s_img" value="800" /></td>
+	</tr>
+	<tr id="bi_2" style="display:none;">
+		<td><span fcklang="GalleryImageHeight">Image height</span>:</td>
+		<td><input type="text" id="height_s_img" value="800" /></td>
+	</tr>
+
+</table>
+
+
+</div>
+
+</body>
+</html>
