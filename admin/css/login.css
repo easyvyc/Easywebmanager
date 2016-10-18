@@ -101,7 +101,9 @@ a {
 .block {
 	display:none;
 }
-
+.admin_session_timeout {
+	display:none;
+}
 
 .center {
 	

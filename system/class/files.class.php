@@ -98,16 +98,16 @@ class files extends basic {
     // sugeneruojamas file vardas
     function setFilename($filename){
         $filename = ereg_replace("%", "", $filename);
-        if(file_exists($this->path.$filename)){
+        if(file_exists($this->path . $filename)){
             $arr = explode(".", $filename);
             $filenamefragment = $arr[(count($arr)-2)];
-            preg_match("/([0-9]{2}$)/", $filenamefragment, $reg);
-            if(!empty($reg)){
-                $counter = (int)$reg[0] + 1;
-                $counter = ($counter<10?'0'.$counter:''.$counter);
-                $filenamefragment = ereg_replace($reg[0], $counter, $filenamefragment);
+            preg_match("/(\(([0-9]{1,})\)$)/", $filenamefragment, $reg);
+	    if(!empty($reg)){
+                $counter = (int)$reg[2] + 1;
+                //$counter = ($counter<10?'0'.$counter:''.$counter);
+                $filenamefragment = preg_replace("/\(" . $reg[2] . "\)$/", '(' . $counter . ')', $filenamefragment);
             }else{
-                $filenamefragment = $filenamefragment.'00';
+                $filenamefragment = $filenamefragment . '(1)';
             }
             $arr[(count($arr)-2)] = $filenamefragment;
             $filename = implode(".", $arr);
@@ -116,6 +116,7 @@ class files extends basic {
         
         return $filename;
     }
+
 
     function remove($file){
     	@unlink($this->path.$file);

@@ -1,1 +1,0 @@
-<input type="hidden" name="<?php echo TPL::getVar("elm.name"); ?>" id="ELMID_<?php echo TPL::getVar("elm.column_name"); ?>" class="FRM" value="<?php echo TPL::getVar("elm.value"); ?>">

@@ -1,4 +1,4 @@
-<div id="id_{elm.name}" class="formElementsField {elm.style}">
+<div id="id_{form_settings.id}_{elm.name}" class="formElementsField {elm.style}">
 	<div class="t">
 		<span class="">{elm.title}:{block elm.required}*{-block elm.required}</span>
 			

@@ -17,7 +17,7 @@
 {css}
 </style>
 
-<script type="text/javascript" src="admin/js/jquery.js"></script>
+<script type="text/javascript" src="{config.admin_dir}js/jquery.js"></script>
 
 </head>
 
@@ -51,14 +51,14 @@ function remind(){
 	$.ajax({
 		  type: "POST",
 		  async: true,
-		  url: "admin.php?action=login&module=admins&method=remind&ajax=1",
+		  url: "{config.admin_url}?action=login&module=admins&method=remind&ajax=1",
 		  cache: false,
 		  data: $($obj).serialize(),
 		  dataType: "json",
 		  beforeSend: function(){
 			  $('#remind_form input').attr('disabled', true);
 			  $('#remind_form .message').removeClass('error');
-			  $('#remind_form .message').html("<img src='images/loading.gif' alt='' > {phrases.login.loading}");
+			  $('#remind_form .message').html("<img src='{config.admin_dir}images/loading_watch.gif' alt='' > {phrases.login.loading}");
 		  },
 		  success: function(json){
 			  $('#remind_form input').attr('disabled', false);
@@ -84,13 +84,13 @@ function remind(){
 	<div id="container">
 
 		<div id="logo">
-	  		<a href="http://www.easywebmanager.com" target="_blank"><img src="admin/images/logo.png" border="0" alt="" ></a>
+	  		<a href="http://www.easywebmanager.com" target="_blank"><img src="{config.admin_dir}images/logo.png" border="0" alt="" ></a>
 		</div>
 
 	
 		<div class="login">
-		  	<a href="javascript: void(show('login'));" id="login_link"><img src="admin/images/lock.gif" border="0" alt="" > {phrases.login.login}</a>
-		  	<a href="javascript: void(show('remind'));" id="remind_link"><img src="admin/images/lock.gif" border="0" alt="" > {phrases.login.password_remind}</a>
+		  	<a href="javascript: void(show('login'));" id="login_link"><img src="{config.admin_dir}images/lock.gif" border="0" alt="" > {phrases.login.login}</a>
+		  	<a href="javascript: void(show('remind'));" id="remind_link"><img src="{config.admin_dir}images/lock.gif" border="0" alt="" > {phrases.login.password_remind}</a>
 		</div>
 		
 			<fieldset class="radius10">

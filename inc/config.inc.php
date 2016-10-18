@@ -6,7 +6,24 @@
 error_reporting(E_ALL);
 
 ini_set('display_errors', true);
-ini_set('magic_quotes_runtime', false);
+ini_set('magic_quotes_gpc', 'off');
+
+// nuimt magic quotes 	
+if (get_magic_quotes_gpc()) {
+    $process = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST);
+    while (list($key, $val) = each($process)) {
+        foreach ($val as $k => $v) {
+            unset($process[$key][$k]);
+            if (is_array($v)) {
+                $process[$key][stripslashes($k)] = $v;
+                $process[] = &$process[$key][stripslashes($k)];
+            } else {
+                $process[$key][stripslashes($k)] = stripslashes($v);
+            }
+        }
+    }
+    unset($process);
+}
 
 class Config {
 
@@ -22,8 +39,8 @@ class Config {
 		
 		self::$val = $variable;
 		
-		self::setVal('site_url', "http://".self::$val['pr_url'].self::$val['project_dir']);
-		self::setVal('site_admin_url', self::$val['site_url'].self::$val['admin_dir']);
+		self::setVal('site_url', "http".(self::$val['https']?"s":"")."://".self::$val['pr_url'].self::$val['project_dir']);
+		self::setVal('site_admin_url', self::$val['site_url'].self::$val['admin_url']);
 		self::setVal('sb_template', self::$val['pr_code']."_template");
 		self::setVal('sb_stat_visitor', self::$val['pr_code']."_stat_visitors");
 		self::setVal('sb_stat_visitor_temp', self::$val['pr_code']."_stat_visitors_temp");
@@ -35,6 +52,7 @@ class Config {
 		self::setVal('sb_module_info', self::$val['pr_code']."_module_info");
 		self::setVal('sb_module_categories', self::$val['pr_code']."_module_category");
 		self::setVal('sb_record', self::$val['pr_code']."_record");
+                self::setVal('sb_record_lang', self::$val['pr_code']."_record_lang");
 		self::setVal('sb_relations', self::$val['pr_code']."_relations");
 		
 	}

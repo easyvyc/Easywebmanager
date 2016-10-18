@@ -497,5 +497,41 @@ if ( ! function_exists('timezones'))
 }
 
 
+function get_months($lang){
+    $months = array();
+    if($lang == 'lt'){
+        $months[0] = 'Sausis';
+        $months[1] = 'Vasaris';
+        $months[2] = 'Kovas';
+        $months[3] = 'Balandis';
+        $months[4] = 'Gegužė';
+        $months[5] = 'Birželis';
+        $months[6] = 'Liepa';
+        $months[7] = 'Rugpjūtis';
+        $months[8] = 'Rugsėjis';
+        $months[9] = 'Spalis';
+        $months[10] = 'Lapkritis';
+        $months[11] = 'Gruodis';
+    }
+    return $months;
+}
+
+function get_weekdays($lang){
+    $weekdays = array();
+    if($lang == 'lt'){
+        $weekdays[0] = 'Sekmadienis';
+        $weekdays[1] = 'Pirmadienis';
+        $weekdays[2] = 'Antradienis';
+        $weekdays[3] = 'Trečiadienis';
+        $weekdays[4] = 'Ketvirtadienis';
+        $weekdays[5] = 'Penktadienis';
+        $weekdays[6] = 'Šeštadienis';
+    }
+}
+
+function date_format_text($date, $lang){
+    return $date;
+}
+
 /* End of file date_helper.php */
 /* Location: ./system/helpers/date_helper.php */

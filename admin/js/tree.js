@@ -1,233 +1,144 @@
-function extractTreeItem(id){
-
-	//alert($('main_'+id+'_'+this.nm));
-	if($('main_'+id+'_'+this.nm).style.display=='none'){
-		this.showTreeItem(id);
-	}else{
-		this.hideTreeItem(id);
-	}
-
-}
-
-function redirect_field_click_function(url, id){ 
-	this.setActiveItem(id); $('page_redirect').value=id; setEdited('page_redirect'); return false; 
-}
-
-function showTreeItem(id){
-
-	if($('main_'+id+'_'+this.nm)) $('main_'+id+'_'+this.nm).style.display = 'block';
-	if($('ico_'+id+'_'+this.nm)) if($('ico_'+id+'_'+this.nm).src.replace(this.baseurl, '')==(this.basedir+'images/tree/plus.gif')) $('ico_'+id+'_'+this.nm).src = 'images/tree/minus.gif';
-
-}
-
-
-function hideTreeItem(id){
-
-	if($('main_'+id+'_'+this.nm)) $('main_'+id+'_'+this.nm).style.display = 'none';
-	if($('ico_'+id+'_'+this.nm)) if($('ico_'+id+'_'+this.nm).src.replace(this.baseurl, '')==(this.basedir+'images/tree/minus.gif')) $('ico_'+id+'_'+this.nm).src = 'images/tree/plus.gif';
-
-}
-
-
-function mouseRightClick(e){
-
-	if (!e) var e = window.event;
-	var targ;
-	if (e.target) targ = e.target;
-	else if (e.srcElement) targ = e.srcElement;
-
-	if (targ.nodeType == 3) // defeat Safari bug
-		targ = targ.parentNode;
+function _TREE_(module){
 	
-	/*if (navigator.appName == 'Netscape' && e.which == 3) {
-			if(targ = getParentNodeByClassName(targ, 'item')){
-				arr = targ.id.split('_');
-				showTreeItemContextMenu(arr[1], arr[2]);
-				return true;
-			}
-	} else {*/
-		//if (navigator.appName == 'Microsoft Internet Explorer' && event.button==2){
-
-			if(targ = getParentNodeByClassName(targ, 'item')){
-				arr = targ.id.split('_');
-				showTreeItemContextMenu(arr[1], arr[2]);
-				return true;
-			}
-		//}
-	//	return false;
-	//}
-	return true;
-
-}
-
-
-function showTreeItemContextMenu(id, nm){
+	this.module = module;
+	this.extracted = [];
+	this.opened = [];
+	this.stop_context = false;
 	
-	//if(this.context!=1) return false;
-	if(!$('contextmenu_'+id+'_'+nm)) return false;
-	
-	$('contextMenuArea').innerHTML = $('contextmenu_'+id+'_'+nm).innerHTML;
-	var arr = findPos($('item_' + id + '_' + nm));
-	$('contextMenuArea').style.left = arr[0] + 25 + 'px';
-	$('contextMenuArea').style.top = arr[1] + 15 + 'px';
-	$('contextMenuArea').style.display = 'block';
-	return false;
-	
-}
-
-if(typeof(HTMLElement)!='undefined'){
-	HTMLElement.prototype.contains = function(node) {
-		if (node == null)
-			return false;
-		if (node == this)
-			return true;
-		else
-			return this.contains(node.parentNode);
-	}
-}
-
-function hideTreeItemContenxtMenu(event){
-	
-	if (!event) var event = window.event;
-	if (!$('contextMenuArea').contains(event.relatedTarget || event.toElement)){ 
-		$('contextMenuArea').style.display = 'none';
-		return false;
-	} 
-	
-}
-
-function treeItemImgClick(url, id){
-	
-	this.setActiveItem(id);
-	eval(url);
-	//top.content.location = url;
-	
-}
-
-function treeSetActiveItem(id){
-	for(i=0; i<this.items.length; i++){
-		if($('link_'+this.items[i].id+'_'+this.nm)) $('link_'+this.items[i].id+'_'+this.nm).className = '';
-	}
-	if($('link_'+id+'_'+this.nm)) $('link_'+id+'_'+this.nm).className = 'active';
-	this.currentItem = id;
-}
-
-function treeItemCheckboxClick(id){
-	var sub_val = $('chk_'+id+'_'+this.nm).checked;
-	var arr = $('main_'+id+'_'+this.nm).getElementsByTagName('input');
-	for(var i=0; i<arr.length; i++){
-		if(arr[i].type=='checkbox') arr[i].checked = sub_val;
-	}
-}
-
-function createTree(id){
-	
-	this.opened = 1;
-	//document.write(this.baseurl + this.basedir + "ajax.php?get=tree/"+this.script+"&module="+this.module+"&nm="+this.nm+"&lng="+this.lng+"&id="+id+this.getParamUrl());
-	PageClass.getPageContent(this.baseurl + this.basedir + "ajax.php?get=tree/"+this.script+"&module="+this.module+"&nm="+this.nm+"&lng="+this.lng+"&id="+id+this.getParamUrl(), "module_tree_"+this.module+"_"+this.nm, 1);
-	if(id) this.setActiveItem(id);
-	
-}
-
-function treeItemChange(drag_to, drag_from){
-	
-	if(drag_to==drag_from.split('_')[1]) return false;
-	if(confirm(this.phrases.move_confirm_text)) PageClass.getPageContent(this.baseurl+this.basedir+"ajax.php?get=tree/"+this.script+"&module="+this.module+"&nm="+this.nm+"&lng="+this.lng+"&action=drag&drag_to="+drag_to+"&drag_item="+drag_from+this.getParamUrl(), "module_tree_"+this.module+"_"+this.nm, 1);
-	
-}
-
-function treeItemInsert(drag_to, drag_from){
-
-	if(drag_to==drag_from.split('_')[1] || drag_to==document.getElementById(drag_from).getAttribute('rel').split('_')[1]) return false;
-	if(confirm(this.phrases.move_confirm_text)) PageClass.getPageContent(this.baseurl+this.basedir+"ajax.php?get=tree/"+this.script+"&module="+this.module+"&nm="+this.nm+"&lng="+this.lng+"&action=parent&drag_to="+drag_to+"&drag_item="+drag_from+this.getParamUrl(), "module_tree_"+this.module+"_"+this.nm, 1);
-	
-}
-
-function getParamUrl(){
-	
-	var str = "";
-	for(var p in this.param){
-		str += "&"+p+"="+this.param[p];
-	}
-	return str;
-	
-}
-
-// for form control FRM_TEE
-function show_hide_tree(elm, val){
-	if(document.getElementById(elm+"_tree_id").style.display=="none"){
-		//t_obj = 'TreeObj_'+mod+'_'+elm;
-		//alert(typeof(eval(t_obj)));
-		//if(typeof(eval(t_obj))!='object'){
-			this.create(val);
-			//eval("TreeObj_"+mod+"_"+elm+".create("+val+");");
-		//}
-		document.getElementById(elm+"_tree_id").style.display = "block";
-		document.getElementById(elm+"_tree_show_button").style.display = "none";
-		document.getElementById(elm+"_tree_hide_button").style.display = "block";
-	}else{
-		document.getElementById(elm+"_tree_id").style.display = "none";
-		document.getElementById(elm+"_tree_show_button").style.display = "block";
-		document.getElementById(elm+"_tree_hide_button").style.display = "none";
-	}
-}
-
-function _TreeClass(url, basedir, script, mod, nm, lng, params, phrases, clickFunc){
-	
-	var obj = new TreeClass(url, basedir, script, mod, nm, lng);
-
-	obj.param.dragndrop = params.dragndrop;
-	obj.param.checkbox = params.checkbox;
-	obj.param.context = params.context;
-
-	obj.param.click = clickFunc;
-	
-	obj.phrases = phrases;
-	
-	if(clickFunc) obj.ImgClick = eval(clickFunc);
-		
-	return obj;
-}
-
-function TreeClass(url, basedir, script, mod, nm, lng){
-	
-	this.module = mod;
-	this.lng = lng;
-	this.script = script;
-	this.nm = nm;
-	this.opened = 0;
-	this.baseurl = url;
-	this.basedir = basedir;
-	this.phrases = new Object();
-	
-	this.create = createTree;
-	
-	this.param = new Object();
-	this.param.dragndrop = 0;
-	this.param.checkbox = 0;
-	this.param.context = 0;
-	
-	this.items = new Array;
-	this.add = function(id, title){
-		var index = this.items.length;
-		this.items[index] = new Object();
-		this.items[index].id = id;
-		this.items[index].title = title;
+	this.load = function(){
+		this.list(0);
 	};
 	
-	this.extract = extractTreeItem;
-	this.showTreeItem = showTreeItem;
-	this.hideTreeItem = hideTreeItem;
-	this.ImgClick = treeItemImgClick;
-	this.CheckboxClick = treeItemCheckboxClick;
-	this.setActiveItem = treeSetActiveItem;
-	this.change = treeItemChange;
-	this.insert = treeItemInsert;
-	this.getParamUrl = getParamUrl;
+	this.extract = function(id){
+                //alert($('#_BRANCH_' + id + ' .extract:first-child').attr('class'));
+                if($('#_BRANCH_' + id + ' .extract[rel='+id+']').hasClass('no_sub')) return false;
+		if(typeof(this.extracted[id])!='undefined' && this.extracted[id]!=false){
+			if(typeof(this.opened[id])!='undefined' && this.opened[id]!=false){
+				this.open(id);
+			}else{
+				this.close(id);
+			}
+		}else{
+			this.open(id);
+			this.list(id);
+		}
+		
+	};
 	
-	this.mouseRightClick = mouseRightClick;
-	this.showTreeItemContextMenu = showTreeItemContextMenu;
+	this.open_branch = function(id){
+		if(typeof(this.extracted[id])!='undefined' && this.extracted[id]!=false){
+			if(typeof(this.opened[id])!='undefined' && this.opened[id]!=false){
+				this.open(id);
+			}
+		}else{
+			this.list(id);
+			this.open(id);
+		}
+	};
 	
-	this.show_hide_tree = show_hide_tree;
+	this.open = function(id){
+		$('#_BRANCH_'+id).addClass('opened');
+		$('#_BRANCH_'+id+' ul.tree:first').slideDown(500);
+		$('#_BRANCH_'+id+' a.extract:first').removeClass('loading').addClass('opened');//('style', "background:url('admin/images/tree/minus"+($('#_BRANCH_'+id).hasClass('last')?'_last':'')+".gif') center center no-repeat;");
+		this.opened[id] = false;
+	};
+	
+	this.close = function(id){
+		$('#_BRANCH_'+id).removeClass('opened');
+		$('#_BRANCH_'+id+' ul.tree:first').slideUp(500);
+		$('#_BRANCH_'+id+' a.extract:first').removeClass('loading').removeClass('opened');//attr('style', "background:url('admin/images/tree/plus"+($('#_BRANCH_'+id).hasClass('last')?'_last':'')+".gif') center center no-repeat;");
+		this.opened[id] = true;
+	};
+	
+	this.remove_branch = function(id){
+		main_ul = $("#_BRANCH_"+id).closest('ul');
+		is_last = $("#_BRANCH_"+id).hasClass('last');
+		$('[rel='+id+']').remove();
+		if(is_last){
+			main_ul.find('li:last-child').removeClass('not_last').addClass('last');
+		}
+		if($('li', main_ul).size() == 0){
+			main_ul.closest('li').find('a.extract').removeClass('sub').removeClass('opened').addClass('no_sub');
+		}
+	};
+	
+	this.replace_branch = function(branch_id, parent_branch_id, sort_to_item_id){
+		$obj = this;
+		$.ajax({
+			async: false,
+			url:"admin.php?module="+$obj.module+"&method=tree_replace_item&branch_id="+branch_id+"&parent_branch_id="+parent_branch_id+"&sort_to_item_id="+sort_to_item_id+"&ajax=1",
+			dataType:"json",
+			type: "GET",
+			beforeSend:function(){
+				$obj.start_loading(parent_branch_id);
+			},
+			complete:function(){
+				
+			},
+			success: function(_json_response_) {
+				$obj.end_loading();
+				if(_json_response_.loged==true){
+					$obj.remove_branch(branch_id);
+					$('#_BRANCH_' + parent_branch_id + ' .extract:first').removeClass('no_sub').addClass('sub');
+					$obj.refresh_branch(parent_branch_id);
+				}else{
+					$obj.close(parent_id);
+					$NAV.login(_json_response_);
+				}
+			}
+		});		
+	}
+	
+	this.refresh_branch = function(parent_id){
+		this.list(parent_id);
+	};
+	
+	this.list = function(parent_id){
+		this.paging(parent_id, 0);
+	};
+	
+	this.paging = function(parent_id, offset){
+		$obj = this;
+		$.ajax({
+			async: false,
+			url:"admin.php?module="+$obj.module+"&method=tree&parent_id="+parent_id+"&offset="+offset+"&ajax=1",
+			dataType:"json",
+			type: "GET",
+			beforeSend:function(){
+				$obj.start_loading(parent_id);
+			},
+			complete:function(){
+				
+			},
+			success: function(_json_response_) {
+				$obj.end_loading();
+				if(_json_response_.loged==true){
+					$('#_BRANCH_'+parent_id+' div.child_branch').html(_json_response_.section[0].content);
+					$obj.extracted[parent_id] = true;
+					$obj.open(parent_id);
+				}else{
+					$obj.close(parent_id);
+					$NAV.login(_json_response_);
+				}
+
+			}
+		});		
+	};
+	
+	this.context = function(obj_id){
+		if(!this.stop_context) showItemContextMenu(obj_id);
+	};
+	
+	this.open_item = function(id){
+		
+	};
+	
+	this.start_loading = function(parent_id){
+		$('#_BRANCH_'+parent_id+' a.extract:first').addClass('loading');//attr('style', "background:url('admin/images/tree/loading.gif') center center no-repeat;");
+	};
+	
+	this.end_loading = function(){
+		
+	};
 	
 }

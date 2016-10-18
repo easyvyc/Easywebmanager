@@ -29,7 +29,7 @@
 </script>
 {-block no}
 
-<div id="id_{elm.name}" class="formElementsField {elm.style}" {block elm.extra_block_style}style="{elm.extra_block_style}"{-block elm.extra_block_style}>
+<div id="id_{form_settings.id}_{elm.name}" class="formElementsField {elm.style}" {block elm.extra_block_style}style="{elm.extra_block_style}"{-block elm.extra_block_style}>
 	<div class="t">
 		
 		<span class="{elm.style}{block elm.editorship no} readonly{-block elm.editorship no}">{elm.title}:{block elm.require}*{-block elm.require}</span>

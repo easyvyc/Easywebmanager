@@ -25,6 +25,7 @@ for($i=0; $i<$n; $i++){
 // cvs export
 $FORM_TYPES_NON_EXPORT = array(FRM_SUBMIT, FRM_BUTTON, FRM_LIST, FRM_HIDDEN, FRM_PASSWORD, FRM_TREE);
 
+
 // file extensions for upload
 $valid_images = array('gif', 'png', 'jpg', 'jpeg');
 $valid_archives = array('zip');

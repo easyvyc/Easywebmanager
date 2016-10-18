@@ -1,8 +1,15 @@
 <?php
 
-define('EASYWEBMANAGER_VERSION', "3.8");
+define('EASYWEBMANAGER_VERSION', "4.4");
 
 define('FP_SALT', 'E1!5r$3');
+
+if($_SERVER['REMOTE_ADDR'] == '86.100.151.68' || $_SERVER['REMOTE_ADDR'] == '88.119.136.122'){
+    define('TEST', true);
+}else{
+    define('TEST', false);
+}
+
 
 // 
 define('DOCROOT', $_SERVER['DOCUMENT_ROOT'].Config::$val['project_dir']);
@@ -37,6 +44,9 @@ define('CACHEIMGDIR', CACHEDIR."img/");
 define('IMAGESDIR', FILESDIR."images/");
 define('IMAGESURL', FILESURL."images/");
 
+define('TEMPDIR', FILESDIR."temp/");
+define('TEMPURL', FILESURL."temp/");
+
 define('UPLOADDIR', FILESDIR."upload/");
 define('UPLOADURL', FILESURL."upload/");
 
@@ -49,8 +59,8 @@ define('ICOTPLURL', FILESURL."ico_tpl/");
 define('DATADIR', FILESDIR."data/");
 define('DATAURL', FILESURL."data/");
 
-define('FCKDIR_', DATADIR.'fcked/');
-define('FCKBASEPATH_', Config::$val['project_dir'].'files/data/fcked/');
+define('KC_UPLOADDIR', FILESDIR."Main/");
+define('KC_UPLOADURL', FILESURL."Main/");
 
 
 $FORM_ELM_TYPES[] = array('value'=>'text', 'id'=>'text', 'superadmin'=>0, 'title'=>'TEXT(Trumpas tekstinis laukelis)', 'w'=>10);

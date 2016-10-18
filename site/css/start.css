@@ -1,0 +1,214 @@
+#success_story {
+    color:#FFF;
+    background-image:url('site/images/plaukikas.jpg');
+     
+}
+
+#mesa {
+    color:#FFF;
+    background-image:url('site/images/mesa.jpg');
+}
+
+
+#istorija {
+    color:#FFF;
+    background-image:url('site/images/istorija.jpg'); 
+}
+
+#rugstys-seima {
+    color:#FFF;
+    background:#3F4748;
+}
+
+
+#patenkinti {
+    color:#FFF;
+    text-shadow:1px 1px 0 #568759;
+    background:#93CA96;
+    margin-top:30px;
+}
+
+
+#pagalba {
+    padding:50px 0;
+    min-height:50px;
+    color:#FFF;
+    background:#FC465C;
+}
+#pagalba p {
+    margin:0px;
+}
+#pagalba .link {
+    font-size: 15px;
+    background:#E23F53;
+    padding:10px 20px;
+    margin:10px;
+    border-radius:10px;
+    color:#FFF;
+    text-decoration:none;
+}
+#pagalba .link:hover, #pagalba .link:focus {
+    background-color: #fff;
+    color: #E23F53;
+}
+
+.c-link {
+    cursor:pointer;
+}
+.c-text {
+    width:360px;
+    height:340px;
+    margin:90px auto;
+}
+.c-text a {
+    color:#2980B9;
+    font-size:18px;
+    text-decoration:none;
+}
+
+
+#circle {
+    border:25px solid #E23F53;
+    height:530px;
+    width:530px;
+    border-radius:290px;
+    background-image:url('site/images/meditacija.jpg');
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-color:#1D1F20;
+    margin:0 auto;
+}
+#circle .contenteditable {
+    min-height:50px;
+}
+#circle-area {
+    width:850px;
+    margin:0 auto;
+    margin-top:50px;
+    padding-top:50px;
+}
+#circle-area .c-link {
+    font-size:24px;
+    position:absolute;
+}
+#circle-area .c-link em {
+    display:block;
+    width:100px;
+    height:100px;
+    border-radius:50px;
+    background-color:#E23F53;
+    position:absolute;
+    margin:0 auto;
+    background-repeat:no-repeat;
+    background-position:center center;
+}
+#circle-area .c-link:hover em, #circle-area .c-link.a em {
+    display:block;
+    width:100px;
+    height:100px;
+    border-radius:50px;
+    background-color:#FFF;
+}
+
+#circle-area .c-link1 {    
+    top:0px;
+    left:500px;
+}
+#circle-area .c-link1 em {
+    top:40px;
+    background-image:url('site/images/circle/brain.png');
+}
+#circle-area .c-link1:hover em, #circle-area .c-link1.a em {
+    background-image:url('site/images/circle/brain-a.png');
+}
+
+#circle-area .c-link2 {    
+    top:135px;
+    left:690px;
+}
+#circle-area .c-link2 em {
+    top:40px;
+    left:-60px;
+    background-image:url('site/images/circle/heart.png');
+}
+#circle-area .c-link2:hover em, #circle-area .c-link2.a em {
+    background-image:url('site/images/circle/heart-a.png');
+}
+
+#circle-area .c-link3 {    
+    top:380px;
+    left:735px;
+}
+#circle-area .c-link3 em {
+    top:20px;
+    left:-105px;
+    background-image:url('site/images/circle/pregnency.png');
+}
+#circle-area .c-link3:hover em, #circle-area .c-link3.a em {
+    background-image:url('site/images/circle/pregnency-a.png');
+}
+
+#circle-area .c-link4 {
+    top:610px;
+    left:610px;
+}
+#circle-area .c-link4 em {
+    top:-70px;
+    left:-110px;
+    background-image:url('site/images/circle/skin.png');
+}
+#circle-area .c-link4:hover em, #circle-area .c-link4.a em {
+    background-image:url('site/images/circle/skin-a.png');
+}
+
+#circle-area .c-link5 {
+    top:610px;
+    left:160px;
+}
+#circle-area .c-link5 em {
+    top:-70px;
+    left:100px;
+    background-image:url('site/images/circle/joints.png');
+}
+#circle-area .c-link5:hover em, #circle-area .c-link5.a em {
+    background-image:url('site/images/circle/joints-a.png');
+}
+
+#circle-area .c-link6 {    
+    top:380px;
+    left:15px;
+}
+#circle-area .c-link6 em {
+    top:20px;
+    left:100px;
+    background-image:url('site/images/circle/prostate.png');
+}
+#circle-area .c-link6:hover em, #circle-area .c-link6.a em {
+    background-image:url('site/images/circle/prostate-a.png');
+}
+
+#circle-area .c-link7 {    
+    top:135px;
+    left:60px;
+}
+#circle-area .c-link7 em {
+    top:40px;
+    left:60px;
+    background-image:url('site/images/circle/lungs.png');
+}
+#circle-area .c-link7:hover em, #circle-area .c-link7.a em {
+    background-image:url('site/images/circle/lungs-a.png');
+}
+
+#circle-area .c-link8 {    
+    top:0px;
+    left:260px;
+}
+#circle-area .c-link8 em {
+    top:30px;
+    left:10px;
+    background-image:url('site/images/circle/eye.png');
+}
+#circle-area .c-link8:hover em, #circle-area .c-link8.a em {
+    background-image:url('site/images/circle/eye-a.png');
+}

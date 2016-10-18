@@ -5,13 +5,15 @@ abstract class easywebmanager extends basic {
 	
 	private static $instance;
 	
-	private $output_gziped = false;
+	private static $output_gziped = false;
 	
 	protected function __construct() {
 		
-		$old_error_handler = set_error_handler("errorHandler");
+		if(function_exists("errorHandler")){
+			$old_error_handler = set_error_handler("errorHandler");
+		}
 		
-		// sesijos uzkrovimas per get (swfupload)
+		// sesijos uzkrovimas per post (swfupload)
 		if(isset($_POST['_SESSION_ID_'])){
 			$this->loadNewSession($_POST['_SESSION_ID_']);
 		}
@@ -19,6 +21,8 @@ abstract class easywebmanager extends basic {
 		session_start();
 		
 		$this->ob_start();
+		
+		header('Content-Type: text/html; charset=utf-8');
 		
 		$_SESSION['_FINGERPRINT_'] = $this->fingerprint();
 
@@ -30,18 +34,18 @@ abstract class easywebmanager extends basic {
 	
 	abstract function process();
 	
-	function ob_start(){
+	static function ob_start(){
 		ob_start();
 	}
 	
-	function output($out){
+	static function output($out){
 		ob_end_clean();
-		$this->ob_start_gzip();
+		self::ob_start_gzip();
 		echo $out;
 		ob_flush();
 	}
 	
-	function ob_start_gzip() {
+	static function ob_start_gzip() {
 	
 	    //If no encoding was given - then it must not be able to accept gzip pages
 	    if( empty($_SERVER['HTTP_ACCEPT_ENCODING']) ) { 
@@ -58,7 +62,7 @@ abstract class easywebmanager extends basic {
 	    //Else if zlib is loaded start the compression.
 	    if ( extension_loaded( 'zlib' ) AND (strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== FALSE) ) {
 	        ob_start('ob_gzhandler');
-	        $this->output_gziped = true;
+	        self::$output_gziped = true;
 	    }
 	
 	}
@@ -81,14 +85,14 @@ abstract class easywebmanager extends basic {
 		return md5($_SERVER['REMOTE_ADDR'].FP_SALT);
 	}
 	
-	function ob_get_contents(){
+	static function ob_get_contents(){
 		$buffer = ob_get_contents();
 		ob_clean();
 		return $buffer;
 	}
 	
-	function is_ob_gzip(){
-		return $this->output_gziped;
+	static function is_ob_gzip(){
+		return self::$output_gziped;
 	}
 	
 }

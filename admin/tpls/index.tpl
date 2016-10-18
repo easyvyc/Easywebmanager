@@ -19,12 +19,25 @@
 
 <script type="text/javascript" src="admin/js/jquery.js"></script>
 <script type="text/javascript" src="admin/js/jquery-ui.js"></script>
+<script type="text/javascript" src="admin/js/datepicker/{cms_lng}.js"></script>
+<script type="text/javascript" src="admin/js/jquery.lightbox.js"></script>
 <script type="text/javascript" src="admin/js/jquery.timers.js"></script>
+<script type="text/javascript" src="admin/js/jquery.upload.js"></script>
 <script type="text/javascript" src="admin/js/scripts.js"></script>
 <script type="text/javascript" src="admin/js/dialog.js"></script>
 <script type="text/javascript" src="admin/js/nav.js"></script>
 <script type="text/javascript" src="admin/js/listing.js"></script>
 <script type="text/javascript" src="admin/js/forms.js"></script>
+<script type="text/javascript" src="admin/js/tree.js"></script>
+
+<script type="text/javascript" src="admin/lib/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="admin/lib/ckeditor/config.js"></script>
+
+<script type="text/javascript">
+var _CNF = new Object;
+_CNF.lng = '{cms_lng}';
+_CNF.cms = true;
+</script>
 
 </head>
 
@@ -41,9 +54,9 @@
 		<div class="top">
 			<div class="fleft"><a href="http://www.easywebmanager.com" target="_blank"><img src="admin/images/logo.png" alt="easywebmanager" /></a></div>
 			<div class="fright ico">
-				<img src="admin/images/top/update.gif" alt="{phrases.top.update_alt}" >&nbsp;<a href="#">{phrases.top.update}</a>
-				<img src="admin/images/top/debug.gif" alt="{phrases.top.debug_alt}" >&nbsp;<a href="#">{phrases.top.debug}</a>
-				<img src="admin/images/top/help.gif" alt="{phrases.top.manual_alt}" >&nbsp;<a href="http://help.easywebmanager.com" target="_blank">{phrases.top.manual}</a>
+				<img src="admin/images/top/update.gif" alt="{phrases.top.update_alt}" >&nbsp;<a href="javascript: void($NAV.get('?module=_easy_updates&ajax=1'));">{phrases.top.update}</a>
+				<!--img src="admin/images/top/debug.gif" alt="{phrases.top.debug_alt}" >&nbsp;<a href="javascript: void($NAV.get('?module=stat&ajax=1'));">{phrases.top.debug}</a-->
+				<img src="admin/images/top/help.gif" alt="{phrases.top.manual_alt}" >&nbsp;<a href="http://help.easywebmanager.com/?v=4" target="_blank">{phrases.top.manual}</a>
 				<img src="admin/images/top/user.gif" alt="{phrases.top.profile_alt}" >&nbsp;<a href="javascript: void($NAV.get('?module=admins&method=edit&id={admin.id}&ajax=1'));">{admin.login} ({admin.firstname} {admin.lastname})</a>
 				<img src="admin/images/top/logout.gif" alt="{phrases.top.logout_alt}" >&nbsp;<a href="admin.php?logout=1">{phrases.top.logout}</a>
 			</div>
@@ -51,17 +64,17 @@
 	
 		<div class="oln"></div>
 		
-		<nav>
+		<nav id="easy_main_navigation">
 		
 			<ul>
-			<?php TPL::setVar('modules', cms::getInstance()->registry->modules->modules->list_menu()); ?>
+			<?php TPL::setVar('modules', cms::getInstance()->registry->model->modules->list_menu()); ?>
 			{loop modules}
 			<li>
 				<a href="javascript: void(select_module_folder('mod_{modules.id}'));">{modules.title}</a>
-				<div id="mod_{modules.id}">
+				<div class="mod_cat" id="mod_{modules.id}" rel="{modules.id}">
 				<ul>
 					{loop modules.sub}
-					<li><a href="javascript: void($NAV.select_module('{modules.sub.table_name}'));">{modules.sub.title}</a></li>
+					<li rel="{modules.sub.table_name}"><a href="javascript: void($NAV.select_module('{modules.sub.table_name}'));">{modules.sub.title}</a></li>
 					{-loop modules.sub}
 				</ul>
 				</div>
@@ -74,7 +87,7 @@
 				<div id="mod_SUPERADMIN">
 				<ul>
 					<li><a href="javascript: void($NAV.select_module('modules'));">{phrases.main.settings.modules_title}</a></li>
-					<li><a href="javascript: void($NAV.select_module('modules_category'));">{phrases.main.settings.modules_category_title}</a></li>
+					<li><a href="javascript: void($NAV.select_module('module_category'));">{phrases.main.settings.modules_category_title}</a></li>
 					<li><a href="javascript: void($NAV.select_module('templates'));">{phrases.main.settings.templates_title}</a></li>
 				</ul>
 				</div>
@@ -96,90 +109,7 @@
 			
 				<div id="tree">
 				
-				sdf<br />
-				sdf<br />
-				sdf<br />
-				sdf<br />
-				sdf<br />
-				sdf<br />
-	
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
-			sdfgsdgsg<br>
+
 				
 				</div>
 				
@@ -190,65 +120,7 @@
 		
 		<div id="content">
 		
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				sdfgsdgsg<br>
-				
-				asfasasassdas			
+		
 		</div>
 		
 	</div>
@@ -261,3 +133,10 @@
 
 </body>
 </html>
+
+<script>
+$(document).ready(function(){
+        select_module_folder('mod_1');
+        $NAV.select_module('pages');
+});
+</script>

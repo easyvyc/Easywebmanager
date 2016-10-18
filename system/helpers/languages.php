@@ -1,13 +1,24 @@
 <?php
 function detect_language(){
-	if(defined('LANG')){
-		return LANG;
-	}elseif(isset($_GET['lng'])){
-		return $_GET['lng'];
+	if(isset($_GET['lng'])){
+		$lng = $_GET['lng'];
+	}elseif(defined('LANG')){
+		$lng = LANG;
+	}elseif($_SESSION['website_language']){
+		$lng = $_SESSION['website_language'];
 	}else{
-		return Config::$val['default_lng'];
+		$lng = Config::$val['default_lng'];
 	}
+        
+        if(!Config::$val['default_page'][$lng]){
+            $lng = Config::$val['default_lng'];
+        }
+        
+        $_SESSION['website_language'] = $lng;
+        
+        return $lng;
 }
+
 
 function load_languages($lngs){
 	foreach($lngs as $key => $val){
@@ -38,11 +49,19 @@ function load_admin_languages($lng_rights){
 }
 
 function detect_admin_lang(){
+	if(isset($_GET['lng'])){ 
+		$_SESSION['site_lng_changed'] = ($_SESSION['site_lng'] != $_GET['lng']);
+		$_SESSION['site_lng'] = $_GET['lng'];
+	}else{
+		if(!isset($_SESSION['site_lng'])){
+			$_SESSION['site_lng_changed'] = true;
+		}
+	}
 	if(isset($_GET['lang'])){
 		$_SESSION['admin_interface_language'] = $_GET['lang'];
 	}
 	if(!isset($_SESSION['admin_interface_language'])){
-		$_SESSION['admin_interface_language'] = 'lt';
+		$_SESSION['admin_interface_language'] = Config::$val['default_admin_interface_lng'];
 	}
 }
 

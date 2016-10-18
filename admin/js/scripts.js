@@ -2,6 +2,10 @@ $(document).ready(function(){
 	
 	$('body').append("<div id='_OVERLAY'></div>");
 	$('body').append("<div id='_LOADING'></div>");
+	$('body').append("<div id='_SCRIPT_' class='hide'></div>");
+	$('body').append("<div id='contextMenu'></div>");
+	$('body').append("<div id='_LOGIN_' class='_WINDOW'></div>");
+	$('body').append("<div id='_POPUP_' class='_WINDOW'><div class='rel'><div class='close' onclick=\"javascript: $('#_POPUP_').hide();\"></div><div class='content'></div></div></div>");
 	
 	reset_content_pos();
 	
@@ -13,11 +17,67 @@ $(document).ready(function(){
 			scroll: false
 	});
 	
+	$("#contextMenu").mouseleave(function(){ $(this).hide(); });
+	
+	$("#DEBUG").draggable({
+		handle: ".handle"
+	}).resizable();
+	
+});
+
+var currentMousePos = { x: -1, y: -1 };
+$(document).mousemove(function(event) {
+    currentMousePos = {
+        x: event.pageX,
+        y: event.pageY
+    };
 });
 
 $(window).resize(function(){
 	reset_content_pos();
 });
+
+function ajaxItemContextMenu(url){
+	//$('#contextMenu').hide();
+        
+        $('#contextMenu').css({'left':currentMousePos.x-5+'px', 'top':currentMousePos.y-5+'px'});
+        $.ajax({
+                async: false,
+                url:url,
+                dataType:"json",
+                type: "GET",
+                beforeSend:function(){
+                        $('#contextMenu').html("<p><mig src='/admin/images/loading.gif' alt='' ></p>");
+                        $('#contextMenu').show();
+                },
+                complete:function(){
+
+                },
+                success: function(_json_response_) {
+                        if(_json_response_.loged==true){
+                                $('#contextMenu').html(_json_response_.section[0].content);
+                        }else{
+                                hideItemContextMenu();
+                                $NAV.login(_json_response_);
+                        }
+                }
+        });
+	
+	return false;
+}
+
+function showItemContextMenu(obj_id){
+	//$('#contextMenu').hide();
+	$('#contextMenu').css({'left':currentMousePos.x-5+'px', 'top':currentMousePos.y-5+'px'});
+	$('#contextMenu').html($('#'+obj_id).html());
+	$('#contextMenu').show();
+	return false;
+}
+
+function hideItemContextMenu(){
+	$('#contextMenu').hide();
+	return false;	
+}
 
 function reset_left_resizer(){
 	n=$(this).position().left; 
@@ -27,6 +87,10 @@ function reset_left_resizer(){
 
 function select_module_folder(mod){
 	$('#module_folder').html($('#'+mod).html());
+        
+        $('#easy_main_navigation a').removeClass('a');
+        $('#'+mod).parents('li').find('a').addClass('a');
+        
 	reset_content_pos();
 }
 
@@ -38,13 +102,25 @@ function reset_content_pos(){
 }
 
 function loading_start(){
-	$('#_OVERLAY').show();
+	//$('#_OVERLAY').show();
 	$('#_LOADING').show();
 }
 
 function loading_end(){
-	$('#_OVERLAY').hide();
+	//$('#_OVERLAY').hide();
 	$('#_LOADING').hide();
+}
+
+function get_url_vars(url){
+    var vars = [], hash;
+    var hashes = url.slice(url.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
 }
 
 function f_clientWidth() {

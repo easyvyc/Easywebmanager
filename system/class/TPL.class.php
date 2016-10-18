@@ -42,7 +42,7 @@ class TPL {
 	        $endPosLoopPos = strpos($source, "{-loop ".$loopname."}", $endPos);
 	        // if end loop mark not found
 	        if($endPosLoopPos===false) {
-	        	throw new Exception(E_USER_ERROR, "Loop - '".$loopname."' does not have end tag", self::$tplFile, ($pos==0?0:substr_count($source, PHP_EOL, 0, $pos)+1), null);
+	        	throw new Exception("Loop - '".$loopname."' does not have end tag " . self::$tplFile . " " . ($pos==0?0:substr_count($source, PHP_EOL, 0, $pos)+1), E_USER_ERROR, null);
 	        }
 	        $length = strlen("{loop ".$loopname."}");
 	        $endPosLoop = $endPosLoopPos + $length + 1;
@@ -55,10 +55,10 @@ class TPL {
 				$loopPath1 = $loopPath;
 				$loopPath_last = array_pop($loopPath1);
 				$subloopname = '$'.implode("_", $loopPath1).'_val';
-				$tempCode = str_replace('{loop '.$loopname.'}', '<?php $'.$name.'_iterator=1; if(isset('.$subloopname.'["'.$loopPath_last.'"])){ foreach('.$subloopname.'["'.$loopPath_last.'"] as $'.$name.'_key => $'.$name.'_val){ $'.$name.'_val[\'_FIRST\']=0; if($'.$name.'_iterator==1) $'.$name.'_val[\'_FIRST\']=1; if($'.$name.'_iterator%2==1) $'.$name.'_val[\'_EVEN\']=0; else $'.$name.'_val[\'_EVEN\']=1; $'.$name.'_val[\'_INDEX\']=$'.$name.'_iterator++; ?>', $tempCode);
+				$tempCode = str_replace('{loop '.$loopname.'}', '<?php $'.$name.'_iterator=1; if(isset('.$subloopname.'["'.$loopPath_last.'"])){ foreach('.$subloopname.'["'.$loopPath_last.'"] as $'.$name.'_key => $'.$name.'_val){ if(!is_array($'.$name.'_val)){ $tmp_val=$'.$name.'_val; $'.$name.'_val=array(); $'.$name.'_val[\'_VALUE\']=$tmp_val; } $'.$name.'_val[\'_FIRST\']=0; if($'.$name.'_iterator==1) $'.$name.'_val[\'_FIRST\']=1; if($'.$name.'_iterator%2==1) $'.$name.'_val[\'_EVEN\']=0; else $'.$name.'_val[\'_EVEN\']=1; $'.$name.'_val[\'_INDEX\']=$'.$name.'_iterator++; $'.$name.'_val[\'_KEY\']=$'.$name.'_key;  ?>', $tempCode);
 				$tempCode = str_replace('{-loop '.$loopname.'}', '<?php }} ?>', $tempCode);
 			}else{
-				$tempCode = str_replace('{loop '.$loopname.'}', '<?php $'.$name.'_iterator=1; foreach(TPL::getLoop("'.$loopname.'") as $'.$name.'_key => $'.$name.'_val){ $'.$name.'_val[\'_FIRST\']=0; if($'.$name.'_iterator==1) $'.$name.'_val[\'_FIRST\']=1; if($'.$name.'_iterator%2==1) $'.$name.'_val[\'_EVEN\']=0; else $'.$name.'_val[\'_EVEN\']=1; $'.$name.'_val[\'_INDEX\']=$'.$name.'_iterator++; ?>', $tempCode);
+				$tempCode = str_replace('{loop '.$loopname.'}', '<?php $'.$name.'_iterator=1; foreach(TPL::getLoop("'.$loopname.'") as $'.$name.'_key => $'.$name.'_val){ if(!is_array($'.$name.'_val)){ $tmp_val=$'.$name.'_val; $'.$name.'_val=array(); $'.$name.'_val[\'_VALUE\']=$tmp_val; } $'.$name.'_val[\'_FIRST\']=0; if($'.$name.'_iterator==1) $'.$name.'_val[\'_FIRST\']=1; if($'.$name.'_iterator%2==1) $'.$name.'_val[\'_EVEN\']=0; else $'.$name.'_val[\'_EVEN\']=1; $'.$name.'_val[\'_INDEX\']=$'.$name.'_iterator++; $'.$name.'_val[\'_KEY\']=$'.$name.'_key; ?>', $tempCode);
 				$tempCode = str_replace('{-loop '.$loopname.'}', '<?php } ?>', $tempCode);
 			}
 		    
@@ -67,19 +67,19 @@ class TPL {
 
 		    // TODO: kad pracekintu ar uzdaryti blokai ar uzsetinti kintamieji
 		    // Replace loop negative blocks
-		    $tempCode = ereg_replace("\{block ".$loopname."\.([a-zA-Z0-9_]{1,}) no\}", "<?php if(!isset(\$".$name."_val[\"\\1\"]) || !\$".$name."_val[\"\\1\"]){ ?>", $tempCode);
-		    $tempCode = ereg_replace("\{-block ".$loopname."\.([a-zA-Z0-9_]{1,}) no\}", "<?php } ?>", $tempCode);
+		    $tempCode = preg_replace("/\{block ".$loopname."\.([a-zA-Z0-9_]{1,}) no\}/", "<?php if(!isset(\$".$name."_val[\"\\1\"]) || !\$".$name."_val[\"\\1\"]){ ?>", $tempCode);
+		    $tempCode = preg_replace("/\{-block ".$loopname."\.([a-zA-Z0-9_]{1,}) no\}/", "<?php } ?>", $tempCode);
 		    
 		    // TODO: kad pracekintu ar uzdaryti blokai ar uzsetinti kintamieji
 			// Replace loop blocks
-		    $tempCode = ereg_replace("\{block ".$loopname."\.([a-zA-Z0-9_]{1,})\}", "<?php if(isset(\$".$name."_val[\"\\1\"]) && \$".$name."_val[\"\\1\"]){ ?>", $tempCode);
-		    $tempCode = ereg_replace("\{-block ".$loopname."\.([a-zA-Z0-9_]{1,})\}", "<?php } ?>", $tempCode);
+		    $tempCode = preg_replace("/\{block ".$loopname."\.([a-zA-Z0-9_]{1,})\}/", "<?php if(isset(\$".$name."_val[\"\\1\"]) && \$".$name."_val[\"\\1\"]){ ?>", $tempCode);
+		    $tempCode = preg_replace("/\{-block ".$loopname."\.([a-zA-Z0-9_]{1,})\}/", "<?php } ?>", $tempCode);
 		    
 		    // Double start '{{' and end '}}' use when no need to php code start and end tags '<?php', '?\>' 
-		    $tempCode = ereg_replace("\{\{".$loopname."\.([a-zA-Z0-9_]{1,})\}\}", "\$".$name."_val[\"\\1\"]", $tempCode);
+		    $tempCode = preg_replace("/\{\{".$loopname."\.([a-zA-Z0-9_]{1,})\}\}/", "\$".$name."_val[\"\\1\"]", $tempCode);
 
 			// Replace loop variables
-		    $tempCode = ereg_replace("\{".$loopname."\.([a-zA-Z0-9_]{1,})\}", "<?php if(isset(\$".$name."_val[\"\\1\"])) echo \$".$name."_val[\"\\1\"]; ?>", $tempCode);
+		    $tempCode = preg_replace("/\{".$loopname."\.([a-zA-Z0-9_]{1,})\}/", "<?php if(isset(\$".$name."_val[\"\\1\"])) echo \$".$name."_val[\"\\1\"]; ?>", $tempCode);
 
 	        $tempCode = self::loops($tempCode);
 
@@ -107,25 +107,25 @@ class TPL {
 	// TODO: padaryt kad pereistu per source ir rastu visus {block ..} patikrintu ar uzsetinti ar uzdaryti ir t.t.	
 	static private function vars($source){
 
-		$source = ereg_replace("\{block ([a-zA-Z0-9\._]{1,}\.)\{([a-zA-Z0-9\._]{1,})\}\}", "<?php if(TPL::getVar(\"\\1\".TPL::getVar(\"\\2\"))){ ?>", $source);
-		$source = ereg_replace("\{block ([a-zA-Z0-9\._]{1,}\.)\{([a-zA-Z0-9\._]{1,})\}(\.[a-zA-Z0-9\._]{1,})\}", "<?php if(TPL::getVar(\"\\1\".TPL::getVar(\"\\2\").\"\\3\")){ ?>", $source);
-		$source = ereg_replace("\{block \{([a-zA-Z0-9\._]{1,})\}(\.[a-zA-Z0-9\._]{1,})\">", "<?php if(TPL::getVar(TPL::getVar(\"\\1\").\"\\2\")){ ?>", $source);
-		$source = ereg_replace("\{block ([a-zA-Z0-9\._]{1,})\}", "<?php if(TPL::getVar(\"\\1\")){ ?>", $source);
-		$source = ereg_replace("\{-block ([a-zA-Z0-9\._]{1,})\}", "<?php } ?>", $source);
+		$source = preg_replace("/\{block ([a-zA-Z0-9\._]{1,}\.)\{([a-zA-Z0-9\._]{1,})\}\}/", "<?php if(TPL::getVar(\"\\1\".TPL::getVar(\"\\2\"))){ ?>", $source);
+		$source = preg_replace("/\{block ([a-zA-Z0-9\._]{1,}\.)\{([a-zA-Z0-9\._]{1,})\}(\.[a-zA-Z0-9\._]{1,})\}/", "<?php if(TPL::getVar(\"\\1\".TPL::getVar(\"\\2\").\"\\3\")){ ?>", $source);
+		$source = preg_replace("/\{block \{([a-zA-Z0-9\._]{1,})\}(\.[a-zA-Z0-9\._]{1,})\">/", "<?php if(TPL::getVar(TPL::getVar(\"\\1\").\"\\2\")){ ?>", $source);
+		$source = preg_replace("/\{block ([a-zA-Z0-9\._]{1,})\}/", "<?php if(TPL::getVar(\"\\1\")){ ?>", $source);
+		$source = preg_replace("/\{-block ([a-zA-Z0-9\._]{1,})\}/", "<?php } ?>", $source);
 
-		$source = ereg_replace("\{block ([a-zA-Z0-9\._]{1,}\.)\{([a-zA-Z0-9\._]{1,})\}\}", "<?php if(!TPL::getVar(\"\\1\".TPL::getVar(\"\\2\"))){ ?>", $source);
-		$source = ereg_replace("\{block ([a-zA-Z0-9\._]{1,}\.)\{([a-zA-Z0-9\._]{1,})\}(\.[a-zA-Z0-9\._]{1,})\}", "<?php if(!TPL::getVar(\"\\1\".TPL::getVar(\"\\2\").\"\\3\")){ ?>", $source);
-		$source = ereg_replace("\{block \{([a-zA-Z0-9\._]{1,})\}(\.[a-zA-Z0-9\._]{1,})\}", "<?php if(!TPL::getVar(TPL::getVar(\"\\1\").\"\\2\")){ ?>", $source);
-		$source = ereg_replace("\{block ([a-zA-Z0-9\._]{1,}) no\}", "<?php if(!TPL::getVar(\"\\1\")){ ?>", $source);
-		$source = ereg_replace("\{-block ([a-zA-Z0-9\._]{1,}) no\}", "<?php } ?>", $source);
+		$source = preg_replace("/\{block ([a-zA-Z0-9\._]{1,}\.)\{([a-zA-Z0-9\._]{1,})\}\}/", "<?php if(!TPL::getVar(\"\\1\".TPL::getVar(\"\\2\"))){ ?>", $source);
+		$source = preg_replace("/\{block ([a-zA-Z0-9\._]{1,}\.)\{([a-zA-Z0-9\._]{1,})\}(\.[a-zA-Z0-9\._]{1,})\}/", "<?php if(!TPL::getVar(\"\\1\".TPL::getVar(\"\\2\").\"\\3\")){ ?>", $source);
+		$source = preg_replace("/\{block \{([a-zA-Z0-9\._]{1,})\}(\.[a-zA-Z0-9\._]{1,})\}/", "<?php if(!TPL::getVar(TPL::getVar(\"\\1\").\"\\2\")){ ?>", $source);
+		$source = preg_replace("/\{block ([a-zA-Z0-9\._]{1,}) no\}/", "<?php if(!TPL::getVar(\"\\1\")){ ?>", $source);
+		$source = preg_replace("/\{-block ([a-zA-Z0-9\._]{1,}) no\}/", "<?php } ?>", $source);
 	    
-	    $source = ereg_replace("\{\{([a-zA-Z0-9\._]{1,})\}\}", "TPL::getVar(\"\\1\")", $source);
+	    $source = preg_replace("/\{\{([a-zA-Z0-9\._]{1,})\}\}/", "TPL::getVar(\"\\1\")", $source);
 	    /*
-	    $source = ereg_replace("\{([a-zA-Z0-9\._]{1,}\.)\{([a-zA-Z0-9\._]{1,})\}\}", "<?php echo TPL::getVar(\"\\1\".TPL::getVar(\"\\2\")); ?>", $source);
-	    $source = ereg_replace("\{([a-zA-Z0-9\._]{1,}\.)\{([a-zA-Z0-9\._]{1,})\}(\.[a-zA-Z0-9\._]{1,})\}", "<?php echo TPL::getVar(\"\\1\".TPL::getVar(\"\\2\").\"\\3\"); ?>", $source);
-	    $source = ereg_replace("\{\{([a-zA-Z0-9\._]{1,})\}(\.[a-zA-Z0-9\._]{1,})\}", "<?php echo TPL::getVar(TPL::getVar(\"\\1\").\"\\2\"); ?>", $source);
+	    $source = preg_replace("/\{([a-zA-Z0-9\._]{1,}\.)\{([a-zA-Z0-9\._]{1,})\}\}/", "<?php echo TPL::getVar(\"\\1\".TPL::getVar(\"\\2\")); ?>", $source);
+	    $source = preg_replace("/\{([a-zA-Z0-9\._]{1,}\.)\{([a-zA-Z0-9\._]{1,})\}(\.[a-zA-Z0-9\._]{1,})\}/", "<?php echo TPL::getVar(\"\\1\".TPL::getVar(\"\\2\").\"\\3\"); ?>", $source);
+	    $source = preg_replace("/\{\{([a-zA-Z0-9\._]{1,})\}(\.[a-zA-Z0-9\._]{1,})\}/", "<?php echo TPL::getVar(TPL::getVar(\"\\1\").\"\\2\"); ?>", $source);
 	    */
-	    $source = ereg_replace("\{([a-zA-Z0-9\._]{1,})\}", "<?php echo TPL::getVar(\"\\1\"); ?>", $source);
+	    $source = preg_replace("/\{([a-zA-Z0-9\._]{1,})\}/", "<?php echo TPL::getVar(\"\\1\"); ?>", $source);
 	    
 	    return $source;
 	    

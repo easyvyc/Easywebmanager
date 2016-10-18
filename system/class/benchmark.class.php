@@ -1,6 +1,6 @@
 <?php
 
-benchmark::mark(benchmark::$start_mark, 'Start benchmark');
+benchmark::mark('Start benchmark', benchmark::$start_mark);
 
 /** 
  * @author Vytautas
@@ -11,9 +11,9 @@ class benchmark {
 	
 	public static $start_mark = '_START_';
 	private static $marker = array();
-	private static $mode = false;
+	private static $mode = true;
 	
-	static function mark($name = '', $msg = ''){
+	static function mark($msg = '', $name = ''){
 		if(!self::$mode) return false;
 		$arr = array();
 		$arr['msg'] = $msg;
@@ -84,6 +84,14 @@ class benchmark {
 		
 		return $b_str;
 		
+	}
+	
+	static function mode($mode){
+		self::$mode = $mode;
+	}
+	
+	static function debug(){
+		return self::$mode;
 	}
 	
 }

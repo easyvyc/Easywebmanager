@@ -5,21 +5,21 @@ function required($val){
 }
 
 function valid_email($email){
-	if (ereg("^.+@.+\\..+$", $email))
+	if (preg_match("/^.+@.+\\..+$/", $email))
 		return false;
 	else
 		return true;
 }
 
 function valid_login($login){
-	if (ereg("^[a-zA-Z0-9]{4,15}$", $login))
+	if (preg_match("/^[a-zA-Z0-9]{4,15}$/", $login))
 		return false;
 	else
 		return true;
 }
 
 function valid_time($time){
-	if (ereg("^[0-9]{1,2}(:[0-9]{2}){1,2}$", $time))
+	if (preg_match("/^[0-9]{1,2}(:[0-9]{2}){1,2}$/", $time))
 		return false;
 	else
 		return true;
@@ -27,7 +27,7 @@ function valid_time($time){
 
 function valid_number($time){
 	//echo $time; exit;
-	if (ereg("^[0-9]{1,}$", $time))
+	if (preg_match("/^[0-9]{1,}$/", $time))
 		return false;
 	else
 		return true;
@@ -42,6 +42,13 @@ function valid_price($time){
 
 function valid_float($time){
 	if (preg_match("/^[0-9]{1,}+(\.+[0-9]{1,}){0,1}$/", $time))
+		return false;
+	else
+		return true;
+}
+
+function valid_table_name($value){
+	if (preg_match("/^[0-9a-zA-Z_]{1,}$/", $value))
 		return false;
 	else
 		return true;
@@ -70,7 +77,7 @@ function valid_banner_size($time){
 }
 
 function valid_url($url){
-  if (!eregi("^((ht|f)tp://)((([a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3}))|(([0-9]{1,3}\.){3}([0-9]{1,3})))((/|\?)[a-z0-9~#%&'_\+=:\?\.-]*)*)$", $url)) { 
+  if (!preg_match("/^((ht|f)tp://)((([a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3}))|(([0-9]{1,3}\.){3}([0-9]{1,3})))((/|\?)[a-z0-9~#%&'_\+=:\?\.-]*)*)$/i", $url)) { 
     return 1; 
   } else { 
     return 0; 
@@ -78,10 +85,7 @@ function valid_url($url){
 }
 
 function valid_page_url($url){
-  global $XML_CONFIG;
-  if($_POST['generate_url']==1) return 0;
-  if($XML_CONFIG['lng_in_url']==1) $url = substr($url, 2);
-  if(!preg_match("/^\/{1}([a-zA-Z0-9\.\-]|_|\/){0,}$/", $url)){ 
+  if(!preg_match("/^([a-zA-Z0-9\.\-]|_|\/){1,}$/", $url)){ 
     return 1; 
   } else { 
     return 0; 
@@ -122,4 +126,13 @@ function isUploadedFile($value){
 	else
 		return 0;
 }
+
+function valid_year_month($date){
+    if (preg_match("/^[0-9]{4}\-[0-9]{2}$/", $date))
+        return false;
+    else
+        return true;
+}
+
+
 ?>

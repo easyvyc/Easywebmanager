@@ -8,19 +8,22 @@ class basic {
 	public $registry;
 	public $benchmark;
 	public $cache_obj;
-	public $phrases;
 	
 	protected $get = array();
 	protected $post = array();
 	protected $session = array();
 	protected $cookie = array();
 	
+	// system admin password encrypt function
+	protected $password_hash_function = "md5";
+	
 	
 	protected function __construct(){
 		
+		load_helpers('sys');
+		
 		if(!isset(Config::$val['DB'])){
-			include_once(CLASSDIR."database.class.php");
-			Config::setVal('DB', DB());
+			Config::setVal('DB', DB::getInstance(Config::$val['dbdriver'], Config::$val['hostname'], Config::$val['database'], Config::$val['username'], Config::$val['password'], Config::$val['dbport']));
 		}
 		
 		// database object
@@ -39,66 +42,6 @@ class basic {
 		
 	}
 	
-	function loadAdminLanguage($lng){ 
-		include(LANGUAGESDIR.$lng.".php");
-		$this->phrases = $cms_phrases;
-	}
-	
-	function get_browser_info($BROWSERS){
-	
-		$info['browser'] = "OTHER";
-		
-		foreach ($BROWSERS as $parent) {
-		   $s = strpos(strtoupper($_SERVER['HTTP_USER_AGENT']), $parent);
-		   $f = $s + strlen($parent);
-		   $version = substr($_SERVER['HTTP_USER_AGENT'], $f, 5);
-		   $version = preg_replace('/[^0-9,.]/','',$version);
-		   
-		   if (strpos(strtoupper($_SERVER['HTTP_USER_AGENT']), $parent)) {
-		   $info['browser'] = $parent;
-		   $info['version'] = $version;
-		   }
-		}
-		$this->browser_info = $info;
-	
-	}
-	
-	function parseString2Array($str){
-		
-		if(!isset($str) || $str=='') return array();
-		
-    	$arr = explode("::", $str);
-    	foreach($arr as $k=>$v){
-    		$arr_ = explode("=", $v);
-    		$arr1[$arr_[0]] = $arr_[1];
-    	}
-		return $arr1;
-				
-	}
-	
-	function getValueParamsImages($string, $s1="::", $s2="||", $s3="="){
-		
-		$arr = explode($s1, $string);
-		foreach($arr as $k1=>$v1){
-		
-				$_arr = explode($s2, $v1);
-				//pa($arr);
-				foreach($_arr as $k2=>$v2){
-					$__arr = explode($s3, $v2);
-					if($__arr[0]=="size"){
-						$___arr = explode("x", $__arr[1]);
-						$params[$k1][$__arr[0].'_width'] = $___arr[0];
-						$params[$k1][$__arr[0].'_height'] = $___arr[1];
-					}else{
-						$params[$k1][$__arr[0]] = $__arr[1];	
-					}
-				}
-		}
-		return $params;
-		
-	}	
-	
-
 }
 
 

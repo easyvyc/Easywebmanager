@@ -20,7 +20,7 @@ class main_module extends basic {
         $this->language = $_SESSION['admin_interface_language'];
         
         $this->setModuleTableFields();
-        $this->setModuleInfoTableFields();
+        //$this->setModuleInfoTableFields();
         
         if(!isset($this->language)) $this->language = Config::$val['default_lng'];
 
@@ -35,116 +35,174 @@ class main_module extends basic {
     
     function setModuleTableFields(){
 
-		$this->_table_fields['title_lt'] = array('title'=>$this->phrases['main']['settings']['module']['title_lt'], 'require'=>1, 'type'=>'text', 	'value'=>$modules->data['title_lt'], 'editorship'=>1	);
-		$this->_table_fields['title_en'] = array('title'=>$this->phrases['main']['settings']['module']['title_en'], 'require'=>1, 'type'=>'text', 	'value'=>$modules->data['title_en'], 'editorship'=>1	);
-		$this->_table_fields['table_name'] = array('title'=>$this->phrases['main']['settings']['module']['table_name'],'require'=>1, 'type'=>'text', 	'value'=>$modules->data['table_name'], 'editorship'=>1, 'class_method'=>"object=modules::method=checkExistTableName::admin_error_msg={$this->phrases['main']['settings']['module']['table_name_exists']}", 'function'=>"function=valid_table_name::admin_error_msg={$this->phrases['main']['settings']['module']['not_valid_table_name']}"	);
-		$this->_table_fields['no_standart_tpl'] = array('title'=>$this->phrases['main']['settings']['module']['no_standart_tpl'], 'require'=>0, 'type'=>'checkbox', 'value'=>$modules->data['no_standart_tpl'], 'editorship'=>1, 'default_value'=>1);
-		$this->_table_fields['area_html'] = array('title'=>$this->phrases['main']['settings']['module']['area_html'], 'require'=>0, 'type'=>'html', 'value'=>$modules->data['area_html'], 'editorship'=>1, 'htmlspecialchars'=>1, 'list_values'=>array('mode'=>'block', 'toolbar'=>'Default', 'height'=>'350'));
-		$this->_table_fields['no_standart_tpl'] = array('onclick'=>"getDefaultModuleTemplate(this, this.form.elements['field_html'], {$modules->data['id']});");
-		$this->_table_fields['additional_submit_action'] = array('title'=>$this->phrases['main']['settings']['module']['additional_submit_action'],'require'=>0, 'type'=>'text', 		'value'=>$modules->data['additional_submit_action'], 'editorship'=>1, "extra_params"=>"style='width:650px;'");
-		$this->_table_fields['multilng'] = array('title'=>$this->phrases['main']['settings']['module']['multilng'],	'require'=>0, 'type'=>'checkbox', 	'value'=>$modules->data['multilng'], 'editorship'=>1	);
-		$this->_table_fields['category'] = array('title'=>$this->phrases['main']['settings']['module']['category'],  'require'=>0, 'type'=>'checkbox', 	'value'=>$modules->data['category'], 'editorship'=>1	);
-		$this->_table_fields['tree'] = array('title'=>$this->phrases['main']['settings']['module']['tree'], 		'require'=>0, 'type'=>'checkbox', 	'value'=>$modules->data['tree'], 'editorship'=>1		);
-		$this->_table_fields['mod_pages'] = array('title'=>$this->phrases['main']['settings']['module']['mod_pages'], 'require'=>0, 'type'=>'select', 	'value'=>$modules->data['mod_pages'], 'editorship'=>1, 'list_values'=>array('source'=>'CALL', 'object'=>'module', 'method'=>'listModules'));
-		$this->_table_fields['default_sort'] = array('title'=>$this->phrases['main']['settings']['module']['default_sort'], 'require'=>1, 'type'=>'select', 	'value'=>$modules->data['default_sort'], 'editorship'=>1, 'list_values'=>$list_values);
-		$this->_table_fields['default_sort_direction'] = array('title'=>$this->phrases['main']['settings']['module']['default_sort_direction'], 'require'=>1, 'type'=>'select', 	'value'=>$modules->data['default_sort_direction'], 'editorship'=>1, 'list_values'=>$list_values);
-		$this->_table_fields['maxlevel'] = array( 'title' => $this->phrases['main']['settings']['module']['maxlevel'], 'type' => 'text', 'require' => 1, 'value' => $modules->data['maxlevel'], 'editorship'=>1 );
-		$this->_table_fields['additional_settings'] = array('title' => $this->phrases['main']['settings']['module']['additional_settings'], 'type' => 'textarea', 'require' => 0, 'value' => $modules->data['additional_settings'], 'editorship'=>1 );
-		$this->_table_fields['description'] = array('title'=>$this->phrases['main']['settings']['module']['description'], 			'require'=>0, 'type'=>'textarea', 	'value'=>$modules->data['description'], 'editorship'=>1	);
-		$this->_table_fields["submit"] = array('type'=>'submit', 'value'=>"", 'title'=>'', 'require'=>0);
-    	
-    	$this->table_fields[] = "table_name";
-    	$this->table_fields[] = "title";
-    	$this->table_fields[] = "title_lt";
-    	$this->table_fields[] = "title_en";
-    	$this->table_fields[] = "tplico";
-    	$this->table_fields[] = "multilng";
-    	$this->table_fields[] = "category";
-    	$this->table_fields[] = "tree";
-    	$this->table_fields[] = "mod_pages";
-    	$this->table_fields[] = "cache";
-    	$this->table_fields[] = "mail";
-    	$this->table_fields[] = "last_modify_time";
-    	$this->table_fields[] = "default_sort";
-    	$this->table_fields[] = "default_sort_direction";
-    	$this->table_fields[] = "search";
-    	$this->table_fields[] = "forbid_delete";
-    	$this->table_fields[] = "forbid_sort";
-    	$this->table_fields[] = "forbid_filter";
-    	$this->table_fields[] = "sort_order";
-    	$this->table_fields[] = "disabled";
-    	$this->table_fields[] = "maxlevel";
-    	$this->table_fields[] = "rss";
-    	$this->table_fields[] = "additional_submit_action";
-    	$this->table_fields[] = "additional_settings";
-    	$this->table_fields[] = "no_standart_tpl";
-    	$this->table_fields[] = "area_html";
-    	$this->table_fields[] = "no_record_table";
-    	$this->table_fields[] = "admin_catalog";
-    	$this->table_fields[] = "html_tpl";
-    	$this->table_fields[] = "parent_module";
+		$this->_table_fields['title_lt'] = array(
+                                                        'title'=>cms::$phrases['main']['settings']['module']['title_lt'], 
+                                                        'required'=>1, 
+                                                        'type'=>'text', 	
+                                                        'editable'=>1	
+		);
+		$this->_table_fields['title_en'] = array(
+                                                        'title'=>cms::$phrases['main']['settings']['module']['title_en'], 
+                                                        'required'=>1, 
+                                                        'type'=>'text', 	
+                                                        'editable'=>1	
+		);
+		$this->_table_fields['table_name'] = array(
+                                                        'title'=>cms::$phrases['main']['settings']['module']['table_name'],
+                                                        'required'=>1, 
+                                                        'type'=>'text', 	
+                                                        'editable'=>1, 
+                                                        'class_method'=>"module=modules::method=checkExistTableName::admin_error_msg=".cms::$phrases['main']['settings']['module']['table_name_exists'], 
+                                                        'function'=>"function=valid_table_name::admin_error_msg=".cms::$phrases['main']['settings']['module']['not_valid_table_name']	
+		);
+//		$this->_table_fields['no_standart_tpl'] = array(
+//											'title'=>cms::$phrases['main']['settings']['module']['no_standart_tpl'], 
+//											'required'=>0, 
+//											'type'=>'checkbox', 
+//											'editorship'=>1, 
+//											'default_value'=>1
+//		);
+//		$this->_table_fields['area_html'] = array(
+//											'title'=>cms::$phrases['main']['settings']['module']['area_html'], 
+//											'required'=>0, 
+//											'type'=>'html', 
+//											'editorship'=>1, 
+//											'htmlspecialchars'=>1, 
+//											'list_values'=>array(
+//															'mode'=>'block', 
+//															'toolbar'=>'Default', 
+//															'height'=>'350'
+//											)
+//		);
+		//$this->_table_fields['no_standart_tpl'] = array('onclick'=>"getDefaultModuleTemplate(this, this.form.elements['field_html'], {$modules->data['id']});");
+		//$this->_table_fields['additional_submit_action'] = array('title'=>cms::$phrases['main']['settings']['module']['additional_submit_action'],'require'=>0, 'type'=>'text', 		'value'=>$modules->data['additional_submit_action'], 'editorship'=>1, "extra_params"=>"style='width:650px;'");
+		$this->_table_fields['multilng'] = array(
+											'title'=>cms::$phrases['main']['settings']['module']['multilng'],	
+											'required'=>0, 
+											'type'=>'checkbox', 	
+											'editable'=>1	
+		);
+		$this->_table_fields['default_sort'] = array(
+											'title'=>cms::$phrases['main']['settings']['module']['default_sort'], 
+											'required'=>1, 
+											'type'=>'text', 
+                                                                                        'default_value'=>'R.sort_order ASC',
+											'editable'=>1
+		);
+		$this->_table_fields['maxlevel'] = array( 
+											'title' => cms::$phrases['main']['settings']['module']['maxlevel'], 
+											'type' => 'text', 
+											'required' => 1, 
+                                                                                        'default_value' => 0,
+											'editable'=>1 
+		);
+		$this->_table_fields['additional_settings'] = array(
+											'title' => cms::$phrases['main']['settings']['module']['additional_settings'], 
+											'type' => 'textarea', 
+											'required' => 0, 
+											'editable'=>1 
+		);
+		$this->_table_fields['folder_id'] = array(
+											'title'=>cms::$phrases['main']['settings']['module']['folder'], 			
+											'required'=>1, 
+											'type'=>FRM_SELECT, 	
+											'editable'=>1,
+                                                                                        'list_values'=>array('source'=>'DB', 'module'=>'module_category', 'parent_id'=>0)
+		);    	
+		$this->_table_fields['category'] = array(
+											'title'=>cms::$phrases['main']['settings']['module']['category'], 			
+											'required'=>0, 
+											'type'=>FRM_CHECKBOX, 	
+											'editable'=>1	
+		);    	
+		$this->_table_fields['cache'] = array(
+											'title'=>cms::$phrases['main']['settings']['module']['cache'], 			
+											'required'=>0, 
+											'type'=>FRM_CHECKBOX, 	
+											'editable'=>1	
+		);    	
+		$this->_table_fields['tree'] = array(
+											'title'=>cms::$phrases['main']['settings']['module']['tree'], 			
+											'required'=>0, 
+											'type'=>FRM_CHECKBOX, 	
+											'editable'=>1	
+		);    	
+		$this->_table_fields['no_record_table'] = array(
+											'title'=>cms::$phrases['main']['settings']['module']['no_record_table'], 			
+											'required'=>0, 
+											'type'=>FRM_CHECKBOX, 	
+											'editable'=>1	
+		);    	
+		$this->_table_fields['search'] = array(
+											'title'=>cms::$phrases['main']['settings']['module']['search'], 			
+											'required'=>0, 
+											'type'=>FRM_CHECKBOX, 	
+											'editable'=>1	
+		);    	
+		$this->_table_fields['disabled'] = array(
+											'title'=>cms::$phrases['main']['settings']['module']['disabled'], 			
+											'required'=>0, 
+											'type'=>FRM_CHECKBOX, 	
+											'editable'=>1	
+		);
+		$this->_table_fields['form_tpl'] = array(
+											'title'=>cms::$phrases['main']['settings']['module']['form_tpl'], 			
+											'required'=>0, 
+											'type'=>'html', 	
+											'editable'=>1	
+		);
+		$this->_table_fields['description'] = array(
+											'title'=>cms::$phrases['main']['settings']['module']['description'], 			
+											'required'=>0, 
+											'type'=>'textarea', 	
+											'editable'=>1	
+		);
+                
+                $this->table_fields = array();
+                foreach($this->_table_fields as $key => $val){
+                    $this->table_fields[] = $key;
+                }
+
     }
 
-    function setModuleInfoTableFields(){
-    	$this->info_table_fields[] = "module_id";
-    	$this->info_table_fields[] = "title";
-    	$this->info_table_fields[] = "title_lt";
-    	$this->info_table_fields[] = "title_en";
-    	$this->info_table_fields[] = "title_ru";
-    	$this->info_table_fields[] = "description";
-    	$this->info_table_fields[] = "column_name";
-    	$this->info_table_fields[] = "column_type";
-    	$this->info_table_fields[] = "column_type_more";
-    	$this->info_table_fields[] = "elm_type";
-    	$this->info_table_fields[] = "default_value";
-    	$this->info_table_fields[] = "list_values";
-    	$this->info_table_fields[] = "function";
-    	$this->info_table_fields[] = "class_method";
-    	$this->info_table_fields[] = "error_message";
-    	$this->info_table_fields[] = "require";
-    	$this->info_table_fields[] = "super_user";
-    	$this->info_table_fields[] = "list";
-    	$this->info_table_fields[] = "editable";
-    	$this->info_table_fields[] = "htmlspecialchars";
-    	$this->info_table_fields[] = "multilng";
-    	$this->info_table_fields[] = "index";
-    	$this->info_table_fields[] = "CE";
-    	$this->info_table_fields[] = "lng";
-    	$this->info_table_fields[] = "sort_order";
-    	$this->info_table_fields[] = "field_html";
-    	$this->info_table_fields[] = "extra_params";
-    	$this->info_table_fields[] = "no_standart_tpl";
-    }
-
-    function getModulesSum($joins, $where){
-    	$sql = "SELECT COUNT(DISTINCT T.id) as _COUNT_ " . 
-        		" FROM $this->table T " .
-        		$joins .     	
-    			" WHERE ".$where." 1=1";
-    	return $this->db->query($sql)->row_array();
+    function getModulesSum($joins, $where, $binds=array()){
+    	return $this->db->select($this->table . " T")
+		    			->fields("COUNT(DISTINCT id) as _COUNT_")
+		    			->joins($joins)
+		    			->bind($binds)
+		    			->where($where)->row_array();
     }
     
-    function listModules($joins, $where, $orders, $limit){
-    	$sql = "SELECT *, title_$this->language AS title, 1 AS editorship ". 
-        			" FROM $this->table T ".$joins." WHERE ".$where." 1=1 ".$orders." ".$limit;
-        return $this->db->query($sql)->result_array();
+    function listModules($joins=array(), $where=array(), $orders=array(), $limit=array(), $binds=array()){
+
+    	return $this->db->select($this->table . " T")
+    					->fields("T.*, T.title_$this->language AS title, 1 AS editorship")
+    					->joins($joins)
+    					->where($where)
+    					->order($orders)
+    					->limit($limit)
+    					->bind($binds)
+    					->result_array();
+    	
     }
     
     function listFolders(){
     	$lng = $this->language;
         if($this->language!='lt') $lng = "en"; 
-    	$sql = "SELECT *, title_$lng AS title FROM $this->table_categories";
-        return $this->db->query($sql)->result_array();
+    	return $this->db->select($this->table_categories)
+    					->fields("*, title_$lng AS title")
+    					->result_array();
     }
 
     function listAdminModules($admin_id, $sort_by="sort_order", $sort_direction="ASC"){
-        $admin_modules_rights = $this->registry->modules->call("admins", "loadModuleRights", $admin_id);
-        $items = $this->listModules('', '', "ORDER BY $sort_by $sort_direction", '');
+        $admin_modules_rights = $this->registry->model->admins->loadModuleRights($admin_id);
+        $items = $this->listModules('', array('disabled!=1'), "$sort_by $sort_direction", '');
+
 		if($_SESSION['admin']['permission']!=1){
 			$n = count($items);
 			for($i=0; $i<$n; $i++){
 				$items[$i]['lng_saved'] = 1;
-				if($items[$i]['admin_catalog']==1 && !in_array($items[$i]['id'], $admin_modules_rights))
+				if(!in_array($items[$i]['id'], $admin_modules_rights))
 					$items_[] = $items[$i];
 			}
 		}else{
@@ -159,69 +217,118 @@ class main_module extends basic {
     function getModule($id_or_name){
     	$lng = $this->language;
         if($this->language!='lt') $lng = "en"; 
-        $this->db->escape($id_or_name);
-    	$sql = "SELECT *, title_$lng AS title FROM $this->table WHERE id='$id_or_name' OR table_name='$id_or_name'";
-        return $this->db->query($sql)->row_array();
+        return $this->db->select($this->table)
+		        		 ->fields("*")
+		        		 ->fields("title_$lng AS title")
+		        		 ->where("id=:id OR table_name=:table_name")
+		        		 ->bind('id', $id_or_name)
+		        		 ->bind('table_name', $id_or_name)->row_array();
+        		 
+    }
+
+    function changeValue($table, $field, $id, $value){
+        
+        $this->db->update($table)
+        	 ->where("id=:id")
+        	 ->values("`$field`=:val")
+        	 ->bind('id', $id)
+                 ->bind('val', $value)
+        	 ->query();
+       return true; 
     }
     
     function changeStatus($table, $action, $id){
         
-        $sql = "SELECT `$action` AS action FROM $table WHERE id=$id";
-        $row = $this->db->query($sql)->row_array();
+    	$row = $this->db->select($table)
+		    			->where("id=:id")
+		    			->bind('id', $id)
+		    			->fields("`$action` AS action")
+		    			->row_array();
+    	
         $set = ($row['action']!=1?1:0);
-        $sql = "UPDATE $table SET `$action`=$set WHERE id=$id";
-        $this->db->query($sql);
+
+        $this->update($table)
+        	 ->where("id=:id")
+        	 ->values("`$action`=$set")
+        	 ->bind('id', $id)
+        	 ->query();
+        
     }
     
     function changeOrder($lastid, $firstid){
-        $sql = "SELECT sort_order FROM $this->table WHERE id=$firstid";
-        $sort1 = $this->db->query($sql)->row_array();
-        $sql = "SELECT sort_order FROM $this->table WHERE id=$lastid";
-        $sort2 = $this->db->query($sql)->row_array();
-
-        if($sort1['sort_order']>$sort2['sort_order'])
-        	$sql = "UPDATE $this->table SET sort_order=sort_order-1 WHERE sort_order<={$sort1['sort_order']} AND sort_order>={$sort2['sort_order']}";
-        else
-        	$sql = "UPDATE $this->table SET sort_order=sort_order+1 WHERE sort_order>={$sort1['sort_order']} AND sort_order<={$sort2['sort_order']}";
-        $this->db->query($sql);
-        $sql = "UPDATE $this->table SET sort_order={$sort1['sort_order']} WHERE id=$lastid";
-        $this->db->query($sql);	
+        
+        $sort1 = $this->db->select($this->table)
+                            ->fields("sort_order")
+                            ->where("id=:id")
+                            ->bind('id', $firstid)
+                            ->row_array();
+        
+        $sort2 = $this->db->select($this->table)
+                            ->fields("sort_order")
+                            ->where("id=:id")
+                            ->bind('id', $lastid)
+                            ->row_array();
+        
+        if($sort1['sort_order']>$sort2['sort_order']){
+        	$set = "sort_order=sort_order-1";
+        	$where = "sort_order<=:s1 AND sort_order>=:s2";
+        }else{
+        	$set = "sort_order=sort_order+1";
+        	$where = "sort_order>=:s1 AND sort_order<=:s2";
+        }
+        				  
+        $this->db->update($this->table)
+        		 ->values($set)
+        		 ->where($where)
+        		 ->bind('s1', $sort1['sort_order'])
+        		 ->bind('s2', $sort2['sort_order'])
+        		 ->query();
+        				  
+        $this->db->update($this->table)
+        		 ->values("sort_order=:s1")
+        		 ->where("id=:id")
+        		 ->bind('s1', $sort1['sort_order'])
+        		 ->bind('id', $lastid)
+        		 ->query();
+        		 
     }
     
     function saveModule($data, $default_columns=1){
         
+    	$this->db->startTransaction();
+    	
         $data['table_name'] = strtolower($data['table_name']);
         
         if($data['isNew']==1){
 
-			if($_SESSION['admin']['permission']!=1){
-				$data['parent_module'] = 0;
-				$data['admin_catalog'] = 1;
-				$data['multilng'] = 1;
-				$data['tree'] = 1;
-				$data['mod_pages'] = 1;
-				$data['search'] = 1;
-				$data['cache'] = 1;
-				$data['forbid_delete'] = 0;
-				$data['disabled'] = 1;
-				$data['no_record_table'] = 0;
-				$data['no_standart_tpl'] = 0;
-				$data['area_html'] = '';
-				$data['additional_submit_action'] = '';
-				$data['maxlevel'] = 0;
-				$data['additional_settings'] = '';
-			}
+            if($_SESSION['admin']['permission']!=1){
+                    $data['parent_module'] = 0;
+                    $data['admin_catalog'] = 1;
+                    $data['multilng'] = 1;
+                    $data['tree'] = 1;
+                    $data['mod_pages'] = 1;
+                    $data['search'] = 1;
+                    $data['cache'] = 1;
+                    $data['disabled'] = 1;
+                    $data['no_record_table'] = 0;
+                    $data['no_standart_tpl'] = 0;
+                    $data['area_html'] = '';
+                    $data['additional_submit_action'] = '';
+                    $data['maxlevel'] = 0;
+                    $data['additional_settings'] = '';
+            }
 
-            //$sql = "SELECT * FROM $this->table WHERE id=";
-            $sql = "SELECT MAX(sort_order) + 1 AS `new_order` FROM $this->table";
-            $row = $this->db->query($sql)->row_array();
+            $row = $this->db->select($this->table)
+                            ->fields("MAX(sort_order) + 1 AS `new_order`")
+                            ->row_array();
+            
             $data['sort_order'] = $row['new_order'];
             $sql = "CREATE TABLE `".Config::$val['pr_code']."_{$data['table_name']}` " .
             		"(`id` int(10) NOT NULL auto_increment, `record_id` int(10) NOT NULL default '0', " .
             		"`lng` varchar(255) default NULL, `lng_saved` tinyint(1) NOT NULL default '0', " .
             		"PRIMARY KEY  (`id`), " .
             		"KEY `record_id` (`record_id`) ) " .
-            		"TYPE=MyISAM AUTO_INCREMENT=1 ;";
+            		"AUTO_INCREMENT=1 ;";
             $this->db->query($sql);
             
             $arr = array();
@@ -229,11 +336,12 @@ class main_module extends basic {
             	if(in_array($key, $this->table_fields))
             		$arr[] = " $key='".addcslashes($val, "'\\")."' ";
             }
-            $str = implode(",", $arr);
             
-            $sql = "INSERT INTO $this->table SET ".$str;
-            $this->db->query($sql);
-            $id = $this->db->insert_id();
+            $this->db->insert($this->table)
+            		 ->values($arr)
+            		 ->query();
+            
+            $id = $this->db->last_insert_id();
             
             $this->saveSettings($data['additional_settings'], $id);
             
@@ -241,170 +349,148 @@ class main_module extends basic {
 
 	            unset($data);
 				$data = array(	'module_id'=>$id, 
-								'isNew'=>1, 
-								'title_lt'=>'Pavadinimas',
-								'title_en'=>'Title',  
-								'column_name'=>'title', 
-								'column_type'=>'varchar(255)', 
-								'elm_type'=>'text', 
-								'default_value'=>'', 
-								'list_values'=>'',
-								'extra_params'=>'', 
-								'function'=>'', 
-								'class_method'=>'', 
-								'error_message'=>'', 
-								'require'=>1,
-								'list'=>1, 
-								'editorship'=>1, 
-								'htmlspecialchars'=>1, 
-								'multilng'=>1, 
-								'CE'=>2 );
+                                                'isNew'=>1, 
+                                                'title_lt'=>'Pavadinimas',
+                                                'title_en'=>'Title',  
+                                                'column_name'=>'title', 
+                                                'column_type'=>'varchar(255)', 
+                                                'elm_type'=>'text', 
+                                                'default_value'=>'', 
+                                                'list_values'=>'',
+                                                'extra_params'=>'', 
+                                                'function'=>'', 
+                                                'class_method'=>'', 
+                                                'error_message'=>'', 
+                                                'require'=>1,
+                                                'list'=>1, 
+                                                'editorship'=>1, 
+                                                'htmlspecialchars'=>1, 
+                                                'multilng'=>1, 
+                                                'CE'=>2 );
 				$this->saveColumn($data);
 	
 	            unset($data);
 				$data = array(	'module_id'=>$id, 
-								'isNew'=>1, 
-								'title_lt'=>'Trumpas aprašymas',
-								'title_en'=>'Short description',  
-								'column_name'=>'short_description', 
-								'column_type'=>'text', 
-								'elm_type'=>'textarea', 
-								'default_value'=>'', 
-								'list_values'=>'',
-								'extra_params'=>'', 
-								'function'=>'', 
-								'class_method'=>'', 
-								'error_message'=>'', 
-								'require'=>0,
-								'list'=>0, 
-								'editorship'=>1, 
-								'htmlspecialchars'=>1, 
-								'multilng'=>0, 
-								'CE'=>2 );
+                                                'isNew'=>1, 
+                                                'title_lt'=>'Trumpas aprašymas',
+                                                'title_en'=>'Short description',  
+                                                'column_name'=>'short_description', 
+                                                'column_type'=>'text', 
+                                                'elm_type'=>'textarea', 
+                                                'default_value'=>'', 
+                                                'list_values'=>'',
+                                                'extra_params'=>'', 
+                                                'function'=>'', 
+                                                'class_method'=>'', 
+                                                'error_message'=>'', 
+                                                'require'=>0,
+                                                'list'=>0, 
+                                                'editorship'=>1, 
+                                                'htmlspecialchars'=>1, 
+                                                'multilng'=>0, 
+                                                'CE'=>2 );
 				$this->saveColumn($data);
 	
 	            unset($data);
 				$data = array(	'module_id'=>$id, 
-								'isNew'=>1, 
-								'title_lt'=>'Paveikslėlis',
-								'title_en'=>'Image',  
-								'column_name'=>'image', 
-								'column_type'=>'varchar(255)', 
-								'elm_type'=>'image', 
-								'default_value'=>'', 
-								'list_values'=>'',
-								'extra_params'=>'prefix=thumb_||size=90x50||quality=80::prefix=||size=500x500||quality=80||water_sign=1', 
-								'function'=>'', 
-								'class_method'=>'', 
-								'error_message'=>'', 
-								'require'=>0,
-								'list'=>0, 
-								'editorship'=>1, 
-								'htmlspecialchars'=>1, 
-								'multilng'=>0, 
-								'CE'=>2 );
-				$this->saveColumn($data);
-							
-	            unset($data);
-				$data = array(	'module_id'=>$id, 
-								'isNew'=>1, 
-								'title_lt'=>'Kaina',
-								'title_en'=>'Price',  
-								'column_name'=>'price', 
-								'column_type'=>'decimal(10,2)', 
-								'elm_type'=>'text', 
-								'default_value'=>'', 
-								'list_values'=>'',
-								'extra_params'=>'', 
-								'function'=>'function=valid_float::admin_error_msg=Wrong price', 
-								'class_method'=>'', 
-								'error_message'=>'', 
-								'require'=>1,
-								'list'=>1, 
-								'editorship'=>1, 
-								'htmlspecialchars'=>1, 
-								'multilng'=>0, 
-								'CE'=>2 );
+                                                'isNew'=>1, 
+                                                'title_lt'=>'Paveikslėlis',
+                                                'title_en'=>'Image',  
+                                                'column_name'=>'image', 
+                                                'column_type'=>'varchar(255)', 
+                                                'elm_type'=>'image', 
+                                                'default_value'=>'', 
+                                                'list_values'=>'',
+                                                'extra_params'=>'prefix=thumb_||size=90x50||quality=80::prefix=||size=500x500||quality=80||water_sign=1', 
+                                                'function'=>'', 
+                                                'class_method'=>'', 
+                                                'error_message'=>'', 
+                                                'require'=>0,
+                                                'list'=>0, 
+                                                'editorship'=>1, 
+                                                'htmlspecialchars'=>1, 
+                                                'multilng'=>0, 
+                                                'CE'=>2 );
 				$this->saveColumn($data);
 				            
 	            unset($data);
 				$data = array(	'module_id'=>$id, 
-								'isNew'=>1, 
-								'title_lt'=>'Aktyvus',
-								'title_en'=>'Active',  
-								'column_name'=>'active', 
-								'column_type'=>'tinyint(1)', 
-								'elm_type'=>'checkbox', 
-								'default_value'=>'1', 
-								'list_values'=>'',
-								'extra_params'=>'', 
-								'function'=>'', 
-								'class_method'=>'', 
-								'error_message'=>'', 
-								'require'=>0,
-								'list'=>1, 
-								'editorship'=>1, 
-								'htmlspecialchars'=>1, 
-								'multilng'=>0, 
-								'CE'=>2);
-				$this->saveColumn($data);
-	
-	            unset($data);
-				$data = array(	'module_id'=>$id, 
-								'isNew'=>1, 
-								'title_lt'=>'Submit',
-								'title_en'=>'Submit',  
-								'column_name'=>'submit', 
-								'column_type'=>'tinyint(1)', 
-								'elm_type'=>'submit', 
-								'default_value'=>'', 
-								'list_values'=>'',
-								'extra_params'=>'', 
-								'function'=>'', 
-								'class_method'=>'', 
-								'error_message'=>'', 
-								'require'=>0,
-								'list'=>0, 
-								'editorship'=>0, 
-								'htmlspecialchars'=>0, 
-								'multilng'=>0,
-								'CE'=>2);
+                                                'isNew'=>1, 
+                                                'title_lt'=>'Aktyvus',
+                                                'title_en'=>'Active',  
+                                                'column_name'=>'active', 
+                                                'column_type'=>'tinyint(1)', 
+                                                'elm_type'=>'checkbox', 
+                                                'default_value'=>'1', 
+                                                'list_values'=>'',
+                                                'extra_params'=>'', 
+                                                'function'=>'', 
+                                                'class_method'=>'', 
+                                                'error_message'=>'', 
+                                                'require'=>0,
+                                                'list'=>1, 
+                                                'editorship'=>1, 
+                                                'htmlspecialchars'=>1, 
+                                                'multilng'=>0, 
+                                                'CE'=>2);
 				$this->saveColumn($data);
             	
             }
 
         }else{
-            $sql = "SELECT table_name FROM $this->table WHERE id={$data['id']}";
-            $row = $this->db->query($sql)->row_array();
-            $sql = "ALTER TABLE `".Config::$val['pr_code']."_{$row['table_name']}` RENAME `".$this->config->variable['pr_code']."_{$data['table_name']}`";
-            $this->db->query($sql);
             
-            $arr = array();
-            foreach($data as $key=>$val){
-            	if(in_array($key, $this->table_fields))
-            		$arr[] = " $key='".addcslashes($val, "'\\")."' ";
+        	$row = $this->db->select($this->table)
+            				->fields("table_name")
+            				->where("id=:id")
+            				->bind('id', $data['id'])
+            				->row_array();
+            
+            if($row['table_name'] != $data['table_name']){
+                $sql = "ALTER TABLE `".Config::$val['pr_code']."_{$row['table_name']}` RENAME `".Config::$val['pr_code']."_{$data['table_name']}`";
+                $this->db->query($sql);
             }
-            $str = implode(",", $arr);
             
-            $sql = "UPDATE $this->table SET ".$str." WHERE id={$data['id']}";
-            $this->db->query($sql);
+            $values = $binds = array();
+            foreach($data as $key=>$val){
+            	if(in_array($key, $this->table_fields)){
+            		$values[] = " $key=:$key ";
+            		$binds[$key] = $val;
+            	}
+            }
+            
+            $this->db->update($this->table)
+            		 ->values($values)
+            		 ->where("id=:id")
+            		 ->bind('id', $data['id'])
+            		 ->bind($binds)
+            		 ->query();
+
             $id = $data['id'];
             
             $this->saveSettings($data['additional_settings'], $id);
             
         }
         
+        $this->db->commitTransaction();
+        
         return $id;
         
     }
     
     function saveSettings($str, $module_id){
-        $sql = "UPDATE $this->table " .
-        		"SET additional_settings='".addcslashes($str, "'\\")."' WHERE id=$module_id";
-        $this->db->query($sql);
+        
+        $this->db->update($this->table)
+        		 ->values("additional_settings=:additional_settings")
+        		 ->where("id=:id")
+        		 ->bind('additional_settings', $str)
+        		 ->bind('id', $module_id)
+        		 ->query();
+        
     }
     
     function importModule($data){
+    	
+    	$this->db->startTransaction();
     	
     	$mod = $this->loadModuleByTablename($data['table_name']);
     	
@@ -437,128 +523,55 @@ class main_module extends basic {
     		$this->saveColumn($val);
     	}
     	
+    	$this->db->commitTransaction();
+    	
     }
     
     function deleteModule($id){
-        $sql = "SELECT table_name FROM $this->table WHERE id=$id";
-        $row = $this->db->query($sql)->row_array();
+        
+    	$this->db->startTransaction();
+    	
+        $row = $this->db->select($this->table)
+        				->fields("table_name")
+        				->where("id=:id")
+        				->bind('id', $id)
+        				->row_array();
 
-        $sql = "SELECT id FROM ".Config::$val['pr_code']."_record WHERE module_id=$id";
-        $arr = $this->db->query($sql)->result_array();
+        $arr = $this->db->select(Config::$val['pr_code']."_record")
+        				->fields("id")
+        				->where("module_id=:id")
+        				->bind('id', $id)
+        				->result_array();
+        				
         foreach($arr as $key=>$val){
-	        $sql = "DELETE FROM ".Config::$val['sb_admin_module_rights']." WHERE record_id={$val['id']}";
-	        $this->db->query($sql);
+	        $this->db->delete(Config::$val['sb_admin_module_rights'])
+	        		 ->where("record_id=:id")
+	        		 ->bind('id', $val['id'])
+	        		 ->query();
 		}
 
-        $sql = "DELETE FROM ".Config::$val['pr_code']."_record WHERE module_id=$id";
-        $this->db->query($sql);
-        $sql = "DELETE FROM $this->table_info WHERE module_id=$id";
-        $this->db->query($sql);
+        $this->db->delete(Config::$val['pr_code']."_record")
+        		 ->where("module_id=:id")
+        		 ->bind('id', $id)
+        		 ->query();
+        
+        $this->db->delete($this->table_info)
+        		 ->where("module_id=:id")
+        		 ->bind('id', $id)
+        		 ->query();
+        		 
         $sql = "DROP TABLE ".Config::$val['pr_code']."_{$row['table_name']}";
         $this->db->query($sql);
-        $sql = "DELETE FROM $this->table WHERE id=$id";
-        $this->db->query($sql);
-    }
-    
-    function loadColumn($id){
-    	$lng = $this->language;
-        if($this->language!='lt') $lng = "en"; 
-    	$sql = "SELECT *, title_$lng AS title FROM $this->table_info WHERE id=$id";
-        return $this->data = $this->db->query($sql)->row_array();        
-    }
-    
-    function listColumns($module_id, $sort_by="sort_order", $sort_direction="ASC"){
-    	if(!isset($module_id) || !is_numeric($module_id)) return false;
-    	$lng = $this->language;
-        if($this->language!='lt') $lng = "en"; 
-    	if($sort_by=='title') $sort_by = "title_".$lng;
-        $sql = "SELECT *, title_$lng AS title, 1 AS lng_saved, module_id AS parent_id, 1 AS editorship FROM $this->table_info WHERE module_id=$module_id ORDER BY $sort_by $sort_direction";
-        return $this->db->query($sql)->result_array();
-    }
-    
-    function saveColumn($data){
         
-        $mod = $this->getModule($data['module_id']);
-        
-        if($data['isNew']==1){
-			
-			if($_SESSION['admin']['permission']!=1){
-				$data['editorship'] = 1;
-				$data['htmlspecialchars'] = 0;
-				$data['super_user'] = 0;
-				$data['function'] = '';
-				$data['class_method'] = '';
-				$data['error_message'] = '';
-				$data['CE'] = 2;
-				$data['no_standart_tpl'] = 0;
-				$data['field_html'] = '';
-			}
-			
-			$sql = "SELECT IF(MAX(sort_order)+1 IS NOT NULL, MAX(sort_order)+1, 1) AS sorder FROM $this->table_info WHERE module_id={$data['module_id']}";
-            $sort = $this->db->query($sql)->row_array();
-            $data['sort_order'] = $sort['sorder'];
-            
-            $sql = "ALTER TABLE `".Config::$val['pr_code']."_{$mod['table_name']}` ADD `{$data['column_name']}` {$data['column_type']}";
-            $this->db->query($sql);
-            
-            $arr = array();
-            foreach($data as $key=>$val){
-            	if(in_array($key, $this->info_table_fields))
-            		$arr[] = " `$key`='".addcslashes($val, "'\\")."' ";
-            }
-            $str = implode(",", $arr);
-           	$sql = "INSERT INTO $this->table_info SET $str";
-            $this->db->query($sql);
-            $id = $this->db->insert_id();
-            
-            return $id;
-            
-        }else{
-            
-            $sql = "SELECT column_name FROM $this->table_info WHERE id={$data['id']}";
-            $row = $this->db->query($sql)->row_array();
-            $sql = "ALTER TABLE `".Config::$val['pr_code']."_{$mod['table_name']}` CHANGE `{$row['column_name']}` `{$data['column_name']}` {$data['column_type']}";
-            $this->db->query($sql);
-            $arr = array();
-            foreach($data as $key=>$val){
-            	if(in_array($key, $this->info_table_fields))
-            		$arr[] = " `$key`='".addcslashes($val, "'\\")."' ";
-            }
-            $str = implode(",", $arr);
-            $sql = "UPDATE $this->table_info " .
-            		"SET $str WHERE id={$data['id']}";
-            $this->db->query($sql);
-            
-            return $data['id'];
-            
-        } 
-               
-    }
-
-    function deleteColumn($id){
-        $sql = "SELECT I.column_name, T.table_name FROM $this->table_info I LEFT JOIN $this->table T ON (I.module_id=T.id) WHERE I.id=$id";
-        $row = $this->db->query($sql)->row_array();
-        $sql = "DELETE FROM $this->table_info WHERE id=$id";
-        $this->db->query($sql);
-        $sql = "ALTER TABLE ".Config::$val['pr_code']."_{$row['table_name']} DROP {$row['column_name']}";
-        $this->db->query($sql);
+        $this->db->delete($this->table)
+        		 ->where("id=:id")
+        		 ->bind('id', $id)
+        		 ->query();
+        		 
+       	$this->db->commitTransaction();
+       	
     }
     
-    function changeColumnsOrder($lastid, $firstid){
-        $sql = "SELECT sort_order, module_id FROM $this->table_info WHERE id=$firstid";
-        $sort1 = $this->db->query($sql)->row_array();
-        $sql = "SELECT sort_order, module_id FROM $this->table_info WHERE id=$lastid";
-        $sort2 = $this->db->query($sql)->row_array();
-
-        if($sort1['sort_order']>$sort2['sort_order'])
-        	$sql = "UPDATE $this->table_info SET sort_order=sort_order-1 WHERE sort_order<={$sort1['sort_order']} AND sort_order>={$sort2['sort_order']} AND module_id={$sort2['module_id']}";
-        else
-        	$sql = "UPDATE $this->table_info SET sort_order=sort_order+1 WHERE sort_order>={$sort1['sort_order']} AND sort_order<={$sort2['sort_order']} AND module_id={$sort2['module_id']}";
-        $this->db->query($sql);
-        $sql = "UPDATE $this->table_info SET sort_order={$sort1['sort_order']} WHERE id=$lastid";
-        $this->db->query($sql);	
-    }
-        
     function listSoapUsersRights($rights_table, $id){
     	$list = $this->listAdminModules($rights_table, $id);
     	foreach($list as $val){
@@ -572,22 +585,40 @@ class main_module extends basic {
     
     function saveAdminRights($rights_table, $data){
     	foreach($data['module'] as $key=>$val){
-    		$sql = "SELECT id FROM $rights_table WHERE admin_id={$data['admin_id']} AND module_id=$key";
-    		$row = $this->db->query($sql)->row_array();
+    		
+    		$row = $this->db->select($rights_table)
+    						->fields("id")
+    						->where("admin_id=:admin_id AND module_id=:module_id")
+    						->bind('admin_id', $data['admin_id'])
+    						->bind('module_id', $key)
+    						->row_array();
+    		
     		if(empty($row)){
-    			$sql = "INSERT INTO $rights_table SET admin_id={$data['admin_id']}, rights={$data['module'][$key]}";
-    			$this->db->query($sql);
+    			$this->db->insert($rights_table)
+    					 ->values("admin_id=:admin_id, rights=:rights")
+    					 ->bind('admin_id', $data['admin_id'])
+    					 ->bind('rights', $data['module'][$key])
+    					 ->query();
     		}else{
-    			$sql = "UPDATE $rights_table SET rights={$data['module'][$key]} WHERE admin_id={$data['admin_id']}";
-    			$this->db->query($sql);
+    			$this->db->update($rights_table)
+    					 ->values("rights=:rights")
+    					 ->where("admin_id=:admin_id")
+    					 ->bind('rights', $data['module'][$key])
+    					 ->bind('admin_id', $data['admin_id'])
+    					 ->query();
     		}
     	}
     }
     
     function loadAdminModuleRights($rights_table, $admin_id, $mod){
     	$module = $this->loadModuleByTablename($mod);
-    	$sql = "SELECT rights FROM $rights_table WHERE admin_id=$admin_id AND module_id={$module['id']}";
-    	$row = $this->db->query($sql)->row_array();
+    	$sql = "SELECT rights FROM  WHERE admin_id=$admin_id AND module_id={$module['id']}";
+    	$row = $this->db->select($rights_table)
+    					->fields("rights")
+    					->where("admin_id=:admin_id AND module_id=:module_id")
+    					->bind('admin_id', $admin_id)
+    					->bind('module_id', $module['id'])
+    					->row_array();
     	return $row['rights'];
     }
     
@@ -611,8 +642,11 @@ class main_module extends basic {
     		
     	}else{
     		
-    		$sql = "SELECT * FROM $this->table_info WHERE column_name='$value' AND module_id={$data['module_id']}";
-            $row = $this->db->query($sql)->row_array();
+            $row = $this->db->select($this->table_info)
+            				->where("column_name=:column_name AND module_id=:module_id")
+            				->bind('column_name', $value)
+            				->bind('module_id', $data['module_id'])
+            				->row_array();
             if(!empty($row)){
     			if($row['id']!=$data['id']){
     				return true;
@@ -641,39 +675,39 @@ class main_module extends basic {
     	if($data['isNew']==1){
     		
     		$table_name = Config::$val['pr_code']."_".$value;
-    		$result = mysql_list_tables(Config::$val['database']);
-    		while ($row = mysql_fetch_row($result)) {
+    		$result = $this->db->query("SHOW TABLES")->result_array();
+    		foreach ($result as $row) {
 				$arr_tbl[] = strtolower($row[0]);
 			}
 			if(in_array($table_name, $arr_tbl)){
-				return true;
+				return false;
 			}
     		
     	}else{
     		
-    		$sql = "SELECT * FROM $this->table WHERE table_name='$value'";
-            $row = $this->db->query($sql)->row_array();
+            $row = $this->db->select($this->table)
+            				->where("table_name=:table_name")
+            				->where("id!=:id")
+            				->bind('table_name', $value)
+            				->bind('id', $data['id'])
+            				->row_array();
             if(!empty($row)){
-    			if($row['id']!=$data['id']){
-    				return true;
-    			}	
-    		}else{
-	    		$table_name = Config::$val['pr_code']."_".$value;
-	    		$result = mysql_list_tables(Config::$val['database']);
-	    		while ($row = mysql_fetch_row($result)) {
-					$arr_tbl[] = strtolower($row[0]);
-				}
-				if(in_array($table_name, $arr_tbl)){
-					return true;
-				}
+   		    	return false;
     		}
     		
     	}
     	
-    	return false;
+    	return true;
     	
     }
-
+    
+    function listColumns($module_id){
+        return $this->registry->model->module_info->listColumns($module_id);
+    }
+    
+    function saveColumn($data){
+        return $this->registry->model->module_info->saveItem($data);
+    }
     
 }
         

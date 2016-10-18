@@ -25,7 +25,7 @@ function errorHandler($errno, $errmsg, $filename, $linenum, $vars){
     // set of errors for which a var trace will be saved
     $user_errors = array(E_USER_ERROR, E_USER_WARNING, E_USER_NOTICE);
 
-	if($errno!=8 && $errno!=1024 && $errno!=2048 && $errno!=2 && $errno!=512){
+	if($errno!=8 && $errno!=1024 && $errno!=2048 && $errno!=2 && $errno!=512 && $errno!=8192){
 		
 		if(Config::$val['send_error_email']==1){
 			

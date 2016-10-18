@@ -14,7 +14,7 @@ $cms_phrases['login']['login_name'] = "Prisijungimo vardas";
 $cms_phrases['login']['login'] = "Prisijungimas";
 $cms_phrases['login']['password'] = "Slaptažodis";
 $cms_phrases['login']['submit'] = "Prisijungti";
-$cms_phrases['login']['session_timeout'] = "Administravimo sesija baigėsi. Jums teks prisijungti prie sistemos iš naujo.";
+$cms_phrases['login']['session_timeout'] = "Administravimo sesija baigėsi.<br />Jums teks prisijungti prie sistemos iš naujo.";
 $cms_phrases['login']['password_remind'] = "Slaptažodžio priminimas";
 $cms_phrases['login']['remind_submit'] = "Priminti";
 $cms_phrases['login']['email'] = "El. paštas";
@@ -59,11 +59,16 @@ $cms_phrases['modules']['context_menu']['edit_title'] = "Keisti įrašą";
 $cms_phrases['modules']['context_menu']['translate_title'] = "Išversti";
 $cms_phrases['modules']['context_menu']['new_title'] = "Naujas įrašas";
 $cms_phrases['modules']['context_menu']['import_title'] = "Importuoti(csv)";
-$cms_phrases['modules']['context_menu']['export_title'] = "Eksportuoti(csv)";
+$cms_phrases['modules']['context_menu']['export_title'] = "Eksportuoti";
 $cms_phrases['modules']['context_menu']['pdf_title'] = "Spausdinimui(pdf)";
 $cms_phrases['modules']['context_menu']['delete_title'] = "Trinti įrašą";
 $cms_phrases['modules']['context_menu']['module_title'] = "Keisti turinį";
 $cms_phrases['modules']['context_menu']['settings_title'] = "Nustatymai";
+$cms_phrases['modules']['context_menu']['blocks_title'] = "Turinys";
+$cms_phrases['modules']['context_menu']['page_edit_title'] = "Parametrai";
+$cms_phrases['modules']['context_menu']['info_title'] = "Informacija";
+$cms_phrases['modules']['context_menu']['copy_title'] = "Sukurti kopiją";
+$cms_phrases['modules']['context_menu']['note_title'] = "Pastabos";
 
 $cms_phrases['modules']['context_menu']['mod_new'] = "Naujas modulis";
 $cms_phrases['modules']['context_menu']['mod_tpl'] = "Keisti šabloną";
@@ -72,6 +77,28 @@ $cms_phrases['modules']['context_menu']['mod_fields'] = "Modulio laukeliai";
 $cms_phrases['modules']['context_menu']['mod_new_field'] = "Sukurti naują modulio laukelį";
 $cms_phrases['modules']['context_menu']['mod_delete'] = "Pašalinti modulį";
 
+$cms_phrases['products']['context_menu']['related_title'] = "Susiję produktai";
+$cms_phrases['products']['context_menu']['fields_title'] = "Papildomos savybės";
+$cms_phrases['products']['context_menu']['modif_title'] = "Modifikacijos";
+$cms_phrases['products']['context_menu']['discount_title'] = "Nuolaidos";
+$cms_phrases['products']['context_menu']['category_title'] = "Kategorijos produktai";
+$cms_phrases['products']['context_menu']['category_item_insert'] = "Įkelti produktą";
+$cms_phrases['products']['new_additional_field'] = "Sukurti naują savybę";
+
+$cms_phrases['pages']['context_menu']['category_products'] = "Produktai";
+
+$cms_phrases['newsletters']['context_menu']['send_title'] = "Siųsti";
+$cms_phrases['newsletters']['context_menu']['test_title'] = "Testuoti";
+
+$cms_phrases['news']['context_menu']['create_newsletter'] = "Sukurti naujienlaiškį";
+
+$cms_phrases['newsletters']['submit_send'] = "Siųsti";
+$cms_phrases['newsletters']['success_send'] = "Naujienlaiškis sėkmingai išsiųstas.";
+$cms_phrases['newsletters']['error_send'] = "Naujienlaiškio išsiųsti nepavyko.";
+$cms_phrases['newsletters']['emails_text'] = "Įrašykite el. laiškų adresus";
+$cms_phrases['newsletters']['emails_groups'] = "Pažymėkite naujienlaiškių prenumeratorių grupes";
+$cms_phrases['newsletters']['send_loading'] = "Naujienlaiškis siunčiamas. Palaukite kol bus išsiųsta.";
+        
 
 $cms_phrases['top']['administrator_alt'] = "Profilis";
 $cms_phrases['top']['administrator'] = "Profilis";
@@ -95,27 +122,6 @@ $cms_phrases['top']['search'] = "Paieška";
 $cms_phrases['top']['search_alt'] = "Paieška";
 
 
-$cms_phrases['desktop']['title'] = "Darbalaukis";
-$cms_phrases['desktop']['add_shortcut'] = "Pridėti nuorodą";
-
-
-
-$cms_phrases['main']['trash']['title'] = "Pavadinimas";
-$cms_phrases['main']['trash']['is_category'] = "Tipas";
-$cms_phrases['main']['trash']['module'] = "Modulis";
-$cms_phrases['main']['trash']['reset_title'] = "Atstatyti";
-$cms_phrases['main']['trash']['delete_title'] = "Šalinti";
-$cms_phrases['main']['trash']['reset_confirm'] = "Ar tikrai norite atstatyti šį įrašą?";
-$cms_phrases['main']['trash']['delete_confirm'] = "Ar tikrai norite pašalinti šį įrašą?";
-$cms_phrases['main']['trash']['items_title'] = "Įrašai";
-$cms_phrases['main']['trash']['settings'] = "Nustatymai";
-$cms_phrases['main']['trash']['view_title'] = "Peržiūrėti";
-$cms_phrases['main']['trash']['create_date'] = "Sukūrimo laikas";
-$cms_phrases['main']['trash']['last_modif_date'] = "Paskutinį kartą redaguotas";
-
-
-$cms_phrases['main']['before_unload_text'] = "Jei norite neišsaugoję vykdyti tolimesnius veiksmus, spauskite OK, jei norite likti esamame puslapyje spauskite Cancel?";
-
 $cms_phrases['main']['form']['delete_file'] = "Trinti failą";
 $cms_phrases['main']['form']['delete_image'] = "Trinti paveikslėlį";
 $cms_phrases['main']['form']['change_image_size'] = "Keisti paveikslėlio dydį";
@@ -134,7 +140,7 @@ $cms_phrases['main']['catalog']['categories_list'] = "Kategorijos";
 $cms_phrases['main']['catalog']['empty_categories'] = "Kategorijų nėra";
 $cms_phrases['main']['catalog']['empty_elements'] = "Įrašų nėra";
 $cms_phrases['main']['catalog']['new_category'] = "Nauja kategorija";
-$cms_phrases['main']['catalog']['elements_list'] = "Įrašai";
+$cms_phrases['main']['catalog']['elements_list'] = "Sąrašas";
 $cms_phrases['main']['catalog']['new_element'] = "Naujas įrašas";
 $cms_phrases['main']['catalog']['edit_element'] = "Keisti įrašą";
 $cms_phrases['main']['catalog']['delete_element'] = $cms_phrases['modules']['context_menu']['delete'];
@@ -189,27 +195,10 @@ $cms_phrases['main']['catalog']['import_data_items_count'] = "Viso įrašų";
 $cms_phrases['main']['catalog']['item_add_success'] = "Įrašas išsaugotas sėkmingai";
 $cms_phrases['main']['catalog']['move_confirm_text'] = "Ar tikrai norite perkelti irašą?";
 $cms_phrases['main']['catalog']['clean_listing_filters'] = "Panaikinti visus filtrus";
+$cms_phrases['main']['catalog']['listing_settings'] = "Sąrašo nustatymai";
 
 
-$cms_phrases['main']['products']['items_count'] = "Prekės kiekis";
-$cms_phrases['main']['products']['no_modifications'] = "Nėra įvestos modifikacijos.";
-$cms_phrases['main']['products']['wrong_storage'] = "Neteisingai įvestas kiekis";
-
-$cms_phrases['main']['orders']['proforma_title'] = "Išankstinė sąskaita";
-$cms_phrases['main']['orders']['invoice_title'] = "Sąskaita faktūra";
-$cms_phrases['main']['orders']['download_proforma'] = "Parsisiųsti";
-$cms_phrases['main']['orders']['download_invoice'] = "Parsisiųsti";
-$cms_phrases['main']['orders']['invoice_not_exist'] = "Sąskaita faktūra dar nėra sugeneruota.";
-$cms_phrases['main']['orders']['generate_invoice'] = "Sugeneruoti sąskaitą faktūrą";
-$cms_phrases['main']['orders']['send_proforma'] = "Išsiųsti išankstinę sąskaitą";
-$cms_phrases['main']['orders']['send_invoice'] = "Išsiųsti sąskaitą-faktūrą";
-$cms_phrases['main']['orders']['last_send'] = "Paskutinį kartą išsiųsta";
-$cms_phrases['main']['orders']['invoice_to_email'] = "Gavėjo el. paštas";
-$cms_phrases['main']['orders']['invoice_to_text'] = "El. laiško turinys";
-$cms_phrases['main']['orders']['invoice_to_subject'] = "El. laiško antraštė(subject)";
-
-$cms_phrases['main']['newsletter']['new_element'] = "Naujas naujienlaiškis";
-$cms_phrases['main']['newsletter']['elements_list'] = "Nuajienlaiškių archyvas";
+$cms_phrases['orders']['context_menu']['ordered_items'] = "Užsakytos prekės";;
 
 $cms_phrases['main']['common']['yes'] = "Taip";
 $cms_phrases['main']['common']['no'] = "Ne";
@@ -244,6 +233,29 @@ $cms_phrases['main']['common']['save'] = "Saugoti";
 $cms_phrases['main']['common']['close'] = "Uždaryti";
 $cms_phrases['main']['common']['video_help'] = "Video pagalba";
 $cms_phrases['main']['common']['cancel_filter'] = "Išvalytį filtrą";
+$cms_phrases['main']['common']['form_validation_error'] = "Yra klaidų. Neteisingai užpildyti laukeliai.";
+$cms_phrases['main']['common']['form_saved_success'] = "Informacija išsaugota sėkmingai.";
+$cms_phrases['main']['common']['form_export_type_title'] = "Pasirinkite bylos tipą";
+$cms_phrases['main']['common']['form_export_fields_title'] = "Pasirinkite kuriuos laukelius eksportuoti";
+$cms_phrases['main']['common']['form_export_add_header_title'] = "Pridėti stulpelių pavadinimus";
+$cms_phrases['main']['common']['file_not_found'] = "Failas nerastas";
+$cms_phrases['main']['common']['info_title'] = "Pagrindinė informacija";
+$cms_phrases['main']['common']['info_module'] = "Modulis";
+$cms_phrases['main']['common']['info_parent_id'] = "Parent #ID";
+$cms_phrases['main']['common']['info_sort_number'] = "Eilės numeris";
+$cms_phrases['main']['common']['info_languages_saved'] = "Išsaugota kalbose (išversta)";
+$cms_phrases['main']['common']['info_created'] = "Įrašas sukurtas";
+$cms_phrases['main']['common']['info_created_date'] = "Data/laikas";
+$cms_phrases['main']['common']['info_created_by'] = "Įrašo autorius";
+$cms_phrases['main']['common']['info_created_ip'] = "IP adresas";
+$cms_phrases['main']['common']['info_updated'] = "Paskutinis įrašo keitimas";
+$cms_phrases['main']['common']['info_updated_date'] = "Data/laikas";
+$cms_phrases['main']['common']['info_updated_by'] = "Įrašą keitė";
+$cms_phrases['main']['common']['info_updated_ip'] = "IP adresas";
+$cms_phrases['main']['common']['note_title'] = "Pastaba";
+$cms_phrases['main']['common']['note_submit'] = "Sukurti pastabą";
+$cms_phrases['main']['common']['note_placeholder'] = "Įrašykite pastabą";
+
 
 $cms_phrases['main']['common']['months'][1] = "Sausis";
 $cms_phrases['main']['common']['months'][2] = "Vasaris";
@@ -321,6 +333,12 @@ $cms_phrases['main']['settings']['columns']['description'] = "Apibūdinimas";
 $cms_phrases['main']['settings']['columns']['column_type'] = "Laukelio DB tipas";
 $cms_phrases['main']['settings']['columns']['elm_type'] = "Laukelio TVS tipas";
 $cms_phrases['main']['settings']['columns']['multilng'] = "Daugiakalbis";
+$cms_phrases['main']['settings']['columns']['default_value'] = "Default reikšmė";
+$cms_phrases['main']['settings']['columns']['require'] = "Privalomas";
+$cms_phrases['main']['settings']['columns']['validator'] = "Tikrinimo funkcijos";
+$cms_phrases['main']['settings']['columns']['list'] = "Sąraše";
+$cms_phrases['main']['settings']['columns']['editable'] = "Redaguojamas";
+$cms_phrases['main']['settings']['columns']['index'] = "Index";
 $cms_phrases['main']['settings']['columns']['list_values'] = "Sąrašo reikšmės";
 
 $cms_phrases['main']['settings']['module']['new_module'] = "Naujas modulis";
@@ -376,9 +394,13 @@ $cms_phrases['main']['settings']['module']['images_extra_context_menu_title'] = 
 $cms_phrases['main']['settings']['module']['export'] = "Eksportuoti";
 $cms_phrases['main']['settings']['module']['import'] = "Importuoti";
 
+$cms_phrases['main']['settings']['module']['folder'] = "Kategorija";
+$cms_phrases['main']['settings']['module']['form_tpl'] = "Savitas maketas";
+
 
 $cms_phrases['main']['admins']['list_title'] = "Administratoriai";
 $cms_phrases['main']['admins']['new_admin'] = "Naujas administratorius";
+$cms_phrases['main']['admins']['rights_title'] = "Administravimo teisės";
 $cms_phrases['main']['admins']['page_rights_title'] = "Teisės (puslapiai)";
 $cms_phrases['main']['admins']['module_rights_title'] = "Teisės (moduliai)";
 $cms_phrases['main']['admins']['language_rights_title'] = "Teisės (kalbos)";
@@ -389,9 +411,13 @@ $cms_phrases['main']['admins']['logout_time'] = "Išėjimo laikas";
 $cms_phrases['main']['admins']['past_time'] = "Praleistas laikas";
 $cms_phrases['main']['admins']['ipaddress'] = "IP adresas";
 $cms_phrases['main']['admins']['admin_title'] = "Administratorius";
+$cms_phrases['main']['admins']['wrong_password'] = "Slaptažodžiai turi sutapti. Slaptažodis turi būti ilgesnis nei 4 simboliai";
 
 
-
+$cms_phrases['main']['stat']['device_type'] = "Įrenginys";
+$cms_phrases['main']['stat']['device_type_web'] = "Personalinis kompiuteris";
+$cms_phrases['main']['stat']['device_type_mobile'] = "Mobilus telefonas";
+$cms_phrases['main']['stat']['device_type_tablet'] = "Planšetinis kompiuteris";
 $cms_phrases['main']['stat']['visitors_by_referer'] = "Lankytojai pagal šaltinį";
 $cms_phrases['main']['stat']['visitors_by_country'] = "Lankytojai pagal šalį";
 $cms_phrases['main']['stat']['visitors_by_pages'] = "Puslapių lankomumas";
@@ -400,6 +426,7 @@ $cms_phrases['main']['stat']['visitors_by_os'] = "Lankytojai pagal OS";
 $cms_phrases['main']['stat']['visitors_by_keyword'] = "Populiariausi raktiniai žodžiai";
 $cms_phrases['main']['stat']['visitors_robots'] = "Robotai";
 $cms_phrases['main']['stat']['settings'] = "Nustatymai";
+$cms_phrases['main']['stat']['registered_user_id'] = "Registruotas lankytojas";
 
 $cms_phrases['main']['stat']['month_visitors'] = "Mėnesio lankomumas";
 $cms_phrases['main']['stat']['day_visitors'] = "Dienos lankytojų sąrašas";
@@ -416,8 +443,7 @@ $cms_phrases['main']['stat']['page_count_average'] = "Vartotojo aplankomų pusla
 $cms_phrases['main']['stat']['only_one_page'] = "Išėjimo iš pirmo puslapio procentas";
 $cms_phrases['main']['stat']['conversion'] = "Svetainės konversijos tikslų koeficientų grafikas";
 $cms_phrases['main']['stat']['conversion_goals_list'] = "Svetainės konversijos tikslų sąrašas";
-
-
+        
 $cms_phrases['main']['stat']['no_data'] = "Nėra duomenų";
 $cms_phrases['main']['stat']['show_stat_by_date'] = "Rodyti statistiką pagal pasirinktą dieną";
 $cms_phrases['main']['stat']['show_stat_by_month'] = "Rodyti statistiką pagal pasirinktą mėnesį";
@@ -455,7 +481,6 @@ $cms_phrases['main']['subscribers']['import_text'] = "Importavimas";
 $cms_phrases['main']['subscribers']['import_file'] = "Importavimas iš bylos";
 $cms_phrases['main']['subscribers']['inserted_emails_count'] = "Įkelta {c} el. pašto adresų";
 
-
 $cms_phrases['update']['updates_title'] = "Turinio valdymo sistemos atnaujinimas";
 $cms_phrases['update']['updates_title_title'] = "Pavadinimas";
 $cms_phrases['update']['updates_description_title'] = "Aprašymas";
@@ -466,23 +491,7 @@ $cms_phrases['update']['update_button'] = "Atnaujinti";
 $cms_phrases['update']['get_updates_list_button'] = "Rodyti atnaujinimų sąrašą";
 $cms_phrases['update']['update_complete'] = "Atnaujinimai atlikti sėkmingai";
 $cms_phrases['update']['select_any_one_update'] = "Pažymėkite bent vieną atnaujinimą iš sąrašo.";
-
-
-$cms_phrases['filemanager']['preview'] = "Peržiūra";
-$cms_phrases['filemanager']['change_size'] = "Keisti dydį";
-$cms_phrases['filemanager']['max_x'] = "Max ilgis";
-$cms_phrases['filemanager']['max_y'] = "Max aukštis";
-$cms_phrases['filemanager']['do_changes'] = "Atlikti pakeitimus";
-$cms_phrases['filemanager']['select'] = "Pasirinkti";
-$cms_phrases['filemanager']['sort_files_by'] = "Bylas rikiuoti pagal:";
-$cms_phrases['filemanager']['sort_files_by_title'] = "Pavadinimą";
-$cms_phrases['filemanager']['sort_files_by_date'] = "Datą";
-$cms_phrases['filemanager']['sort_files_by_size'] = "Dydį";
-$cms_phrases['filemanager']['sort_files_by_ext'] = "Plėtinį";
-$cms_phrases['filemanager']['upload_files'] = "Įkelti bylas";
-
-
-$cms_phrases['license']['bad_license'] = "Netinkama licenzija";
+$cms_phrases['update']['wrong_config'] = "Netinkami ftp prisijungimo duomenys. Patikrinkite konfiguracini faila.";
 
 
 

@@ -1,1 +1,0 @@
-<input type="hidden" name="{elm.name}" id="ELMID_{elm.column_name}" value="{elm.value}">

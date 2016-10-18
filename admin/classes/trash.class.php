@@ -65,7 +65,7 @@ class trash extends basic {
     	$row = $this->getModule($id);
     	
     	if(isset($row['table_name'])){
-	    	$record = $this->registry->modules->create($row['table_name']);
+	    	$record = $this->registry->model->create($row['table_name']);
 	    	$record->deleteFromTrash($id);
     	}
 
@@ -76,7 +76,7 @@ class trash extends basic {
     	$row = $this->getModule($id);
     	
     	if(isset($row['table_name'])){
-	    	$record = $this->registry->modules->create($row['table_name']);
+	    	$record = $this->registry->model->create($row['table_name']);
 	    	$record->resetFromTrash($id);
     	}
 

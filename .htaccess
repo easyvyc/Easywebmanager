@@ -1,0 +1,25 @@
+DirectoryIndex index.html index.php
+Options +FollowSymLinks +MultiViews -Indexes
+RewriteEngine	on
+#RewriteBase	/
+
+# Force www subdomain
+#RewriteCond %{HTTP_HOST} ^xxx\.com [NC]
+#RewriteRule ^(.*)$ http://www.xxx.com/$1 [R=301,L]
+
+# Redirect all virtual requests to easywebmanager router
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z]{2})(.*)$ index.php?lng=$1&path=$2 [L]
+
+# Protect easywebmanager resources
+RewriteRule	^inc/	http://www.easywebmanager.com/ [R]
+RewriteRule	^site/classes/	http://www.easywebmanager.com/ [R]
+RewriteRule	^site/tpls/	http://www.easywebmanager.com/ [R]
+RewriteRule	^admin/classes/	http://www.easywebmanager.com/ [R]
+RewriteRule	^admin/tpls/	http://www.easywebmanager.com/ [R]
+
+
+ErrorDocument 404 /404.php
+php_flag register_globals off
+php_flag magic_quotes_gpc Off

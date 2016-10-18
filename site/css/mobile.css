@@ -1,0 +1,25 @@
+@media only screen and (max-width: 480px) {
+
+    /*
+    #data_text table, #data_text thead, #data_text tbody, #data_text th, #data_text td, #data_text tr { 
+        display: block; 
+    }
+    
+    #data_text tr { border:none; }
+	
+    #data_text td { 
+            border: none;
+            position: relative;
+            padding-left: 0; 
+    }
+
+    #data_text td:before { 
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: 100%; 
+            white-space: nowrap;
+    }
+    */    
+    
+}

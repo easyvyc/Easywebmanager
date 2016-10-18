@@ -7,7 +7,7 @@
 ?>
 <center>
 
-Tokio puslapio nėra
+404 Page does nos not exist
 <br />
 <br />
 <br />

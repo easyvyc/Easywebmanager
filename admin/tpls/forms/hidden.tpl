@@ -1,1 +1,1 @@
-<input type="hidden" name="{elm.name}" id="ELMID_{elm.column_name}" class="FRM" value="{elm.value}">
+<input type="hidden" name="{elm.name}" id="ELMID_{form_settings.id}_{elm.column_name}" class="FRM" value="{elm.value}">

@@ -1,71 +1,58 @@
-<div id="id_{elm.name}" class="formElementsField {elm.style}">
+<div id="id_{form_settings.id}_{elm.name}" class="formElementsField {elm.style}">
 	<div class="t">
 		<span class="">{elm.title}:{block elm.required}*{-block elm.required}</span>
 		{block elm.show_error}<span class="error_message">{elm.error_message}</span>{-block elm.show_error}
 	</div>
 	<div class="e">
 	
-	<div style="float:left;min-width:150px;">
+		{block elm.value}
+		<a id="lightbox_{form_settings.id}_{elm.column_name}" target="_blank" href="admin.php?module={_hiddens.module}&method=show_image&column={elm.column_name}&id={_hiddens.id}&w=800&h=800&t=0&tmp={form_settings.validate_error}&rand={random}" >
+			<img src='admin.php?module={_hiddens.module}&method=show_image&column={elm.column_name}&id={_hiddens.id}&w=200&h=200&t=0&tmp={form_settings.validate_error}&rand={random}' border='0' id="img_src_{elm.name}" />
+		</a>
+		<br />
+                <label><input type='checkbox' name='delete_{elm.name}' value='1' id='id_{form_settings.id}_{elm.name}_delete' {block elm.editorship no}disabled{-block elm.editorship no}>{phrases.main.form.delete_image}</label>
+                <br />
+		{-block elm.value}
 
-			<img id="_IMGUPLOAD_FRM_{elm.column_name}_{form_elements.id.value}" src="{uploadurl}{elm.value}" alt="" /><br />
-			
-			<input type="hidden" name="old_{elm.column_name}" value="{elm.value}" >
-			<input type="hidden" name="{elm.column_name}" class="FRM" id="_FRM_{form_elements.id.value}edititem___{elm.column_name}___{form_elements.id.value}" value="" />
-			
-			<span id="fsUploadProgress_FRM_{elm.column_name}_{form_elements.id.value}"></span>
-			<div id="btnUpload_FRM_{elm.column_name}_{form_elements.id.value}"></div>
-			<div id="btnCancel_FRM_{elm.column_name}_{form_elements.id.value}"></div>
-			
-			<script type="text/javascript">
-			
-				var settings = {
-					flash_url : "js/swfupload/swfupload.swf",
-					upload_url: "{config.site_url}ajax.php?content=uf&id={form_elements.id.value}&column={elm.column_name}",
-					post_params: {"easywebmanager_sid" : getCookie('Eid') },
-					file_size_limit : "50 MB",
-					file_types : "*.jpg;*.png;*.gif",
-					file_types_description : "All images",
-					file_upload_limit : 0,
-					file_queue_limit : 1,
-					button_window_mode : "transparent",
-					custom_settings : {
-						progressTarget : "fsUploadProgress_FRM_{elm.column_name}_{form_elements.id.value}",
-						cancelButtonId : "btnCancel_FRM_{elm.column_name}_{form_elements.id.value}"
-					},
-					debug: false,
-			
-					// Button settings
-					button_image_url: "",
-					button_width: "100%",
-					button_height: "23",
-					button_placeholder_id: 'btnUpload_FRM_{elm.column_name}_{form_elements.id.value}',
-					button_text: '<b>{phrases.upload_attachements}</b>',
-					button_text_style: ".theFont { font-size: 12; text-align:center; font-weight:bold; }",
-					button_text_left_padding: 6,
-					button_text_top_padding: 2,
-					
-					// The event handler functions are defined in handlers.js
-					file_queued_handler : fileQueued,
-					file_queue_error_handler : fileQueueError,
-					file_dialog_complete_handler : fileDialogComplete,
-					upload_start_handler : uploadStart,
-					upload_progress_handler : uploadProgress,
-					upload_error_handler : uploadError,
-					upload_success_handler : function(file_object, server_data, response){ 
-													$('#_IMGUPLOAD_FRM_{elm.column_name}_{form_elements.id.value}').attr('src', "ajax.php?content=call&module={form_data.module}&method=loadTempUploadFile_image&params[column]={elm.column_name}&params[id]={form_elements.id.value}&lng={form_data.language}&_="+Math.floor(Math.random()*10001));
-													$('#_FRM_{form_elements.id.value}edititem___{elm.column_name}___{form_elements.id.value}').val(1); 
-											},
-					upload_complete_handler : uploadComplete,
-					queue_complete_handler : function(){  }	// Queue plugin event
-				};
-				
-				new SWFUpload(settings);
-					
-			</script>
-			
+		<input type='hidden' name='{elm.name}' value='{elm.value}'>
+		
+		<input type='hidden' name='{elm.name}_type' value='upload'>
 
-	</div>
-	<div style="clear:both;"></div>
-	
+		<div class="img_upload_types"><a class="upload" href="#">Upload</a>&nbsp;&nbsp;<a href="#" class="url">URL</a></div>
+		
+		<div class="image_upload_type" id="img_{form_settings.id}_{elm.column_name}_upload">
+		<input type='file' name='file_{elm.name}' id="ELMID_upload_{form_settings.id}_{elm.column_name}" value='' class='FRM {style}_{elm.elm_type}' {block elm.editable no}readonly{-block elm.editable no} >
+		</div>
+
+		<div class="image_upload_type" id="img_{form_settings.id}_{elm.column_name}_url" style="display:none">
+		<input type='text' name='url_{elm.name}' id="ELMID_url_{form_settings.id}_{elm.column_name}" value='' placeholder="Image URL" class='FRM {style}_text' {block elm.editable no}readonly{-block elm.editable no} ><br />
+		<img id="img_url_preview_{form_settings.id}_{elm.name}" style="height:100px;" src="admin/images/0.gif">
+		</div>
+
+		
+		<span style="font-size:9px;">{phrases.main.common.max_file_size} - {max_file_size} Mb</span>
+
 	</div>
 </div>
+<script>
+$(document).ready(function(){
+    
+        $('#lightbox_{form_settings.id}_{elm.column_name}').lightBox();
+
+        $('#id_{form_settings.id}_{elm.name} .img_upload_types .upload').click(function(){
+            $("#id_{form_settings.id}_{elm.name} .image_upload_type").hide();
+            $("#img_{form_settings.id}_{elm.name}_upload").show();
+            $("#id_{form_settings.id}_{elm.name} [name={elm.name}_type]").val('upload');
+        });
+        
+        $('#id_{form_settings.id}_{elm.name} .img_upload_types .url').click(function(){
+            $("#id_{form_settings.id}_{elm.name} .image_upload_type").hide();
+            $("#img_{form_settings.id}_{elm.name}_url").show();
+            $("#id_{form_settings.id}_{elm.name} [name={elm.name}_type]").val('url');
+        });
+
+	$("#ELMID_url_{form_settings.id}_{elm.column_name}").change(function(){
+		$("#img_url_preview_{form_settings.id}_{elm.name}").attr('src', $(this).val());
+	});
+});
+</script>

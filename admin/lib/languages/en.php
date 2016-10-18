@@ -14,7 +14,7 @@ $cms_phrases['login']['login_name'] = "Loginname";
 $cms_phrases['login']['login'] = "Login";
 $cms_phrases['login']['password'] = "Password";
 $cms_phrases['login']['submit'] = "Login";
-$cms_phrases['login']['session_timeout'] = "Administrator session timeout. Please login again.";
+$cms_phrases['login']['session_timeout'] = "Administrator session timeout.<br /> Please login again.";
 $cms_phrases['login']['password_remind'] = "Password reminder";
 $cms_phrases['login']['remind_submit'] = "Remind";
 $cms_phrases['login']['email'] = "E-mail";
@@ -57,11 +57,16 @@ $cms_phrases['modules']['context_menu']['edit_title'] = "Edit item";
 $cms_phrases['modules']['context_menu']['translate_title'] = "Translate";
 $cms_phrases['modules']['context_menu']['new_title'] = "New item";
 $cms_phrases['modules']['context_menu']['import_title'] = "Import(csv)";
-$cms_phrases['modules']['context_menu']['export_title'] = "Export(csv)";
+$cms_phrases['modules']['context_menu']['export_title'] = "Export";
 $cms_phrases['modules']['context_menu']['pdf_title'] = "Print(pdf)";
 $cms_phrases['modules']['context_menu']['delete_title'] = "Delete item";
 $cms_phrases['modules']['context_menu']['module_title'] = "Edit content";
 $cms_phrases['modules']['context_menu']['settings_title'] = "Settings";
+$cms_phrases['modules']['context_menu']['blocks_title'] = "Content";
+$cms_phrases['modules']['context_menu']['page_edit_title'] = "Parameters";
+$cms_phrases['modules']['context_menu']['info_title'] = "Information";
+$cms_phrases['modules']['context_menu']['copy_title'] = "Create copy";
+$cms_phrases['modules']['context_menu']['note_title'] = "Notes";
 
 $cms_phrases['modules']['context_menu']['mod_new'] = "Naujas modulis";
 $cms_phrases['modules']['context_menu']['mod_tpl'] = "Keisti šabloną";
@@ -70,6 +75,27 @@ $cms_phrases['modules']['context_menu']['mod_fields'] = "Modulio laukeliai";
 $cms_phrases['modules']['context_menu']['mod_new_field'] = "Sukurti naują modulio laukelį";
 $cms_phrases['modules']['context_menu']['mod_delete'] = "Pašalinti modulį";
 
+$cms_phrases['products']['context_menu']['related_title'] = "Related products";
+$cms_phrases['products']['context_menu']['fields_title'] = "Extra Fields";
+$cms_phrases['products']['context_menu']['modif_title'] = "Modifications";
+$cms_phrases['products']['context_menu']['discount_title'] = "Discounts";
+$cms_phrases['products']['context_menu']['category_title'] = "Category products";
+$cms_phrases['products']['context_menu']['category_item_insert'] = "Insert product";
+$cms_phrases['products']['new_additional_field'] = "Create new field";
+
+$cms_phrases['pages']['context_menu']['category_products'] = "Products";
+
+$cms_phrases['newsletters']['context_menu']['send_title'] = "Send";
+$cms_phrases['newsletters']['context_menu']['test_title'] = "Send test";
+
+$cms_phrases['news']['context_menu']['create_newsletter'] = "Create newsletter";
+
+$cms_phrases['newsletters']['submit_send'] = "Send";
+$cms_phrases['newsletters']['success_send'] = "Newsletter sended successfully.";
+$cms_phrases['newsletters']['error_send'] = "Newsletter not sent.";
+$cms_phrases['newsletters']['emails_text'] = "Insert e-mail addresses";
+$cms_phrases['newsletters']['emails_groups'] = "Select target subscribers groups";
+$cms_phrases['newsletters']['send_loading'] = "Sending newsletter. Please wait.";
 
 $cms_phrases['top']['administrator_alt'] = "Profile";
 $cms_phrases['top']['administrator'] = "Profile";
@@ -187,26 +213,29 @@ $cms_phrases['main']['catalog']['import_data_items_count'] = "Items count";
 $cms_phrases['main']['catalog']['item_add_success'] = "Item successfuly saved";
 $cms_phrases['main']['catalog']['move_confirm_text'] = "Do you realy want to move this item?";
 $cms_phrases['main']['catalog']['clean_listing_filters'] = "Clean listing filters";
+$cms_phrases['main']['catalog']['listing_settings'] = "Listing settings";
 
-$cms_phrases['main']['products']['items_count'] = "Items count";
-$cms_phrases['main']['products']['no_modifications'] = "No modifications data.";
-$cms_phrases['main']['products']['wrong_storage'] = "Wrong quantity value";
+//$cms_phrases['main']['products']['items_count'] = "Items count";
+//$cms_phrases['main']['products']['no_modifications'] = "No modifications data.";
+//$cms_phrases['main']['products']['wrong_storage'] = "Wrong quantity value";
+//
+//$cms_phrases['main']['orders']['proforma_title'] = "Proforma";
+//$cms_phrases['main']['orders']['invoice_title'] = "Invoice";
+//$cms_phrases['main']['orders']['download_proforma'] = "Download";
+//$cms_phrases['main']['orders']['download_invoice'] = "Download";
+//$cms_phrases['main']['orders']['invoice_not_exist'] = "Invoice is not generated.";
+//$cms_phrases['main']['orders']['generate_invoice'] = "Generate invoice";
+//$cms_phrases['main']['orders']['send_proforma'] = "Send proforma";
+//$cms_phrases['main']['orders']['send_invoice'] = "Send invoice";
+//$cms_phrases['main']['orders']['last_send'] = "Last send";
+//$cms_phrases['main']['orders']['invoice_to_email'] = "Target e-mail";
+//$cms_phrases['main']['orders']['invoice_to_text'] = "E-mail content";
+//$cms_phrases['main']['orders']['invoice_to_subject'] = "E-mail subject";
+//
+//$cms_phrases['main']['newsletter']['new_element'] = "New newsletter";
+//$cms_phrases['main']['newsletter']['elements_list'] = "Newsletter archive";
 
-$cms_phrases['main']['orders']['proforma_title'] = "Proforma";
-$cms_phrases['main']['orders']['invoice_title'] = "Invoice";
-$cms_phrases['main']['orders']['download_proforma'] = "Download";
-$cms_phrases['main']['orders']['download_invoice'] = "Download";
-$cms_phrases['main']['orders']['invoice_not_exist'] = "Invoice is not generated.";
-$cms_phrases['main']['orders']['generate_invoice'] = "Generate invoice";
-$cms_phrases['main']['orders']['send_proforma'] = "Send proforma";
-$cms_phrases['main']['orders']['send_invoice'] = "Send invoice";
-$cms_phrases['main']['orders']['last_send'] = "Last send";
-$cms_phrases['main']['orders']['invoice_to_email'] = "Target e-mail";
-$cms_phrases['main']['orders']['invoice_to_text'] = "E-mail content";
-$cms_phrases['main']['orders']['invoice_to_subject'] = "E-mail subject";
-
-$cms_phrases['main']['newsletter']['new_element'] = "New newsletter";
-$cms_phrases['main']['newsletter']['elements_list'] = "Newsletter archive";
+$cms_phrases['orders']['context_menu']['ordered_items'] = "Ordered Items";
 
 $cms_phrases['main']['common']['yes'] = "Yes";
 $cms_phrases['main']['common']['no'] = "No";
@@ -241,6 +270,29 @@ $cms_phrases['main']['common']['save'] = "Save";
 $cms_phrases['main']['common']['close'] = "Close";
 $cms_phrases['main']['common']['video_help'] = "Video help";
 $cms_phrases['main']['common']['cancel_filter'] = "Cancel filter";
+$cms_phrases['main']['common']['form_validation_error'] = "There are errors. Incorrectly filled fields.";
+$cms_phrases['main']['common']['form_saved_success'] = "Information saved successfully.";
+$cms_phrases['main']['common']['form_export_type_title'] = "Choose file type";
+$cms_phrases['main']['common']['form_export_fields_title'] = "Choose fields to export";
+$cms_phrases['main']['common']['form_export_add_header_title'] = "Add columns titles header";
+$cms_phrases['main']['common']['file_not_found'] = "File not found";
+$cms_phrases['main']['common']['info_title'] = "Main info";
+$cms_phrases['main']['common']['info_module'] = "Module";
+$cms_phrases['main']['common']['info_parent_id'] = "Parent #ID";
+$cms_phrases['main']['common']['info_sort_number'] = "Sort number";
+$cms_phrases['main']['common']['info_languages_saved'] = "Saved languages (translated)";
+$cms_phrases['main']['common']['info_created'] = "Item created";
+$cms_phrases['main']['common']['info_created_date'] = "Date/time";
+$cms_phrases['main']['common']['info_created_by'] = "Item author";
+$cms_phrases['main']['common']['info_created_ip'] = "IP address";
+$cms_phrases['main']['common']['info_updated'] = "Last item update";
+$cms_phrases['main']['common']['info_updated_date'] = "Date/time";
+$cms_phrases['main']['common']['info_updated_by'] = "Update author";
+$cms_phrases['main']['common']['info_updated_ip'] = "IP address";
+$cms_phrases['main']['common']['note_title'] = "Note";
+$cms_phrases['main']['common']['note_submit'] = "Create note";
+$cms_phrases['main']['common']['note_placeholder'] = "Write note here ...";
+
 
 $cms_phrases['main']['common']['months'][1] = "January";
 $cms_phrases['main']['common']['months'][2] = "February";
@@ -318,6 +370,13 @@ $cms_phrases['main']['settings']['columns']['column_type'] = "DB column type";
 $cms_phrases['main']['settings']['columns']['elm_type'] = "CMS column type";
 $cms_phrases['main']['settings']['columns']['multilng'] = "Multilanguage";
 $cms_phrases['main']['settings']['columns']['list_values'] = "Listing values";
+$cms_phrases['main']['settings']['columns']['default_value'] = "Default value";
+$cms_phrases['main']['settings']['columns']['require'] = "Required";
+$cms_phrases['main']['settings']['columns']['validator'] = "Validation functions";
+$cms_phrases['main']['settings']['columns']['list'] = "In list";
+$cms_phrases['main']['settings']['columns']['editable'] = "Editable";
+$cms_phrases['main']['settings']['columns']['index'] = "Index";
+
 
 $cms_phrases['main']['settings']['module']['new_module'] = "Naujas modulis";
 $cms_phrases['main']['settings']['module']['title'] = "Pavadinimas(Lentelė)";
@@ -372,9 +431,12 @@ $cms_phrases['main']['settings']['module']['images_extra_context_menu_title'] = 
 $cms_phrases['main']['settings']['module']['export'] = "Export";
 $cms_phrases['main']['settings']['module']['import'] = "Import";
 
+$cms_phrases['main']['settings']['module']['folder'] = "Category";
+$cms_phrases['main']['settings']['module']['form_tpl'] = "Custom layout";
 
 $cms_phrases['main']['admins']['list_title'] = "Administrators";
 $cms_phrases['main']['admins']['new_admin'] = "New administrator";
+$cms_phrases['main']['admins']['rights_title'] = "Administrator rights";
 $cms_phrases['main']['admins']['page_rights_title'] = "Rights (pages)";
 $cms_phrases['main']['admins']['module_rights_title'] = "Rights (modules)";
 $cms_phrases['main']['admins']['language_rights_title'] = "Rights (languages)";
@@ -385,7 +447,7 @@ $cms_phrases['main']['admins']['logout_time'] = "Logout time";
 $cms_phrases['main']['admins']['past_time'] = "Past time";
 $cms_phrases['main']['admins']['ipaddress'] = "IP address";
 $cms_phrases['main']['admins']['admin_title'] = "Administrator";
-
+$cms_phrases['main']['admins']['wrong_password'] = "Passwords must match and longer than 4 characters.";
 
 
 $cms_phrases['main']['stat']['visitors_by_referer'] = "Visitors by referer";
@@ -396,7 +458,11 @@ $cms_phrases['main']['stat']['visitors_by_os'] = "Visitors by OS";
 $cms_phrases['main']['stat']['visitors_by_keyword'] = "Most popular keywords";
 $cms_phrases['main']['stat']['visitors_robots'] = "Robots";
 $cms_phrases['main']['stat']['settings'] = "Settings";
-
+$cms_phrases['main']['stat']['device_type'] = "Device";
+$cms_phrases['main']['stat']['device_type_web'] = "Personal computer";
+$cms_phrases['main']['stat']['device_type_mobile'] = "Mobile phone";
+$cms_phrases['main']['stat']['device_type_tablet'] = "Tablet PC";
+$cms_phrases['main']['stat']['registered_user_id'] = "Registered user";
 
 $cms_phrases['main']['stat']['month_visitors'] = "Month statistic";
 $cms_phrases['main']['stat']['day_visitors'] = "Day visitors list";
@@ -460,6 +526,7 @@ $cms_phrases['update']['no_updates_exist_title'] = "Currently no updates.";
 $cms_phrases['update']['update_button'] = "Update";
 $cms_phrases['update']['get_updates_list_button'] = "Show updates list";
 $cms_phrases['update']['update_complete'] = "Updated successfuly";
+$cms_phrases['update']['wrong_config'] = "Wrong ftp login data. Check configuration file.";
 
 
 $cms_phrases['filemanager']['preview'] = "Preview";

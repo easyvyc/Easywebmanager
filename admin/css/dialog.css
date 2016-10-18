@@ -26,13 +26,15 @@
 	 /*border-top: 7px solid #9BC14A;*/
 	 text-align:left;
 	 top:150px;
-	 margin:10px;
+	 margin:auto 10px;
 	width:670px;
 	min-height:200px;
 	max-height:800px;
 	height:auto;
 	
 	border:7px solid #9d9d9d;
+
+	box-shadow:5px 5px 10px #999;
 
 	background: #FFFFFF;
 	background: rgba(255, 255, 255);
@@ -48,9 +50,12 @@
 * html ._WINDOW { /* ie6 hack */
 	position: absolute;
 }
+._WINDOW.ui-resizable {
+    position:fixed;
+}
 ._WINDOW_content {
 	padding: 10px;
-	max-height:760px;
+	max-height:755px;
 	height:auto;
 	overflow:auto;
 }

@@ -2,9 +2,9 @@
 
 class Registry {
 	
-	private $obj = array();
+    private $obj = array();
 	
-	private static $instance;
+    private static $instance;
 	
     private function __construct() {}
     
@@ -46,36 +46,37 @@ class Scope {
 	
 	function create($module){
 	    
+                $module = trim($module);
+            
 		if(is_numeric($module)){
-			// jei paduodamas modulio ID tai is db istraukiamas modulio vardas
-    		include_once(CLASSDIR."main_module.class.php");
-			$mod = main_module::getInstance()->getModule($module);
-    		if($mod['table_name']!=''){
-    			$module = $mod['table_name'];
-    		}else{
-    			trigger_error("Module by id not found ID: $module");
-    		}
-    	}
+                    // jei paduodamas modulio ID tai is db istraukiamas modulio vardas
+                    include_once(CLASSDIR."main_module.class.php");
+                            $mod = main_module::getInstance()->getModule($module);
+                    if($mod['table_name']!=''){
+                            $module = trim($mod['table_name']);
+                    }else{
+                            trigger_error("Module by id not found ID: $module");
+                    }
+                }
 
 		if(is_object($this->obj[$module])) return $this->obj[$module];
     	
 		$scope = $this->name;
 		
-		if(file_exists(self::classDir."$scope/$module.class.php")){
+                if(file_exists(self::classDir."$scope/$module.class.php")){
     		
-    		include_once(self::classDir."$scope/$module.class.php");
-    		$classname = $scope."_".$module;
-    		$this->obj[$module] = new $classname();
+                    include_once(self::classDir."$scope/$module.class.php");
+                    $classname = $scope."_".$module;
+                    $this->obj[$module] = new $classname();
     		
-    	}else{
+        	}else{
     		
-    		include_once(self::classDir."$scope.class.php");
-    		$this->obj[$module] = new $scope($module);
+                    include_once(self::classDir."$scope.class.php");
+                    $this->obj[$module] = new $scope($module);
     		
-    	}
+        	}
     	
-    	return $this->obj[$module];
-    	
+        	return $this->obj[$module];
     	
 	}
 	

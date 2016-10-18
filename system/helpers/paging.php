@@ -1,5 +1,5 @@
 <?php
-function generatePaging($offset, $count, $limit, $RESULTS_PAGING){
+function generatePaging($offset, $count, $limit, $RESULTS_PAGING=10){
 
 	$paging_count = ceil($count/$limit); $tmp_number = 0; $paging_start = 0; $paging_end = $paging_count;
 	
@@ -30,6 +30,7 @@ function generatePaging($offset, $count, $limit, $RESULTS_PAGING){
 	for($i=0, $arr=array(), $paging=array(); $i<$paging_count && floor(($count-1)/$limit)>0; $i++){
 		$arr['value'] = "$i";
 		$arr['title'] = ($i * $limit + 1)."..".($i + 1)*$limit;
+                $arr['title_number'] = $i + 1;
 		$arr['active'] = $offset==$i?1:0;
 		if($i>=$paging_start && $i<=$paging_end){
 			$paging[] = $arr;	

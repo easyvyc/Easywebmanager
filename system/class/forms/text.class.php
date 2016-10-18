@@ -2,7 +2,7 @@
 
 include_once (CLASSDIR.'Element.class.php');
 
-class text extends Element {
+class element_text extends Element {
 	
 	public function __construct($name, $element, $form_object) {
 		parent::__construct ($name, $element, $form_object);

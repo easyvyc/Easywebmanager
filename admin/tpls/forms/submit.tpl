@@ -1,4 +1,4 @@
-<div id="id_{elm.name}" class="formElementsField {elm.style}" {elm.extra_params}>
+<div id="id_{form_settings.id}_{elm.name}" class="formElementsField {elm.style}" {elm.extra_params}>
 	<div class="t">
 	</div>
 	<div class="e">

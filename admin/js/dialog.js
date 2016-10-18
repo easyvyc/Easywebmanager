@@ -4,7 +4,8 @@ var e_multiDialog = {
 		
 	load:function(id){
 		if(typeof(this.dialogs[id])=='undefined'){
-			this.dialogs[id] = eDIALOG.init(id);
+			this.dialogs[id] = new eDIALOG(id);
+			this.dialogs[id].init();
 		}
 		return this.dialogs[id];
 	},
@@ -13,43 +14,52 @@ var e_multiDialog = {
 		this.load(id).showDialog(content);
 	},
 	
-	open_url:function(id, url){
-		this.load(id).doAjaxRequest(url);
+	open_url:function(id, url, title){
+                tab_id = 'tab_' + $.random(10);
+		this.load(id).showAjaxDialog(url, title, tab_id);
 	},
 	
 	close:function(id){
 		this.load(id).closeDialog();
+                
+                // reikalingas nes sito nebeatsidaro popup 
+		this.dialogs[id] = undefined;
+	},
+	
+	print:function(id){
+		this.load(id).printDialog();
 	}
 
-}
+};
 
 function eDIALOG(id){
 		
+		this.id = id;
 		this.opened = false;
 		this.overlay = '#_OVERLAY';
 		this.tab_arr = [];
 		this.current_tab = 0;
 
-		this.init = function(id){
-			this.dialog = '#_WINDOW_'+id;
-			this.content = '#_WINDOW_content_'+id;
-			this.tabs = '#_WINDOW_tabs_'+id;
-			this.tabs_i = '#_WINDOW_tabs_inner_'+id;
-			this.ico = '#_WINDOW_ico_'+id;
-			this.loading = '#_WINDOW_loading_'+id;
+		this.init = function(){
+			this.dialog = '#_WINDOW_'+this.id;
+			this.content = '#_WINDOW_content_'+this.id;
+			this.tabs = '#_WINDOW_tabs_'+this.id;
+			this.tabs_i = '#_WINDOW_tabs_inner_'+this.id;
+			this.ico = '#_WINDOW_ico_'+this.id;
+			this.loading = '#_WINDOW_loading_'+this.id;
 			
-			$('body').append("<div id='_WINDOW_"+id+"' class='_WINDOW'><div id='_WINDOW_toolbar_"+id+"' class='_WINDOW_toolbar'><div id='_WINDOW_tabs_"+id+"' class='_WINDOW_tabs'><div id='_WINDOW_tabs_inner_"+id+"' class='_WINDOW_tabs_inner'></div></div>" +
-					"<div id='_WINDOW_ico_"+id+"' class='_WINDOW_ico'><a href='javascript: void(eDIALOG.printDialog());'><img src='admin/images/W_print.gif' alt='' class='vam' /></a>&nbsp" +
-					"<a href='javascript: void(eDIALOG.closeDialog());'><img src='admin/images/W_close.gif' alt='' class='vam' /></a></div></div>" +
-					"<div id='_WINDOW_content_"+id+"' class='_WINDOW_content'></div></div>");
+			$('body').append("<div id='_WINDOW_"+this.id+"' class='_WINDOW'><div id='_WINDOW_toolbar_"+this.id+"' class='_WINDOW_toolbar'><div id='_WINDOW_tabs_"+this.id+"' class='_WINDOW_tabs'><div id='_WINDOW_tabs_inner_"+this.id+"' class='_WINDOW_tabs_inner'></div></div>" +
+					"<div id='_WINDOW_ico_"+this.id+"' class='_WINDOW_ico'>\n" +
+                                        //"<a href='javascript: void(e_multiDialog.print(\""+this.id+"\"));'><img src='admin/images/W_print.gif' alt='' class='vam' /></a>&nbsp" +
+					"<a href='javascript: void(e_multiDialog.close(\""+this.id+"\"));'><img src='admin/images/W_close.gif' alt='' class='vam' /></a></div></div>" +
+					"<div id='_WINDOW_content_"+this.id+"' class='_WINDOW_content'></div></div>");
 
-			$("#_WINDOW_"+id).draggable({ cursor: 'move', handle: '#_WINDOW_toolbar_'+id, opacity: 0.8, 'containment': 'body' });
-			$("#_WINDOW_"+id).resizable({ autoHide: true, minHeight: 200, minWidth: 300, alsoResize: '#_WINDOW_content_'+id });
+			$("#_WINDOW_"+this.id).draggable({ cursor: 'move', handle: '#_WINDOW_toolbar_'+this.id, opacity: 0.8, containment: 'body' });
+			$("#_WINDOW_"+this.id).resizable({ autoHide: true, minHeight: 200, minWidth: 300, alsoResize: '#_WINDOW_content_'+this.id });
 			
-			return this;
 		},
-		
-		this.my_alert = function(msg){
+                        
+                this.my_alert = function(msg){
 			this.showDialog(msg);
 		},
 
@@ -84,18 +94,18 @@ function eDIALOG(id){
 
 		this.showAjaxDialog = function(url, title, tab_id){
 
-			$obj = this;
+                        $dlg_obj = this;
 			
 			$.ajax({
 			  async: true,
 			  url: url,
 			  cache: false,
 			  beforeSend: function(){
-			  	$obj.openLoading();
+			  	$dlg_obj.openLoading();
 			  },
 			  success: function(html){
-				  $obj.showDialog(html, title, tab_id);
-				  $obj.closeLoading();
+                                $dlg_obj.showDialog(html, title, tab_id);
+                                $dlg_obj.closeLoading();
 			  },
 			  //timeout: 20,
 			  complete: function(html){
@@ -151,20 +161,35 @@ function eDIALOG(id){
 		},
 
 		this.showDialog = function(msg){
-			
+                        if(typeof(arguments[1])!='undefined'){
+                            // TODO: set dialog title = arguments[1]
+                            //$(this.content).html(arguments[1]);
+                        }
 			$(this.content).html(msg);
 			this.openDialog();
 			
 		},
 		
 		this.openDialog = function(){
-			if(!this.opened){
-				$(this.overlay).fadeIn(200, function(){ $(this.overlay).css('filter', 'alpha(opacity=55)'); });
-				$(this.dialog).css('top', 150 + 'px');
+
+                        client_h = f_clientHeight();
+                        wnd_h = $(this.dialog).height();
+
+                        if(client_h < wnd_h){
+                            $(this.dialog).css('max-height', client_h + 'px');
+                            $(this.content).css('max-height', client_h - 45 + 'px');
 			}
+
+                        wnd_top = parseInt(client_h/2) - parseInt($(this.dialog).height()/2);
+                        if(wnd_top < 0) wnd_top = 0;
+
+                        $(this.dialog).css('top', wnd_top + 'px');
+                    
 			if(!this.opened){
-				client_h = f_clientHeight();
 				client_w = f_clientWidth();
+                                
+				$(this.overlay).fadeIn(200, function(){ $(this.overlay).css('filter', 'alpha(opacity=55)'); });
+
 				if($(this.dialog).width() > (client_w-30)){
 					$(this.dialog).width(client_w - 30);
 					$(this.content).width(client_w - 50);

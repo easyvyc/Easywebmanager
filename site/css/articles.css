@@ -1,0 +1,281 @@
+.articles_page {
+    padding-top:50px;
+    overflow:hidden;
+}
+.articles_nav {
+    float:left;
+    width:250px;
+    padding-right:10px;
+    margin-top:10px;
+}
+.articles_nav .articles_nav_item {
+    background:#FFF;
+    box-shadow:0 0 10px #CCC;
+    transition: all 0.5s ease 0s;
+    margin-bottom:15px;
+}
+
+.articles_nav .articles_nav_item:hover {
+    box-shadow:0 0 10px #999;
+}
+.articles_nav_item ul {
+    list-style:none;
+    padding:15px;
+    margin:0px;    
+}
+.articles_nav ul li {
+    padding:3px;
+}
+.articles_nav .temos ul li {
+    display:inline;
+}
+.articles_nav ul a {
+    font-size:14px;
+    text-decoration:none;
+    color:#000;
+}
+.articles_nav ul a:hover {
+    text-decoration:underline;
+}
+.articles_nav h3 {
+    font-size: 16px;
+    margin: 0;
+    padding:10px 15px; 
+    background:#666;
+    color:#FFF;
+    text-shadow:1px 1px 0 #000;
+    font-weight:normal;
+}
+.articles_nav .left_banners {
+    margin-top:15px;
+}
+.item-tags {
+    padding:10px 0;
+    border-top:1px solid #AAA;
+    border-bottom:1px solid #AAA;
+}
+
+.articles_list_inner, .articles_one {    
+    float:right;
+    width:790px;
+}
+/* Responsive */
+@media all and (min-width: 1200px) {
+    .articles_list_inner, .articles_one {
+        width:940px;
+    }
+}
+@media all and (max-width: 980px) {
+    .articles_list_inner, .articles_one {
+        width:100%;
+    }
+    .articles_nav {
+        width:100%;
+        float:none;
+    }
+}
+
+
+.articles_list_start {
+    padding:25px 0;
+    overflow:hidden;
+}
+
+.articles_list > .content {
+    overflow:hidden;
+    padding:30px 10px;
+}
+.articles_one article.item {
+    overflow:hidden;
+    margin-top:10px;
+    background:#FFF;
+    padding:20px;
+    box-shadow:0 0 10px #CCC;
+}
+.articles_one article.item .text {
+    padding-bottom:10px;
+}
+.articles_one article.item h1.title {
+    padding-top:0px;
+}
+
+.articles_one .comments h5 {
+    background: #666 none repeat scroll 0 0;
+    color: #fff;
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0;
+    padding: 10px 15px;
+    text-shadow: 1px 1px 0 #000;    
+}
+.articles_one .comments .list {
+    padding:10px;
+}
+.articles_one .comments .list .comment-item {
+    border:1px solid #DDD;
+    padding:10px;
+    position:relative;
+    margin:5px 0;
+}
+.articles_one .comments .list .comment-item .author {
+    font-weight:bold;
+}
+.articles_one .comments .list .comment-item .date {
+    font-style:italic;
+}
+.articles_one .comments form {
+    padding:10px;
+}
+
+.articles_list article {
+    float:left;
+    width:220px;
+    margin-right:10px;
+    margin-bottom:10px;
+    height:350px;
+    box-shadow:0 0 10px #CCC;
+    background:#FFF;
+}
+.articles_list article a {
+    color: #333333;
+    display: block;
+    height: 100%;
+    overflow: hidden;
+    text-decoration:none;
+    transition: all 0.5s ease 0s;
+    position:relative;
+}
+.articles_list article a:hover {
+    box-shadow:0 0 10px #999;
+}
+.articles_list article h2 {
+    margin:10px;
+    font-size:18px;
+    font-weight:normal;
+    line-height:22px;
+}
+.articles_list article p {
+    margin:10px;
+}
+.articles_list article figure, .articles_list article figure img {
+    margin:0px;
+    padding:0px;
+}
+.articles_list article figure img {
+}
+.articles_list article .text {
+    background:#FFF;
+    transition: all 0.5s ease 0s;
+    position:absolute;
+    left:0px;
+    width:100%;
+    z-index:2;
+    min-height:200px;
+}
+.articles_list article .b {
+    height:50px;
+    position:absolute;
+    width:100%;
+    bottom:0px;
+    left:0px;
+    z-index:3;
+    /*
+    background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1)));
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+    background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+    background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+    background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
+    */
+}
+
+.articles_list article a:hover figure {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    opacity:0.5;
+}
+.articles_list article a:hover .text {
+    top:50px !important;
+}
+
+h1.title {
+    padding-left:30px;
+    font-size:32px;
+    color:#777;
+    margin-bottom:20px;
+}
+
+h1.title {
+    padding-left:0px;
+    background:none;
+    color:#000;
+    margin-top:0px;
+}
+
+
+.article_footer {
+    padding:15px;
+    overflow:hidden;
+}
+.article_footer .social {
+    float:left;
+    padding:0px;
+}
+.article_footer .social2 {
+    float:right;
+}
+.article_footer span {
+    line-height:32px;
+    font-size:16px;
+    vertical-align:top;
+    display:inline-block;
+    height:32px;
+    margin-right:15px;
+}
+.article_footer a {
+    display:inline-block;
+    width:32px;
+    height:32px;
+    background-repeat:no-repeat;    
+    margin:0 7px;
+    border-radius:16px;
+    box-shadow:0 0 5px #AAA;
+    transition: all 0.5s ease 0s;
+}
+.article_footer a:hover {
+    box-shadow:0 0 5px #888;
+}
+.article_footer .fb {
+    background-image:url('site/images/ico/facebook.png');    
+}
+.article_footer .gp {
+    background-image:url('site/images/ico/google-plus.png');    
+}
+.article_footer .tw {
+    background-image:url('site/images/ico/twitter.png');    
+}
+.article_footer .fb:hover {
+    background-position:0 -120px;
+}
+.article_footer .gp:hover {
+    background-position:0 -160px;
+}
+.article_footer .tw:hover {
+    background-position:0 -160px;
+}
+
+.article_footer .print {
+    background-image:url('site/images/ico/print.png');    
+}
+.article_footer .email {
+    background-image:url('site/images/ico/email.png');    
+}
+.article_footer .print:hover {
+    background-position:0 -120px;
+}
+.article_footer .email:hover {
+    background-position:0 -120px;
+}

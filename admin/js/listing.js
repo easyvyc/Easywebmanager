@@ -16,34 +16,17 @@ function fieldsColumnAdd(name, width, type){
 	this.cols[i].name = name;
 	this.cols[i].width = width;
 	this.cols[i].cells = new Array;
+        this.cols[i].optionArray = new Array;
 	this.cols[i].reset = resetColumnWidth;
+        var $obj = this;
 	if(type=='select' || type == 'checkbox_group' || type == 'radio'){
 		this.cols[i].elm_choice = 1;
-		this.cols[i].optionArray = new Array;
 		this.cols[i].createSelectObject = function(obj, value){
-			//if(!this.loadedItems){
 				arr = value.split('::');
-				obj.options.length = 0;
-				var where = (navigator.appName == "Microsoft Internet Explorer") ? -1 : null;
-				newElem = document.createElement("option");
-			    newElem.text = "------";
-		    	newElem.value = "0";
-				obj.add(newElem, where);
-				for(k=0, index=0; k<this.optionArray.length; k++){
-					selected=false;
-					newElem = document.createElement("option");
-				    newElem.text = this.optionArray[k].title;
-			    	newElem.value = this.optionArray[k].id;
-			    	for(j=0; j<arr.length; j++){
-			    		if(arr[j]==this.optionArray[k].id){
-			    			selected=true;
-			    		}
-			    	}
-			    	newElem.selected = selected;
-					obj.add(newElem, where);
-				}
-				//this.loadedItems=true;
-			//}
+                    $(obj).append($("<option></option>").attr("value","").text("---")); 
+                    $.each($obj.cols[i].optionArray, function(key, val) { 
+                         $(obj).append($("<option></option>").attr("value",val.id).text(val.title).attr('selected', ($.inArray(val.id, arr)==-1 ? false : true))); 
+                    });
 		};
 	}else{
 		this.cols[i].elm_choice = 0;
@@ -55,6 +38,7 @@ function fieldsColumnAdd(name, width, type){
 function gridClass(module){
 	
 	this.module = module;
+        this.cid = 0;
 
 	this.columns = new Object;
 	this.columns.cols = new Array;
@@ -98,12 +82,13 @@ function gridClass(module){
 						$("#value___"+field+"___"+id).html(json.value);
 						$obj.cellBlurEvent(document.getElementById('edititem___'+field+'___'+id));
 					}else{
-						$("#buttonImg_"+id+"_"+field).attr('src', 'admin/images/status_.'+json.value+'gif');
-						$("#chk_"+id+"_"+field).val(json.value);
+						$("#buttonImg_"+id+"_"+field).attr('src', 'admin/images/status_'+json.value+'.gif');
+						$("#chk_"+id+"_"+field).val(json.value==1 ? 0 : 1);
 					}
 				}else{
 					eDIALOG.my_alert(json.error_message);
 				}
+				$('#DEBUG_content').html(json.debug);
 			}
 		});
 	};
@@ -122,6 +107,10 @@ function gridClass(module){
 		
 	};
 	
+        this.cellEditItem_autocomplete = function(cell){
+		return false;
+	};
+        
 	this.cellEditItem_checkbox = function(cell){
 		return false;
 	};
@@ -265,7 +254,7 @@ function gridClass(module){
 		$('#edit___'+arr[1]+'___'+arr[2]).show();
 		
 		index = this.getColumnIndex(arr[1]);
-		this.columns.cols[index].createSelectObject($('#edititem___'+arr[1]+'___'+arr[2]), $('#edititemvalue___'+arr[1]+'___'+arr[2]).val());
+                this.columns.cols[index].createSelectObject(document.getElementById('edititem___'+arr[1]+'___'+arr[2]), $('#edititemvalue___'+arr[1]+'___'+arr[2]).val());
 		
 	};
 		
@@ -277,27 +266,8 @@ function gridClass(module){
 		this.start_resize_x = mousePos.x;//(document.all?e.clientX + document.body.scrollLeft:e.pageX);
 	};
 
-	showItemContextMenu = function(id, e){
-		
-		if(!$('#contextmenu_'+id)) return false;
-		$('#contextMenuArea').html($('#contextmenu_'+id).html());
-		var Pos = getMouseXY(e);
-		
-		// if f*** ms ie
-		if(window.navigator.userAgent.toLowerCase().indexOf('msie')!=-1){
-			$('#contextMenuArea').css('left', document.documentElement.scrollLeft + Pos.x + 'px');
-			$('#contextMenuArea').css('top', document.documentElement.scrollTop + Pos.y + 'px');
-		}else{
-			$('#contextMenuArea').css('left', Pos.x + 'px');
-			$('#contextMenuArea').css('top', Pos.y + 'px');
-		}
-		
-		$('#contextMenuArea').show();
-		return false;
-	
-	};
-	
 	this.mouseRightClick = function(e){
+		/*
 		if (!e) var e = window.event;
 		var targ;
 		if (e.target) targ = e.target;
@@ -309,7 +279,8 @@ function gridClass(module){
 			showItemContextMenu(arr[2], e);
 			return false;
 		}
-		return true;		
+		return true;
+		*/	
 	};
 
 	this.hideItemContenxtMenu = function(event){
@@ -325,7 +296,7 @@ function gridClass(module){
 	this.init = function(module){
 		
 		this.module = module;
-		
+                
 		WIDTH = 100;
 		var CH = WIDTH/this.columns.allColumnWidth;
 		for(var i=0, all_length=0; i<this.columns.cols.length; i++){
@@ -374,26 +345,45 @@ function gridClass(module){
 				firstid = ui_item_id.substring(p);
 				p = target_row.lastIndexOf("_")+1;
 				lastid = target_row.substring(p);
-				$NAV.get('?module='+$grid_obj.module+'&method=changeOrder&firstid='+firstid+'&lastid='+lastid);
+				$NAV.get('?' + $grid_obj.base_url + '&change_order=1&firstid='+firstid+'&lastid='+lastid);
 				
 			}
 		}).disableSelection();
 		
 	};
+
+	this.setFilter = function(column, value){
+		$('#filteritem___' + column).val(value);
+		$NAV.post('?' + this.base_url, $('#filter___' + this.module));
+	};
+                
+	this.setFilters = function(filters){
+                for (var column in filters) {
+                    $('#filteritem___' + column).val(filters[column]);
+                }
+		$NAV.post('?' + this.base_url, $('#filter___' + this.module));
+	};
 	
 	this.cleanFilter = function(column){
-		$('#filter___'+column+' input, #filter___'+column+' select').val('');
-		$NAV.post('?module='+$grid_obj.module, $('#filter___'+$grid_obj.module));
+		$('#filter___' + column + ' input, #filter___' + column + ' select').val('');
+		$NAV.post('?' + this.base_url, $('#filter___' + this.module));
 	};
 	
 	this.cleanFilters = function(){
 		$('.list_item_filter input, .list_item_filter select').val('');
-		$NAV.post('?module='+$grid_obj.module, $('#filter___'+$grid_obj.module));
+		$NAV.post('?' + this.base_url, $('#filter___' + this.module));
 	};
 	
 	this.selectAllItems = function(checked){
 		$('.selectall input[type=checkbox]').attr('checked', checked);
 	};
+        
+        
+        this.tools_toggle = function($link){
+            console.dir($($link));
+            $($link).parents('td').find('.display_paging').toggle();
+        }
+        
 	
 }
 

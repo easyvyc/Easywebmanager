@@ -60,8 +60,8 @@ class filemanager extends files {
     function remove($file){
     	files::remove($file);
     	$file_info_arr = pathinfo($file);
-		if(!isset($file_info_arr['filename'])) $file_info_arr['filename'] = ereg_replace("/\.{$file_info_arr['extension']}$/", "", $file_info_arr['basename']);
-		$dirname = ereg_replace("^".FILESDIR, "", $this->path);
+		if(!isset($file_info_arr['filename'])) $file_info_arr['filename'] = preg_replace("/\.{$file_info_arr['extension']}$/", "", $file_info_arr['basename']);
+		$dirname = str_replace(FILESDIR, "", $this->path);
 		$pattern = CACHEIMGDIR_.md5($dirname)."_".$file_info_arr['filename']."_*.".$file_info_arr['extension'];
     	$files_arr = glob($pattern, GLOB_NOSORT);
     	foreach($files_arr as $val){

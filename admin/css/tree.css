@@ -2,30 +2,130 @@ ul.tree {
 	list-style:none;
 	padding:0px;
 	margin:0px;
-	margin-left:17px;
+}
+ul.tree ul {
+	padding-left:18px;
 }
 ul.tree li {
-	margin:-1px;
-	padding:-1px;
 	white-space:nowrap;
-	border:1px solid #F3F3F3;
+	margin:0px 0px;
 }
-ul.tree li.sep {
+ul.tree li table {
+	border-collapse:collapse;
+	padding:0px;
+	margin:0px;
+}
+ul.tree li table td {
+	padding:0px;
+	margin:0px;		
+}
+ul.tree li .sep {
+	height:4px;
 	font-size:0px;
-	line-height:2px;
-	height:2px;
+	background-image:url('admin/images/tree/line1.gif');
+        background-repeat:repeat-y;
+}
+ul.tree li .last {
+	background-image:none !important;
+}
+ul.tree li > .child_branch, ul.tree li.not_last > .child_branch {
+	background-image:url('admin/images/tree/line1.gif');
+        background-repeat:repeat-y;
+}
+ul.tree li.last > .child_branch {
+	background-image:none;
+}
+
+ul.tree > li > table a.sub {
+	background-image:url('admin/images/tree/plus.gif');
+        background-position:center center;
+        background-repeat:no-repeat;
+}
+ul.tree > li.last > table a.sub {
+	background-image:url('admin/images/tree/plus_last.gif');
+        background-position:center center;
+        no-repeat;
+}
+ul.tree > li.not_last > table a.sub {
+	background-image:url('admin/images/tree/plus.gif');
+        background-position:center center;
+        background-repeat:no-repeat;
+}
+
+ul.tree > li > table a.loading {
+	background-image:url('admin/images/tree/loading.gif');
+        background-position:center center;
+        background-repeat:no-repeat;
+}
+ul.tree > li > table a.opened {
+	background-image:url('admin/images/tree/minus.gif');
+        background-position:center center;
+        background-repeat:no-repeat;
+}
+ul.tree > li.last > table a.opened {
+	background-image:url('admin/images/tree/minus_last.gif');
+        background-position:center center;
+        background-repeat:no-repeat;
+}
+ul.tree > li.not_last > table a.opened {
+	background-image:url('admin/images/tree/minus.gif');
+        background-position:center center;
+        background-repeat:no-repeat;
+}
+
+ul.tree > li > table a.no_sub {
+	background-image:url('admin/images/tree/line.gif');
+        background-position:center center;
+        background-repeat:no-repeat;
+}
+ul.tree > li.last > table a.no_sub {
+	background-image:url('admin/images/tree/line_last.gif');
+        background-position:center center;
+        background-repeat:no-repeat;
+}
+ul.tree > li.not_last > table a.no_sub {
+	background-image:url('admin/images/tree/line.gif');
+        background-position:center center;
+        background-repeat:no-repeat;
+}
+
+
+
+ul.tree li span {
+	display:block;
+	min-height:2px;
+}
+.hovered {
+	background-color:#AAA;
+	color:#FFF;
+}
+.hovered_sep {
+    background-color:#A00;
 }
 ul.tree li img {
 	border:none;
 	padding:0px;
 	margin:0px;
 }
+ul.tree li a.extract, ul.tree li a.leaf {
+	display:block;
+	width:18px;
+	height:18px;
+}
+ul.tree li a.extract {
+	
+}
+ul.tree li a.extract:hover, ul.tree li a.leaf:hover {
+	text-decoration:none;
+}
 ul.tree li a {
-	padding:1px;
+	padding:0px;
 	cursor:pointer;
 	color:#666;
 	font-size:10px;
 	font-family:Verdana;
+	text-decoration:none;
+	display:block;
 }
 ul.tree li a:hover {
 	text-decoration:underline;
@@ -38,51 +138,6 @@ ul.tree li a.active, .item-active a {
 	background:none;
 	color:#000;
 }
-.contextMenu {
-/*	position:absolute;
-	display:none;
-	z-index:1000;*/
-	display:none;
-}
-#contextMenuArea, .contextMenu {
-	position:absolute;
-	display:none;
-	z-index:1000;
-	width:180px;
-	background:#F30000;
-	border:1px solid #787676;
-	border-right:2px solid #585656;
-	border-bottom:2px solid #585656;
-}
-#contextMenuArea div.text, .contextMenu div.text {
-	padding:3px;
-	background:#C8C6C6;
-}
-#contextMenuArea div.text div {
-	padding:2px;
-}
-#contextMenuArea div.text div a {
-	cursor:pointer;
-	padding-left:2px;
-	padding-right:5px;
-}
-#contextMenuArea div.text div a:hover {
-	background:#FFF;
-	text-decoration:none;
-}
-#contextMenuArea div.title, .contextMenu div.title {
-	color:#FFF;
-	padding:3px;
-	background:#787676;
-}
-.sep-active {
-	background:#F00;
-	height:10px;
-	line-height:10px;
-}
-.hide {
-	display:none;
-}
-.show {
-	display:block;
+ul.tree li a.striketrough {
+    text-decoration:line-through;
 }
