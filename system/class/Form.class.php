@@ -58,6 +58,13 @@ class Form extends basic {
 	}
 		
 	function add($name, $element){
+	    if($element['type']){
+		$element['elm_type'] = $element['type'];
+	    }
+	    if($element['elm_type']){
+		$element['type'] = $element['elm_type'];
+	    }		
+		
 		$this->fields[$name] = $this->createElement($name, $element, $this);
 	}
 	
