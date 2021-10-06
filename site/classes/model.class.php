@@ -236,10 +236,17 @@ class model extends basic {
 			$values[] = "record_id=:record_id";
 		}
 		
-		foreach($cond as $key=>$val){
-			$binds[$key . "_w"] = $val;
-			$where[] = "$key=:" . $key . "_w";
-		}
+        foreach ($cond as $key => $val) {
+            if(is_array($val)){
+                $op = $val['op'];
+                $value = $val['val'];
+                $binds[$key . "_w"] = $value;
+                $where[] = "$key $op :" . $key . "_w";
+            }else{
+                $binds[$key . "_w"] = $val;
+                $where[] = "$key=:" . $key . "_w";
+            }
+        }
 		
 		$this->db->update($this->table)
 				->values($values)
